@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import NotFound from './pages/Notfound';
+import Login from './pages/Auth/Login';
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,8 @@ function App() {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/" element={<Home />} />
         </Route>
+        <Route path="/login" element={<Login />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
