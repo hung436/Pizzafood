@@ -22,7 +22,7 @@ const Header = () => {
           <div className="flex md:w-[250px]">
             <input
               type="search"
-              className="border-2 border-[#5488c7] h-[35px] w-10/12 focus:outline-0 px-2 hidden md:block"
+              className="border-2 focus:ring-0 border-[#5488c7] h-[35px] w-10/12   focus:outline-0 px-2 hidden md:block"
             />
             <button className="md:bg-[#5488c7] flex-1 flex items-center justify-center text-xl">
               <BiSearchAlt className="md:text-[#ffffff] text-[#5488c7] text-2xl" />

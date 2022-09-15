@@ -1,0 +1,25 @@
+.underline {
+  transition: all linear 0.2s;
+
+  position: relative;
+  text-decoration: none;
+  &::after {
+    position: absolute;
+    content: '';
+    height: 2px;
+    width: 0;
+    top: calc(100% + 3px);
+    left: 0;
+    background-color: white;
+    transition: width 0.2s ease-in;
+  }
+
+  &.active,
+  &:hover {
+    cursor: pointer;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
