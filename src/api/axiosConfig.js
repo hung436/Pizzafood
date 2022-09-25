@@ -1,22 +1,22 @@
-import axios from 'axios';
+import axios from "axios";
 const instance = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: "http://localhost:8082/api/v1",
   //   headers: { 'X-Custom-Header': 'foobar' },
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 instance.interceptors.request.use(
   function (config) {
     // Làm gì đó trước khi request dược gửi đi
-    const URLS = ['/getaddress'];
-    const dynamicURL = ['/user/favorites/'];
+    const URLS = ["/getaddress"];
+    const dynamicURL = ["/user/favorites/"];
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item);
     });
     if (URLS.includes(config.url) || dynamicURLNeedToken) {
-      const token = localStorage.getItem('token');
-      config.headers.authorization = token ? `Bearer ${token}` : '';
+      const token = localStorage.getItem("token");
+      config.headers.authorization = token ? `Bearer ${token}` : "";
     }
     return config;
   },

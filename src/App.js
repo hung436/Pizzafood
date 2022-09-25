@@ -1,23 +1,24 @@
-import Header from './components/Header';
-import './styles/App.scss';
-import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
-import Admin from './pages/Admin';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Product from './pages/Product';
-import NotFound from './pages/Notfound';
-import Login from './pages/Auth/Login';
-import Register from './pages/Auth/Register';
+import Header from "./components/Header";
+import "react-toastify/dist/ReactToastify.css";
+import "./styles/App.scss";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import Admin from "./pages/Admin";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import NotFound from "./pages/Notfound";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 function App() {
   const PrivateRoute = ({ children }) => {
     const isAuthenticated = true;
-    return isAuthenticated ? children : <Navigate to="/login" />;
+    return isAuthenticated ? children : <Navigate to='/login' />;
   };
   return (
-    <div className="App">
+    <div className='App'>
       <Routes>
         <Route
-          path="/admin/*"
+          path='/admin/*'
           element={
             <PrivateRoute>
               <Admin />
@@ -25,7 +26,7 @@ function App() {
           }
         />
         <Route
-          path="/"
+          path='/'
           element={
             <>
               <Header />
@@ -34,13 +35,13 @@ function App() {
             </>
           }
         >
-          <Route path="/" element={<Home />} />
-          <Route path="/product/:id" element={<Product />} />
-          <Route path="/" element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/product/:id' element={<Product />} />
+          <Route path='/' element={<Home />} />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
   );
