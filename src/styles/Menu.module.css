@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+   margin-top: 3rem;
+  
+}
+.heading{
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    justify-content: flex-start;
+    
+}
+.heading>:nth-child(1){
+    color: var(--themeRed);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+.heading>:nth-child(2),.heading>:nth-child(3){
+  
+    font-size: 2rem;
+}
