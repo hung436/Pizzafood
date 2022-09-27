@@ -1,4 +1,5 @@
 // import React, { useState } from "react";
+import { HiOutlineUser } from "react-icons/hi";
 // import { BiSearchAlt, BiLogIn } from "react-icons/bi";
 // import { BsBellFill } from "react-icons/bs";
 
@@ -242,6 +243,7 @@ import css from "../../styles/Header.module.css";
 import Logo from "../../assets/Logo.png";
 import { BiShoppingBag } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
 function Header() {
   return (
     <div className={css.header}>
@@ -253,14 +255,19 @@ function Header() {
 
       {/* MENU SIDE */}
       <ul className={css.menu}>
-        <li>Home</li>
-        <li>Menu</li>
-        <li>Contact</li>
+        <li>Trang chủ</li>
+        <li>Sản phẩm</li>
+        <li>Về chúng tôi</li>
       </ul>
 
       {/* right side */}
 
       <div className={css.rightSide}>
+        <Link to='/login'>
+          <div className={css.cart}>
+            <HiOutlineUser size={35} color='#2E2E2E' />
+          </div>
+        </Link>
         <Link to='/Cart'>
           <div className={css.cart}>
             <BiShoppingBag size={35} color='#2E2E2E' />
