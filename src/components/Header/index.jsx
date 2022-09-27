@@ -240,7 +240,7 @@ import { HiOutlineUser } from "react-icons/hi";
 // };
 // export default Header;
 import css from "../../styles/Header.module.css";
-import Logo from "../../assets/Logo.png";
+import Logo from "../../assets/img/Logo.png";
 import { BiShoppingBag } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
