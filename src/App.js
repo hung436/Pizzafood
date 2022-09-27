@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import "react-toastify/dist/ReactToastify.css";
-import "./styles/globals.css";
+
 import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
