@@ -32,7 +32,7 @@ const AdminPage = () => {
             <Route path='/tables' element={<Tables />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
-          {/* <FooterAdmin /> */}
+          <FooterAdmin />
         </div>
       </div>
     </>

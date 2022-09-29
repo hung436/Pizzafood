@@ -88,10 +88,10 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className='md:flex-col md:min-w-full flex flex-col list-none'>
-              <li className='items-center'>
+              <li className='items-center rounded-md'>
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold flex flex-row space-x-2 items-center " +
+                    "text-xs uppercase py-3 px-3 space-x-4 font-bold flex flex-row items-center " +
                     (activePage === "/admin/dashboard"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
@@ -113,7 +113,7 @@ export default function Sidebar() {
               <li className='items-center'>
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold flex flex-row space-x-2 items-center " +
+                    "text-xs uppercase px-3 py-3 space-x-4 font-bold flex flex-row  items-center " +
                     (activePage === "/admin/category"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
@@ -146,7 +146,7 @@ export default function Sidebar() {
               <li className='items-center'>
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold flex flex-row space-x-2 items-center " +
+                    "text-xs uppercase py-3 px-3 font-bold flex flex-row space-x-4 items-center " +
                     (activePage === "/admin/product"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
@@ -168,7 +168,7 @@ export default function Sidebar() {
               <li className='items-center '>
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold  flex flex-row space-x-2 items-center " +
+                    "text-xs uppercase py-3 px-3 font-bold  flex flex-row space-x-4 items-center " +
                     (activePage === "/admin/order"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
@@ -198,7 +198,7 @@ export default function Sidebar() {
               <li className='items-center'>
                 <Link
                   className={
-                    "text-xs uppercase py-3 font-bold  flex flex-row space-x-2 items-center " +
+                    "text-xs uppercase p-3 font-bold  flex flex-row space-x-4 items-center " +
                     (activePage === "/admin/user"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")

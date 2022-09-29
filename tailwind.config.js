@@ -12,6 +12,7 @@ module.exports = {
         "blueGray-700": "#455A64",
         "blueGray-500": "#607D8B",
         "blueGray-300": "#90A4AE",
+        "blueGray-100": "#CFD8DC",
       },
     },
   },

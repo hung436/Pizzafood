@@ -278,6 +278,7 @@ function Product() {
               </table>
             </div>
           </div>
+
           <div className='flex justify-center items-center'>
             <Paginate />
           </div>

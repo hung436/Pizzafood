@@ -40,11 +40,14 @@
     ]
   },
   "devDependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@mui/styles": "^5.10.7",
     "autoprefixer": "^10.4.7",
     "chart.js": "^3.9.1",
     "flowbite": "^1.5.2",
     "flowbite-react": "^0.1.10",
     "formik": "^2.2.9",
+    "material-table": "^2.0.3",
     "node-sass": "^7.0.1",
     "postcss": "^8.4.14",
     "ra-data-json-server": "^4.3.0",
