@@ -37,11 +37,12 @@ export default function Modal({ showModal, hideShow, option }) {
                         Danh mục
                       </label>
                       <select className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-whit rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'>
-                        <option value=''></option>
-                        <option value=''></option>
-                        <option value=''></option>
+                        <option value=''>Pizza</option>
+                        <option value=''>Sườn BBQ</option>
+                        <option value=''>Đồ uống</option>
                       </select>
                     </div>
+
                     <div className='flex flex-col'>
                       <label
                         htmlFor=''
@@ -59,11 +60,24 @@ export default function Modal({ showModal, hideShow, option }) {
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
+                        Size
+                      </label>
+                      <select className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-whit rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'>
+                        <option value=''>S</option>
+                        <option value=''>M</option>
+                        <option value=''>L</option>
+                      </select>
+                    </div>
+                    <div className='flex flex-col'>
+                      <label
+                        htmlFor=''
+                        className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
+                      >
                         Giá
                       </label>
                       <input
                         type='number'
-                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
+                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
                         min='1'
                         step='any'
                       />
@@ -77,7 +91,7 @@ export default function Modal({ showModal, hideShow, option }) {
                       </label>
                       <input
                         type='text'
-                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
+                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
                       />
                     </div>
                     <div className='flex flex-col md:col-span-3'>
@@ -89,7 +103,7 @@ export default function Modal({ showModal, hideShow, option }) {
                       </label>
                       <input
                         type='text'
-                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
+                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
                       />
                     </div>
                     <div className='flex flex-col'>
@@ -108,7 +122,7 @@ export default function Modal({ showModal, hideShow, option }) {
                       ></label>
                       <input
                         type='text'
-                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
+                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
                       />
                     </div>
                     <div className='flex flex-col'>
@@ -120,7 +134,7 @@ export default function Modal({ showModal, hideShow, option }) {
                       </label>
                       <input
                         type='text'
-                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
+                        className='px-2 py-1 placeholder-slate-300 text-slate-600 relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
                       />
                     </div>
                   </div>
