@@ -242,9 +242,15 @@ import { HiOutlineUser } from "react-icons/hi";
 import css from "../../styles/Header.module.css";
 import Logo from "../../assets/Logo.png";
 import { BiShoppingBag } from "react-icons/bi";
+import {AiOutlineMenu} from "react-icons/ai"
+import {FaTimes} from "react-icons/fa"
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 function Header() {
+  // var menu= document.querySelector('.iconMenu')
+  // menu.onClick=function(){
+  //   console.log(Math.random());
+  // }
   return (
     <div className={css.header}>
       {/* logo side */}
@@ -274,6 +280,26 @@ function Header() {
             <div className={css.badge}>1</div>
           </div>
         </Link>
+        <label htmlFor="navMobileInput"  className={css.iconMenu}>
+           <AiOutlineMenu size={35} color='#2E2E2E'/>
+        </label>
+        <input type="checkbox" name="" className={css.navInput} id="navMobileInput" />
+        <nav className={css.navMobile}>
+          <label htmlFor="navMobileInput" className={css.navClose}>
+          <FaTimes size={35} color='#2E2E2E'/>
+          </label>
+        
+          <ul className={css.navMenu}>
+            <li>Trang chủ</li>
+            <li>Sản phẩm</li>
+            <li>Về chúng tôi</li>
+          </ul>
+          <div className={css.logoMobile}>
+            <img src={Logo} alt='logo' width={60} height={60} />
+            <span>FUDO</span>
+          </div>
+        </nav>
+    
       </div>
     </div>
   );
