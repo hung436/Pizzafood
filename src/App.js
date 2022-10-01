@@ -33,6 +33,7 @@ function App() {
             <>
               <Header />
               <Outlet />
+              <Product/>
               <Footer />
             </>
           }
