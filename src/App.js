@@ -4,13 +4,13 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import css from "./styles/globals.css"
+import  "./styles/globals.css"
 function App() {
   const PrivateRoute = ({ children }) => {
     const isAuthenticated = true;
@@ -34,7 +34,7 @@ function App() {
               <Header />
               <Outlet />
               <Product/>
-              <Footer />
+              {/* <Footer /> */}
             </>
           }
         >

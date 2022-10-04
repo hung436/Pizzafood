@@ -1,5 +1,8 @@
 import React from "react";
 import "./Home.scss";
+import Services from "./component/services/services.jsx"
+import Hero from "./component/Hero/Hero.jsx"
+
 const Home = () => {
   return (
     <div className=''>
@@ -13,6 +16,8 @@ const Home = () => {
           <li className='underline'>VIDEOS</li>
         </ul>
       </div>
+      <Hero/>
+      <Services/>
     </div>
   );
 };
