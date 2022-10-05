@@ -1,8 +1,12 @@
 import React from "react";
 import "./Home.scss";
-import Services from "./component/services/services.jsx"
-import Hero from "./component/Hero/Hero.jsx"
-
+import Services from "./component/services/services.jsx";
+import Hero from "./component/Hero/Hero.jsx";
+import Slide from "./component/Slide/Slide";
+import slide1 from "../../assets/img/slide1.jpg";
+import slide2 from "../../assets/img/slide2.jpg";
+import slide3 from "../../assets/img/slide3.jpg";
+const ImageLink = [slide1, slide2, slide3];
 const Home = () => {
   return (
     <div className=''>
@@ -16,8 +20,11 @@ const Home = () => {
           <li className='underline'>VIDEOS</li>
         </ul>
       </div>
-      <Hero/>
-      <Services/>
+      <div className=''>
+        <Slide ImageLink={ImageLink} />
+      </div>
+      <Hero />
+      <Services />
     </div>
   );
 };

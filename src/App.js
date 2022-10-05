@@ -10,11 +10,10 @@ import Product from "./pages/Product";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-<<<<<<< HEAD
+
 import css from "./styles/globals.css";
-=======
-import  "./styles/globals.css"
->>>>>>> 508f372322388b8ec49e4a56bf30c7716a0092d9
+import "./styles/globals.css";
+
 function App() {
   const PrivateRoute = ({ children }) => {
     const isAuthenticated = true;
@@ -37,13 +36,11 @@ function App() {
             <>
               <Header />
               <Outlet />
-<<<<<<< HEAD
-              <Product />
-              <Footer />
-=======
-              <Product/>
+
               {/* <Footer /> */}
->>>>>>> 508f372322388b8ec49e4a56bf30c7716a0092d9
+
+              <Product />
+              {/* <Footer /> */}
             </>
           }
         >
