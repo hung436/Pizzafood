@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
-// import Footer from "./components/Footer/Footer.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import NotFound from "./pages/Notfound";
@@ -40,7 +40,7 @@ function App() {
               {/* <Footer /> */}
 
               <Product />
-              {/* <Footer /> */}
+              <Footer />
             </>
           }
         >
