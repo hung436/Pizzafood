@@ -1,6 +1,6 @@
 import axios from "axios";
 const instance = axios.create({
-  baseURL: "http://localhost:8082/api/v1",
+  baseURL: process.env.REACT_APP_URL_BE + "/api/v1",
   //   headers: { 'X-Custom-Header': 'foobar' },
   headers: {
     "Content-Type": "application/json",
@@ -30,7 +30,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   function (response) {
     const { data } = response;
-    return response.data;
+    return data;
   },
   function (error) {
     const { config, status } = error.response;

@@ -10,7 +10,7 @@ import Product from "./pages/Product";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import css from "./styles/globals.css"
+import css from "./styles/globals.css";
 function App() {
   const PrivateRoute = ({ children }) => {
     const isAuthenticated = true;
@@ -33,7 +33,7 @@ function App() {
             <>
               <Header />
               <Outlet />
-              <Product/>
+              <Product />
               <Footer />
             </>
           }

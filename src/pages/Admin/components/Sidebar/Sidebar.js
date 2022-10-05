@@ -28,7 +28,7 @@ export default function Sidebar() {
             className='md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0'
             to='/'
           >
-            ADMIN BLOGME
+            ADMIN PAGE
           </Link>
           {/* User */}
           <ul className='md:hidden items-center flex flex-wrap list-none'>
@@ -92,7 +92,8 @@ export default function Sidebar() {
                 <Link
                   className={
                     "text-xs uppercase py-3 px-3 space-x-4 font-bold flex flex-row items-center " +
-                    (activePage === "/admin/dashboard"
+                    (activePage === "/admin/dashboard" ||
+                    activePage === "/admin"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -101,7 +102,8 @@ export default function Sidebar() {
                 >
                   <MdOutlineDashboard
                     className={
-                      activePage === "/admin/dashboard"
+                      activePage === "/admin/dashboard" ||
+                      activePage === "/admin"
                         ? "opacity-75"
                         : "text-blueGray-300"
                     }

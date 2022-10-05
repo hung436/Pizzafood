@@ -20,7 +20,7 @@ const AdminPage = () => {
         <AdminNavbar />
         {/* Header */}
         <HeaderStats />
-        <div className='px-4 md:px-10 mx-auto w-full -m-24'>
+        <div className='px-4 md:px-10 mx-auto w-full md:-mt-24'>
           <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />
@@ -32,7 +32,6 @@ const AdminPage = () => {
             <Route path='/tables' element={<Tables />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
-          <FooterAdmin />
         </div>
       </div>
     </>

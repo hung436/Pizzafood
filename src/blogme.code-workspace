@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../webserverv2"
+		},
+		{
+			"path": "../../../nodejs_bascic"
+		}
+	]
+}
