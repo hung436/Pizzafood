@@ -4,10 +4,17 @@
 html,
 body {
   margin: 0;
+<<<<<<< HEAD
   /* font-family: 'Poppins', sans-serif; */
   /* color: var(--themeBlack);
   background: var(--background-color); */
   /* overflow-x:hidden; */
+=======
+  font-family: 'Poppins', sans-serif;
+  color: var(--themeBlack);
+  background: var(--background-color);
+  overflow-x:hidden;
+>>>>>>> 508f372322388b8ec49e4a56bf30c7716a0092d9
 }
 
 :root{
@@ -19,7 +26,6 @@ body {
   --background-color:  linear-gradient(180deg, rgba(255, 237, 237, 0.85) 0%, rgba(255, 255, 255, 0) 30rem);
   --cartBack : rgba(255, 255, 255, 0.38);
 }
-
 
 /* width */
 ::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import css from "../../styles/Product.module.css"
+import css from "./Product.module.css"
 import p1 from "../../assets/img/p1.jpg";
 function Product() {
     return ( 

@@ -4,13 +4,17 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+<<<<<<< HEAD
 import css from "./styles/globals.css";
+=======
+import  "./styles/globals.css"
+>>>>>>> 508f372322388b8ec49e4a56bf30c7716a0092d9
 function App() {
   const PrivateRoute = ({ children }) => {
     const isAuthenticated = true;
@@ -33,8 +37,13 @@ function App() {
             <>
               <Header />
               <Outlet />
+<<<<<<< HEAD
               <Product />
               <Footer />
+=======
+              <Product/>
+              {/* <Footer /> */}
+>>>>>>> 508f372322388b8ec49e4a56bf30c7716a0092d9
             </>
           }
         >

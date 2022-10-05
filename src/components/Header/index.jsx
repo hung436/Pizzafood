@@ -239,7 +239,7 @@ import { HiOutlineUser } from "react-icons/hi";
 //   );
 // };
 // export default Header;
-import css from "../../styles/Header.module.css";
+import css from "./Header.module.css";
 import Logo from "../../assets/img/Logo.png";
 import { BiShoppingBag } from "react-icons/bi";
 import {AiOutlineMenu} from "react-icons/ai"
