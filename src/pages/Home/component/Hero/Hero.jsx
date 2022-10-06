@@ -14,23 +14,23 @@ function Hero(){
            </div>
 
             <div className={css.heroText}>
-                <span>Be the Fastest</span>
-                <span>In Delivering</span>
+                <span>Đặt Hàng Nhanh</span>
+                <span>Dịch Vụ Tốt</span>
                 <span>
-                    Your <span style={{color: "var(--themeRed)"}}>Pizza</span>
+                <span style={{color: "var(--themeRed)"}}>FUDO</span> Pizza 
                 </span>
             </div>
 
             <span className={css.miniText}>
-                Our Mission is to filling your tummy with delicious food and with fast and free delivery
+            Với sứ mệnh “Mang đến niềm vui, sẻ chia hạnh phúc”, chúng tôi đã và đang nỗ lực từng ngày để mang đến những trải nghiệm ẩm thực tốt nhất cho tất cả những vị khách thân yêu của mình bằng những món ăn ngon và giao hàng nhanh chóng.
             </span>
 
             <button className={`btn ${css.btn}`}>
-                Get Started
+                Đặt hàng ngay
             </button>
          </div>
            {/* right side */}
-           <div className={css.right}>
+         <div className={css.right}>
                 <div className={css.imagerContainer}>
                     <img src={HeroImage} alt="anhloi"/>
                 </div>
@@ -55,7 +55,7 @@ function Hero(){
                 </div>
 
 
-           </div>
+        </div>
        </div> );
 }
 

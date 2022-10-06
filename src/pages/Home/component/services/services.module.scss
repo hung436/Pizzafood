@@ -26,6 +26,7 @@
     justify-content: center;
     align-items: center;
     gap:1rem;
+    width: 20rem;
 }
 .imageWrapper{
     width: 10rem;
@@ -38,6 +39,28 @@
 .features>:nth-child(3){
     color: var(--gray);
     word-wrap: break-word;
-    width: 20rem;
-    align-items: center;
+    width: auto;
+   text-align: center;
+   
+}
+@media (max-width:739px){
+    .services{
+        flex-direction: column;
+        text-align: center;
+    }
+ 
+    .features>:nth-child(2){
+        font-weight: bold;
+        color: var(--themeRed);
+        width: max-content;
+    }
+   
+  
+}
+// table
+@media (min-width: 740px) and (max-width: 1023px){
+    .features{
+        width: 33%;
+    }
+  
 }

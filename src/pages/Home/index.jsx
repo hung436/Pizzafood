@@ -23,8 +23,12 @@ const Home = () => {
       <div className=''>
         <Slide ImageLink={ImageLink} />
       </div>
-      <Hero />
-      <Services />
+    <div>
+    <Hero />
+    </div>
+    <div>
+    <Services />
+    </div>
     </div>
   );
 };
