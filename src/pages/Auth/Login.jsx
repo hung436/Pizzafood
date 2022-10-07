@@ -9,19 +9,29 @@ import {
   BsFillEyeSlashFill,
   BsGithub,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+
 import { toast } from "react-toastify";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { login, loginFB } from "../../api/Auth";
-import { useDispatch } from "react-redux";
-import { LoginFacebook } from "../../app/Reducer/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginFacebook, loginUser } from "../../app/Reducer/authSlice";
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [Eye, setEye] = useState(false);
+  const { loading, userInfo } = useSelector((state) => state.user);
   useEffect(() => {
     document.title = "Đăng nhập - Blogme";
   }, []);
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.RoleId === 2) navigate("/admin");
+      else navigate("/");
+      toast.success("Đăng nhập thành công");
+    }
+  }, [navigate, userInfo]);
   const showPassword = () => setEye(!Eye);
   const SigninSchema = Yup.object().shape({
     username: Yup.string().required("Email Không để trống"),
@@ -30,15 +40,13 @@ const Login = () => {
       .required("Không để trống"),
   });
   const loginSubmit = async (values) => {
-    const res = await login(values);
-    toast.warn("hung");
+    const action = loginUser(values);
+    dispatch(action);
   };
-  const dispatch = useDispatch();
+
   const responseFacebook = async (response) => {
     const action = LoginFacebook(response);
-
-    let res = await dispatch(action);
-    console.log("res", res);
+    await dispatch(action);
   };
   return (
     <div className='flex  h-screen justify-center items-center'>
@@ -116,7 +124,6 @@ const Login = () => {
         <div className='flex space-x-1 w-full justify-between'>
           <FacebookLogin
             appId='1158486995018850'
-            autoLoad={true}
             fields='name,email,picture'
             // onClick={componentClicked}
             callback={responseFacebook}

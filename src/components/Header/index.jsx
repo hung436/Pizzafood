@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-import { HiOutlineUser } from "react-icons/hi";
+import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 // import { BiSearchAlt, BiLogIn } from "react-icons/bi";
 // import { BsBellFill } from "react-icons/bs";
 
@@ -241,12 +241,21 @@ import { HiOutlineUser } from "react-icons/hi";
 // export default Header;
 import css from "./Header.module.css";
 import Logo from "../../assets/img/Logo.png";
-import { BiShoppingBag } from "react-icons/bi";
-import {AiOutlineMenu} from "react-icons/ai"
-import {FaTimes} from "react-icons/fa"
+
+import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
+import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FaUserAlt } from "react-icons/fa";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../app/Reducer/authSlice";
 function Header() {
+  const { userInfo, userToken } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // if (userToken) {
+    //   dispatch(getUserDetails());
+    // }
+  }, [userToken, dispatch]);
   // var menu= document.querySelector('.iconMenu')
   // menu.onClick=function(){
   //   console.log(Math.random());
@@ -260,35 +269,48 @@ function Header() {
       </div>
 
       {/* MENU SIDE */}
-      <ul className={css.menu}>
+      {/* <ul className={css.menu}>
         <li>Trang chủ</li>
         <li>Sản phẩm</li>
         <li>Về chúng tôi</li>
-      </ul>
+      </ul> */}
 
       {/* right side */}
 
       <div className={css.rightSide}>
-        <Link to='/login'>
-          <div className={css.cart}>
-            <HiOutlineUser size={35} color='#2E2E2E' />
-          </div>
-        </Link>
         <Link to='/Cart'>
           <div className={css.cart}>
-            <BiShoppingBag size={35} color='#2E2E2E' />
+            <AiOutlineShoppingCart size={35} color='#2E2E2E' />
             <div className={css.badge}>1</div>
           </div>
         </Link>
-        <label htmlFor="navMobileInput"  className={css.iconMenu}>
-           <AiOutlineMenu size={35} color='#2E2E2E'/>
+        {userInfo ? (
+          <button onClick={() => dispatch(logout())}>
+            <div className=''>
+              <HiOutlineLogout size={35} color='#2E2E2E' />
+            </div>
+          </button>
+        ) : (
+          <Link to='/login'>
+            <div className={css.cart}>
+              <HiOutlineUser size={35} color='#2E2E2E' />
+            </div>
+          </Link>
+        )}
+        <label htmlFor='navMobileInput' className={css.iconMenu}>
+          <AiOutlineMenu size={35} color='#2E2E2E' />
         </label>
-        <input type="checkbox" name="" className={css.navInput} id="navMobileInput" />
+        <input
+          type='checkbox'
+          name=''
+          className={css.navInput}
+          id='navMobileInput'
+        />
         <nav className={css.navMobile}>
-          <label htmlFor="navMobileInput" className={css.navClose}>
-          <FaTimes size={35} color='#2E2E2E'/>
+          <label htmlFor='navMobileInput' className={css.navClose}>
+            <FaTimes size={35} color='#2E2E2E' />
           </label>
-        
+
           <ul className={css.navMenu}>
             <li>Trang chủ</li>
             <li>Sản phẩm</li>
@@ -299,7 +321,6 @@ function Header() {
             <span>FUDO</span>
           </div>
         </nav>
-    
       </div>
     </div>
   );
