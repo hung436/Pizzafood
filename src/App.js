@@ -1,16 +1,14 @@
 import Header from "./components/Header";
 import "react-toastify/dist/ReactToastify.css";
-
 import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
 import Footer from "./components/Footer/Footer.jsx";
 import Home from "./pages/Home";
-import Product from "./pages/Product";
+import Product from "./pages/DetailProduct/index.jsx";
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-
 import css from "./styles/globals.css";
 import "./styles/globals.css";
 
@@ -36,17 +34,15 @@ function App() {
             <>
               <Header />
               <Outlet />
-
-              {/* <Footer /> */}
-
-              <Product />
+     
               <Footer />
             </>
           }
         >
           <Route path='/' element={<Home />} />
           <Route path='/product/:id' element={<Product />} />
-          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
+       
         </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {AiFillFacebook} from "react-icons/ai"
 import {FaInstagramSquare} from 'react-icons/fa'
 import {BsFillTelephoneInboundFill} from 'react-icons/bs'
-const Footer = () => {
+function Footer(){
   return(
  <footer>
      <div className={css.container}>
@@ -73,6 +73,6 @@ const Footer = () => {
         </div>
     </div>
  </footer>)
-};
+}
 
 export default Footer;
