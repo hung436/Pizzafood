@@ -2,7 +2,19 @@ import css from './Product.module.scss'
 import p1 from "../../assets/img/p1.jpg"
 import LeftArrow from "../../assets/img/arrowLeft.png"
 import RightArrow from "../../assets/img/arrowRight.png"
+import { useState } from 'react'
 function Product() {
+    const [Quantity,setQuantity]=useState(1)
+
+    const handleQuanDec=()=>{
+      if(Quantity >1){
+        setQuantity((prev)=>prev-1)
+      }
+     
+    }
+    const handleQuanCre=()=>{
+        setQuantity((prev)=>prev+1)
+    }
     return(
         <div className={css.container}>
             <div className={css.imageWrapper}>
@@ -26,9 +38,9 @@ function Product() {
                 <div className={css.quantity}>
                     <span>Quantity</span>
                     <div className={css.counter}>
-                        <img className={css.leftArrow} src={LeftArrow}   alt=''/>
-                        <span>1</span>
-                        <img className={css.rightArrow} src={RightArrow}   alt=''/>
+                        <img className={css.leftArrow} src={LeftArrow}  onClick={handleQuanDec}   alt=''/>
+                        <span>{Quantity}</span>
+                        <img className={css.rightArrow} src={RightArrow} onClick={handleQuanCre}   alt=''/>
                     </div>
                 </div>
                 <div className={`btn ${css.btn}`}>
