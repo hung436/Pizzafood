@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-import { HiOutlineUser } from "react-icons/hi";
+import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 // import { BiSearchAlt, BiLogIn } from "react-icons/bi";
 // import { BsBellFill } from "react-icons/bs";
 
@@ -241,12 +241,24 @@ import { HiOutlineUser } from "react-icons/hi";
 // export default Header;
 import css from "./Header.module.css";
 import Logo from "../../assets/img/Logo.png";
-import { BiShoppingBag } from "react-icons/bi";
-import {AiOutlineMenu} from "react-icons/ai"
-import {FaTimes} from "react-icons/fa"
+
+import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
+import { FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FaUserAlt } from "react-icons/fa";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../app/Reducer/authSlice";
+import { TextInput } from "flowbite-react";
+
+
 function Header() {
+  const { userInfo, userToken } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // if (userToken) {
+    //   dispatch(getUserDetails());
+    // }
+  }, [userToken, dispatch]);
   // var menu= document.querySelector('.iconMenu')
   // menu.onClick=function(){
   //   console.log(Math.random());
@@ -258,37 +270,65 @@ function Header() {
         <img src={Logo} alt='logo' width={50} height={50} />
         <span>FUDO</span>
       </div>
+      {/* search */}
+      <div className={'hidden md:flex'}>
+  <form>   
+  <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+  <div className="relative">
+    <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+      <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+    </div>
+    <TextInput type="search" id="default-search" className="block p-3.5 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tìm kiếm sản phẩm" required/>
+      <button type="submit" className="text-white absolute right-2.5 bottom-1.5 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Search</button>
+   </div>
+</form>
+
+      </div>
+
 
       {/* MENU SIDE */}
-      <ul className={css.menu}>
+      {/* <ul className={css.menu}>
         <li>Trang chủ</li>
         <li>Sản phẩm</li>
         <li>Về chúng tôi</li>
-      </ul>
+      </ul> */}
 
       {/* right side */}
 
       <div className={css.rightSide}>
-        <Link to='/login'>
-          <div className={css.cart}>
-            <HiOutlineUser size={35} color='#2E2E2E' />
-          </div>
-        </Link>
         <Link to='/Cart'>
           <div className={css.cart}>
-            <BiShoppingBag size={35} color='#2E2E2E' />
+            <AiOutlineShoppingCart size={35} color='#2E2E2E' />
             <div className={css.badge}>1</div>
           </div>
         </Link>
-        <label htmlFor="navMobileInput"  className={css.iconMenu}>
-           <AiOutlineMenu size={35} color='#2E2E2E'/>
+        {userInfo ? (
+          <button onClick={() => dispatch(logout())}>
+            <div className=''>
+              <HiOutlineLogout size={35} color='#2E2E2E' />
+            </div>
+          </button>
+        ) : (
+          <Link to='/login'>
+            <div className={css.cart}>
+              <HiOutlineUser size={35} color='#2E2E2E' />
+            </div>
+          </Link>
+        )}
+        <label htmlFor='navMobileInput' className={css.iconMenu}>
+          <AiOutlineMenu size={35} color='#2E2E2E' />
         </label>
-        <input type="checkbox" name="" className={css.navInput} id="navMobileInput" />
+        <input
+          type='checkbox'
+          name=''
+          className={css.navInput}
+          id='navMobileInput'
+        />
         <nav className={css.navMobile}>
-          <label htmlFor="navMobileInput" className={css.navClose}>
-          <FaTimes size={35} color='#2E2E2E'/>
+          <label htmlFor='navMobileInput' className={css.navClose}>
+            <FaTimes size={35} color='#2E2E2E' />
           </label>
-        
+
           <ul className={css.navMenu}>
             <li>Trang chủ</li>
             <li>Sản phẩm</li>
@@ -299,7 +339,6 @@ function Header() {
             <span>FUDO</span>
           </div>
         </nav>
-    
       </div>
     </div>
   );

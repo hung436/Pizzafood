@@ -4,8 +4,10 @@
     padding: 1rem 2rem;
 }
 .left{
+    position: relative;
     display: flex;
     flex-direction: column;
+    width: 50%;
     gap:2rem;
 }
 .cherryDiv{
@@ -29,7 +31,7 @@
     font-weight: bold;
 }
 .miniText{
-    width: 70%;
+    width: 80%;
     color: var(--gray);
     font-weight: 600;
 }
@@ -37,12 +39,12 @@
     padding: 1rem 2rem;
 }
 .right{
+ 
     position: relative;
 }
 .imagerContainer{
     width: 38rem;
     position: absolute;
-    top:-5rem;
     left: -5rem;
 }
 
@@ -102,4 +104,90 @@
 .Pizza:hover{
     transform: scale(1.1);
     cursor: pointer;
+}
+@media (min-width: 740px) and (max-width: 1023px) {
+    .heroText{
+      
+        font-size: 2.4rem;
+      
+    }
+    .miniText{
+       font-size: 0.8rem;
+    }
+    .imagerContainer{
+        width: 29rem;
+        top:30px;
+        left: -100px;
+       
+    }
+    .ContactUs{
+        top:60px;
+
+        padding: 0.4rem;
+    }
+    .ContactUs>div{
+  
+        width: 2rem;
+        height: 2rem;
+      
+    }
+    .Pizza{
+      
+        bottom: 3rem;
+        left: 6rem;
+      
+    }
+    .btn {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+}
+/* moblie */
+@media (max-width:739px) {
+    .container{
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 800px;
+        width: 100%;
+    }
+    .left{
+      
+        width: 100%;
+        display: flex;
+        align-items: center;
+     
+        gap:1rem;
+    }
+  
+    .heroText{
+        text-align: center;
+        font-size: 2.1rem;
+      
+    }
+    .miniText{
+        display: none;
+    }
+    .cherryDiv{
+      
+        margin-top:1rem;
+      
+    
+    }
+  
+    .imagerContainer{
+        width: 20rem;
+       text-align: center;
+       left: 40%;
+       transform: translateX(-50%);
+    }
+    .Pizza{
+        display: none;
+      
+    }
+    .ContactUs{
+        top: 350px;
+        margin-left:60%;
+        padding: 0.4rem;
+        
+    }
 }

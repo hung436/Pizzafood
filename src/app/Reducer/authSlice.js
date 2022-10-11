@@ -18,27 +18,28 @@ export const LoginFacebook = createAsyncThunk(
   }
 );
 export const loginUser = createAsyncThunk("/login", async (payload) => {
-  console.log(payload);
   const data = await login(payload);
 
-  if (data.error === 0) {
-    const user = {
-      name: data.username,
-      id: data.userID,
-      access_token: data.accessToken,
-      addressId: null,
-      refreshToken: data.refreshToken,
-    };
-    //save data to local storage
-    // await localStorage.setItem(StorageKeys.TOKEN, data.accessToken);
-    // await localStorage.setItem(StorageKeys.USER, JSON.stringify(user));
+  if (data.success) {
+    console.log(data.data.refreshToken);
+    await localStorage.setItem(StorageKeys.ACCESSTOKEN, data.data.accessToken);
+    await localStorage.setItem(
+      StorageKeys.REFRESHTOKEN,
+      data.data.refreshToken
+    );
   }
   return data;
 });
 
 const initialState = {
+  loading: false,
   isLogin: false,
-  current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || null,
+  isAdmin: false,
+  userInfo: null,
+  userToken: localStorage.getItem(StorageKeys.ACCESSTOKEN)
+    ? localStorage.getItem("userToken")
+    : null,
+  // current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || null,
 };
 
 export const userSlice = createSlice({
@@ -46,32 +47,50 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.current = null;
-      localStorage.removeItem(StorageKeys.TOKEN);
-      localStorage.removeItem(StorageKeys.USER);
+      state.userInfo = null;
+      localStorage.removeItem(StorageKeys.ACCESSTOKEN);
+      state.loading = false;
+      state.userToken = null;
+      // localStorage.removeItem(StorageKeys.USER);
     },
     change: (state, action) => {
       state.current = action.payload;
       localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
     },
     refreshToken: (state, action) => {
-      alert(action.payload);
+      // alert(action.payload);
       state.current.access_token = action.payload;
       localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
     },
+
     //
   },
   extraReducers: {
-    [login.fulfilled]: (state, action) => {
-      if (action.payload.error === 0) {
-        let user = {
-          name: action.payload.username,
-          id: action.payload.userID,
-          access_token: action.payload.accessToken,
-        };
+    [loginUser.pending]: (state) => {
+      state.loading = true;
+      // state.error = null;
+    },
+    [loginUser.fulfilled]: (state, { payload }) => {
+      const { Name, email, RoleId, avatar, phone } = payload.data;
+      const user = {
+        Name: Name,
+        RoleId: RoleId,
+        Avatar: avatar,
+        Email: email,
+        Phone: phone,
+      };
+      state.loading = false;
+      state.userInfo = user;
 
-        state.current = user;
-      }
+      // if (action.payload.error === 0) {
+      //   let user = {
+      //     name: action.payload.username,
+      //     id: action.payload.userID,
+      //     access_token: action.payload.accessToken,
+      //   };
+
+      //   state.current = user;
+      // }
     },
   },
 });
