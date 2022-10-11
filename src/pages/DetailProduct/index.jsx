@@ -8,12 +8,12 @@ function Product() {
 
     const handleQuanDec=()=>{
       if(Quantity >1){
-        setQuantity((prev)=>prev-1)
+        setQuantity((prev)=>prev*1-1)
       }
      
     }
     const handleQuanCre=()=>{
-        setQuantity((prev)=>prev+1)
+        setQuantity((prev)=>prev*1+1)
     }
     return(
         <div className={css.container}>
@@ -39,7 +39,10 @@ function Product() {
                     <span>Quantity</span>
                     <div className={css.counter}>
                         <img className={css.leftArrow} src={LeftArrow}  onClick={handleQuanDec}   alt=''/>
-                        <span>{Quantity}</span>
+                        <input type='number'  value={Quantity} onChange={(e)=>{
+                            // if(e.target.value*1<1 ) return setQuantity(1)
+                            setQuantity(e.target.value )
+                        }}/>
                         <img className={css.rightArrow} src={RightArrow} onClick={handleQuanCre}   alt=''/>
                     </div>
                 </div>

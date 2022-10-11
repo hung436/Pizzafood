@@ -70,8 +70,34 @@
 .counter{
     display: flex;
     flex-direction: row;
-    
+    overflow: hidden;
+    font-size: 1.5rem;
+  
+
+    input{  
+            display: block;
+            width: 80px;
+            border-radius: 10px;
+            text-align: center;
+            outline: none;
+            border: 1px solid transparent;
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button{
+                -webkit-appearance: none;
+            }
+
+            &:focus{
+                border-color: var(--themeRed) !important;
+                --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) transparent;
+                --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) transparent;
+                 box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), transparent;
+            }
+    }
 }
+// .counter>input{
+//     width: 100px;
+//     border-radius: 20px;
+// }
 .quantity{
     display: flex;
     justify-content: flex-start;
