@@ -40,8 +40,9 @@ const Login = () => {
       .required("Không để trống"),
   });
   const loginSubmit = async (values) => {
+    console.log(values);
     const action = loginUser(values);
-    dispatch(action);
+    console.log(dispatch(action));
   };
 
   const responseFacebook = async (response) => {
