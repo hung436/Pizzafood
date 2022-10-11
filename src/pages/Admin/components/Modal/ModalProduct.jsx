@@ -34,7 +34,7 @@ export default function Modal({ showModal, hideShow, option }) {
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
-                        Danh mục
+                        Category
                       </label>
                       <select className='px-2 py-1 placeholder-slate-300 text-slate-600 relative bg-whit rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'>
                         <option value=''>Pizza</option>
@@ -48,7 +48,7 @@ export default function Modal({ showModal, hideShow, option }) {
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
-                        Tên sản phẩm
+                       Product
                       </label>
                       <input
                         type='text'
@@ -73,7 +73,7 @@ export default function Modal({ showModal, hideShow, option }) {
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
-                        Giá
+                        Order
                       </label>
                       <input
                         type='number'
@@ -99,7 +99,7 @@ export default function Modal({ showModal, hideShow, option }) {
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
-                        Chi tiết
+                        OrderDetail
                       </label>
                       <input
                         type='text'
@@ -107,30 +107,30 @@ export default function Modal({ showModal, hideShow, option }) {
                       />
                     </div>
                     <div className='flex flex-col'>
-                      <label
+                      {/* <label
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
-                        Hiển thị
+                        Hiển thị đsds
                       </label>
-                      <input type='checkbox' className='outline-0 -0' />
+                      <input type='checkbox' className='outline-0 -0' /> */}
                     </div>
                     <div className='flex flex-col'>
-                      <label
+                      {/* <label
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       ></label>
                       <input
                         type='text'
                         className='px-2 py-1 placeholder-slate-300 text-slate-600 relative  bg-white rounded text-sm border-0 shadow outline-none focus:outline-none  w-full'
-                      />
+                      /> */}
                     </div>
                     <div className='flex flex-col'>
                       <label
                         htmlFor=''
                         className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded text-blue-600 bg-blue-200  last:mr-0 mr-1'
                       >
-                        Tên sản phẩm
+                        Role
                       </label>
                       <input
                         type='text'
