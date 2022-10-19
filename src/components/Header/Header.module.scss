@@ -10,31 +10,66 @@
     align-items: center;
     justify-content: flex-start;
     gap:0.5rem;
-    flex: 1;
+
 }
-.search{
-    flex: 2;
-}
+
 .logo>span{
     font-weight: bold;
     font-size: 1.5rem;
 }
-
-.menu{
-    flex: 1;
+/* search */
+.search{
+    position: relative;
     display: flex;
-    justify-content: center;
-    list-style: none;
-    gap:2rem;
-    z-index: 100;
-    font-size: 1.2rem;
+    align-items: center;
+    height: 46px;
+    width: 361px;
+    padding-left: 16px;
+  
+   background-color: rgba(22,24,35,0.06);
+   border-radius: 92px;
+   border: 1.5px solid transparent;
+
+    input{
+        flex: 1;
+        height: 100%;
+        color: var(--themeBlack);
+        font-size: 1rem;
+        border: none;
+        background-color: transparent;
+        outline: none;
+
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 28px;
+        top:9px;
+        right:45px;
+        background-color: rgba(22,24,35,0.12);
+      
+    }
+    &:focus-within{
+        border-color:  var(--themeRed);
+    }
 }
-.menu>li:hover{
-    cursor: pointer;
-    color: var(--themeRed);
+.searchBtn{
+    width: 40px;
+    height: 100%;
+    text-align: center;
+    border-top-right-radius: 92px;
+    border-bottom-right-radius: 92px;
+    margin-left: 10px;
+    &:hover{
+        cursor: pointer;
+        background-color: rgba(22,24,35,0.03);
+    }
+  
 }
+
 .rightSide{
-    flex: 1;
+
     display: flex;
     gap:1rem;
     justify-content: flex-end;
@@ -70,10 +105,7 @@
 
  /* table  */
  @media (min-width: 740px) and (max-width: 1023px) {
-    .menu{
-       flex: 3;
-        
-    }
+
     
 }
 
@@ -88,44 +120,7 @@
     .navInput:checked ~ .navMobile {
         transform: translate(0);
     }
-    .menu {
-        display: none;
-    }
-    .iconMenu{
-        display: block;
-    }
-    .navMobile{
-        display: block;
-        position: fixed;
-        top:0;
-        right: 0;
-        bottom:0;
-        width: 100%;
-        max-width: 100%;
-        background-color: #fff;
-        transform: translateX(100%);
-        background: #d6e5d8;
-        z-index: 10000;
-    
-    }
-    .navMenu{
-        display: block;
-        text-align: right;
-        margin-top: 40%;
-        margin-right: 20px;
-        align-items: center;
-
-    }
-    .navMenu>li{
-        color: #333;
-        display: block;
-        padding: 16px 0;
-        font-size: 1.4rem;
-    }
-    .navMenu>li:hover{
-        color: var(--themeRed);
-        cursor: pointer;
-    }
+  
     .navClose{
         position: absolute;
         top:1.3rem;

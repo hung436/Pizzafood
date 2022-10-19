@@ -239,7 +239,7 @@ import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 //   );
 // };
 // export default Header;
-import css from "./Header.module.css";
+import css from "./Header.module.scss";
 import Logo from "../../assets/img/Logo.png";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
@@ -247,10 +247,9 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../app/Reducer/authSlice";
-import { TextInput } from "flowbite-react";
-
-
-
+import {AiOutlineCloseCircle} from "react-icons/ai"
+import {AiOutlineLoading} from "react-icons/ai"
+import {BsSearch} from "react-icons/bs"
 function Header() {
   const { userInfo, userToken } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -266,12 +265,23 @@ function Header() {
   return (
     <div className={css.header}>
       {/* logo side */}
-      <div className={css.logo}>
-        <img src={Logo} alt='logo' width={50} height={50} />
-        <span>FUDO</span>
-      </div>
+      <Link to="/">
+          <div className={css.logo}>
+            <img src={Logo} alt='logo' width={50} height={50} />
+            <span>FUDO</span>
+          </div>
+      </Link>
       {/* search */}
-    
+      <div className={css.search}>
+        <input placeholder="Nhập tìm kiếm sản phẩm" spellCheck={false}/>
+        <button className={css.clear}>
+            <AiOutlineCloseCircle/>
+        </button>
+             <AiOutlineLoading/>
+        <button className={css.searchBtn}>
+              <BsSearch/>
+        </button>
+      </div>
 
 
       {/* MENU SIDE */}
