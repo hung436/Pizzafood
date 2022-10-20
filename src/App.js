@@ -4,11 +4,9 @@ import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
 import Footer from "./components/Footer/Footer.jsx";
-
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-
 import "./styles/globals.css";
 import React, { Suspense } from "react";
 import { useSelector } from "react-redux";

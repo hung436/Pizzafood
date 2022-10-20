@@ -23,7 +23,25 @@ footer{
 .desc{
     font-size: 1.4rem;
     color: #3f3c3c;
-    margin-bottom: 2rem;
+  
+    & a{
+        color: var(--themeRed);
+        font-style: normal;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 44px;
+   
+    }
+}
+.contact{
+    display: flex;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    & span{
+    margin-left: 10px;
+    font-weight: 600;
+    }
+   
 }
 .socialsTitle{
     font-size: 1.4rem;
@@ -87,7 +105,6 @@ footer{
     .desc{
         max-width: 300px;
         font-size: 1rem;
-        margin-bottom: 2.5rem;
         line-height: 28px;
        
     }

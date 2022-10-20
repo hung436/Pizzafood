@@ -239,29 +239,22 @@ import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 //   );
 // };
 // export default Header;
-import css from "./Header.module.scss";
-import Logo from "../../assets/img/Logo.png";
+
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { logout } from "../../app/Reducer/authSlice";
-import {AiOutlineCloseCircle} from "react-icons/ai"
-import {AiOutlineLoading} from "react-icons/ai"
-import {BsSearch} from "react-icons/bs"
+import Logo from "../../assets/img/Logo.png";
+import css from "./Header.module.scss";
+import Search from "../Search"
+// import Tippy from '@tippyjs/react/headless';
 function Header() {
+   
   const { userInfo, userToken } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  useEffect(() => {
-    // if (userToken) {
-    //   dispatch(getUserDetails());
-    // }
-  }, [userToken, dispatch]);
-  // var menu= document.querySelector('.iconMenu')
-  // menu.onClick=function(){
-  //   console.log(Math.random());
-  // }
+ 
+
   return (
     <div className={css.header}>
       {/* logo side */}
@@ -272,16 +265,7 @@ function Header() {
           </div>
       </Link>
       {/* search */}
-      <div className={css.search}>
-        <input placeholder="Nhập tìm kiếm sản phẩm" spellCheck={false}/>
-        <button className={css.clear}>
-            <AiOutlineCloseCircle/>
-        </button>
-             <AiOutlineLoading/>
-        <button className={css.searchBtn}>
-              <BsSearch/>
-        </button>
-      </div>
+    <Search/>
 
 
       {/* MENU SIDE */}
