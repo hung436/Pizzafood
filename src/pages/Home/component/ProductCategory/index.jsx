@@ -1,5 +1,6 @@
 import css from './ProductCategory.module.scss'
 import p1 from "../../../../assets/img/p1.jpg";
+import {MdFavoriteBorder} from "react-icons/md"
 import {Link} from "react-router-dom"
 function ProductCategory() {
     return ( 
@@ -19,7 +20,11 @@ function ProductCategory() {
                     </div>
                 </Link>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
+                    
                 </div>
                 <div className={css.pizza}>
                     <div className={css.ImageWrapper}>
@@ -27,7 +32,10 @@ function ProductCategory() {
                     
                     </div>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
                 <div className={css.pizza}>
                     <div className={css.ImageWrapper}>
@@ -35,7 +43,10 @@ function ProductCategory() {
                     
                     </div>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
             </div>
 
@@ -53,7 +64,10 @@ function ProductCategory() {
                     </div>
                 </Link>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
                 <div className={css.pizza}>
                     <div className={css.ImageWrapper}>
@@ -61,7 +75,10 @@ function ProductCategory() {
                     
                     </div>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
                 <div className={css.pizza}>
                     <div className={css.ImageWrapper}>
@@ -69,7 +86,10 @@ function ProductCategory() {
                     
                     </div>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
             </div>
 
@@ -89,7 +109,10 @@ function ProductCategory() {
                     </div>
                 </Link>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
                 <div className={css.pizza}>
                     <div className={css.ImageWrapper}>
@@ -97,7 +120,10 @@ function ProductCategory() {
                     
                     </div>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
                 <div className={css.pizza}>
                     <div className={css.ImageWrapper}>
@@ -105,7 +131,10 @@ function ProductCategory() {
                     
                     </div>
                     <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                    <div className={css.price}>
+                        <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
+                        <MdFavoriteBorder className={css.favorite}/>
+                    </div>
                 </div>
             </div>
 

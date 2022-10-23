@@ -12,14 +12,14 @@ const ImageLink = [slide1, slide2, slide3];
 const Home = () => {
   return (
     <div className="">
-      <div className='h-[67px] bg-[#0b1a33] flex justify-center font-semibold text-xs w-full'>
-        <ul className='flex text-white items-center justify-start space-x-5 md:w-[1140px] overflow-x-auto whitespace-nowrap'>
+      <div className='h-[67px] bg-[#F54748] flex justify-center font-semibold text-xs w-full'>
+        <ul className='flex text-sm text-white items-center justify-around  md:w-[1140px] overflow-x-auto whitespace-nowrap'>
           <li className='underline active w-fit'>TRANG CHỦ</li>
           <li className='underline'>MENU</li>
+          <li className='underline'>YÊU THÍCH</li>
+          <li className='underline'>GIỎ HÀNG</li>
+          <li className='underline'>LIÊN HỆ</li>
           <li className='underline'>VỀ CHÚNG TÔI</li>
-          <li className='underline'>lIÊN HỆ</li>
-          <li className='underline'>TRENDING</li>
-          <li className='underline'>VIDEOS</li>
         </ul>
       </div>
       <div className=''>
