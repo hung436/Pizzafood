@@ -1,88 +1,35 @@
-import css from "./ListProduct.module.css"
+import css from "./ListProduct.module.scss";
 import p1 from "../../../../assets/img/p1.jpg";
-import {Link} from "react-router-dom"
-function ListProduct() {
-    return ( 
-        <div className={css.container}>
-            <div className={css.heading}>
-                <span> THỰC ĐƠN CỦA CHÚNG TÔI  </span>
-                <span>Menu That Always</span>
-                <span>Make You Fall in Love</span>
+import { MdFavoriteBorder } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { BsArrowRightShort } from "react-icons/bs";
+function ListProduct({ data }) {
+  return (
+    <div className={css.menu}>
+      {data.map((item) => (
+        <div key={item.id} className={css.pizza}>
+          <Link to="/product/id">
+            <div className={css.ImageWrapper}>
+              <img src={p1} alt="P1" />
             </div>
-
-            <div className={css.menu}>
-                <div className={css.pizza}>
-                <Link to="/product/id">
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                </Link>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span>18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-                <div className={css.pizza}>
-                    <div className={css.ImageWrapper}>
-                        <img src={p1} alt='P1'/>
-                    
-                    </div>
-                    <span>Red Chilli Pizza</span>
-                    <span><span style={{color: "var(--themeRed)"}}>$</span> 18</span>
-                </div>
-            </div>
+          </Link>
+          <span>{item.name}</span>
+          <div className={css.price}>
+            <span>
+              <span style={{ color: "var(--themeRed)" }}>$</span> {item.price}
+            </span>
+            <MdFavoriteBorder className={css.favorite} />
+            <Link to="/product/:id">
+              <button className={css.buy}>
+                Mua ngay
+                <BsArrowRightShort />
+              </button>
+            </Link>
+          </div>
         </div>
-
-      
-
-     );
+      ))}
+    </div>
+  );
 }
 
 export default ListProduct;

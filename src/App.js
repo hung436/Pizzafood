@@ -4,6 +4,7 @@ import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Admin from "./pages/Admin";
 import Footer from "./components/Footer/Footer.jsx";
+import Menu from "./pages/Menu/menu.jsx"
 import NotFound from "./pages/Notfound";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -49,6 +50,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/product/:id' element={<Product />} />
             <Route path='/home' element={<Home />} />
+            <Route path="/menu" element={<Menu/>}/>
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

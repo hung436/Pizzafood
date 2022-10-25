@@ -17,7 +17,7 @@ function Product() {
   return (
     <div className={css.container}>
       <div className={css.imageWrapper}>
-        <img src={p1} alt='' />
+        <img src={p1} alt="" />
       </div>
       {/* right side */}
       <div className={css.right}>
@@ -45,10 +45,10 @@ function Product() {
               className={css.leftArrow}
               src={LeftArrow}
               onClick={handleQuanDec}
-              alt=''
+              alt=""
             />
             <input
-              type='number'
+              type="number"
               value={Quantity}
               onChange={(e) => {
                 if (e.target.value > 1 || e.target.value == "")
@@ -59,7 +59,7 @@ function Product() {
               className={css.rightArrow}
               src={RightArrow}
               onClick={handleQuanCre}
-              alt=''
+              alt=""
             />
           </div>
         </div>
