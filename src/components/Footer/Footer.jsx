@@ -14,9 +14,14 @@ function Footer(){
                 <div className={css.logo}>
                     <img src={Logo} alt="logo"/>
                 </div>
-                <p className={css.desc}>
-                    Những món ăn truyền thống của nhà hàng chay HOMIE tươi ngon để cả gia đình thích thú.
-                </p>
+
+                <div className={css.desc}>
+                    <div className={css.contact}>
+                        <BsFillTelephoneInboundFill/>
+                        <span>Hotline đặt hàng </span>
+                    </div>
+                    <a href="tel:19006099" class={css.hotline}>1900 9999</a>
+                </div>
                 <div className={css.socials}>
                     <h4 className={css.socialsTitle}>Follow us</h4>
                     <ol>

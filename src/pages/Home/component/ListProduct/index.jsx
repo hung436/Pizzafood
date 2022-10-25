@@ -5,7 +5,7 @@ function ListProduct() {
     return ( 
         <div className={css.container}>
             <div className={css.heading}>
-                <span> OUR MENU </span>
+                <span> THỰC ĐƠN CỦA CHÚNG TÔI  </span>
                 <span>Menu That Always</span>
                 <span>Make You Fall in Love</span>
             </div>
