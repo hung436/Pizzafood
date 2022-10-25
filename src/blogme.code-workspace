@@ -1,13 +1,19 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		},
-		{
-			"path": "../../webserverv2"
-		},
-		{
-			"path": "../../../nodejs_bascic"
-		}
-	]
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../webserverv2"
+    },
+    {
+      "path": "../../../nodejs_bascic"
+    },
+    {
+      "path": "../../webserverv3"
+    },
+    {
+      "path": "C:/Users/hungh/OneDrive/Máy tính/nestjs-ecommerce-application-backend"
+    }
+  ]
 }

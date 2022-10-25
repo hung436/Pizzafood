@@ -47,6 +47,7 @@ const Login = () => {
 
   const responseFacebook = async (response) => {
     const action = LoginFacebook(response);
+    console.log(response);
     await dispatch(action);
   };
   return (
