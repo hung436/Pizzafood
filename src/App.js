@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/App.scss";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
-import Admin from "./pages/Admin";
+
 import Footer from "./components/Footer/Footer.jsx";
 import Menu from "./pages/Menu/menu.jsx"
 import NotFound from "./pages/Notfound";
@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import Loading from "./components/Loading";
 const Product = React.lazy(() => import("./pages/DetailProduct/index.jsx"));
 const Home = React.lazy(() => import("./pages/Home"));
+const Admin = React.lazy(() => import("./pages/Admin"));
 function App() {
   const { userInfo } = useSelector((state) => state.user);
   console.log(userInfo);
