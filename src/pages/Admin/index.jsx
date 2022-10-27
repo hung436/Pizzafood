@@ -3,15 +3,16 @@ import Dashboard from "./views/Dashboard";
 // import Maps from './views/Maps';
 import Settings from "./views/Settings";
 import Tables from "./views/Tables";
-
+import React from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import AdminNavbar from "./components/AdminNavbar/AdminNavbar";
 import HeaderStats from "./components/Headers/HeaderStats";
 import FooterAdmin from "./components/Footers/FooterAdmin";
-import Category from "./views/Category";
-import Product from "./views/Product";
-import User from "./views/User";
 import NotFound from "../Notfound";
+const Category = React.lazy(() => import("./views/Category"));
+const Product = React.lazy(() => import("./views/Product"));
+const User = React.lazy(() => import("./views/User"));
+
 const AdminPage = () => {
   return (
     <>
@@ -20,7 +21,7 @@ const AdminPage = () => {
         <AdminNavbar />
         {/* Header */}
         <HeaderStats />
-        <div className='px-4 md:px-10 mx-auto w-full md:-mt-24'>
+        <div className=' md:px-10 mx-auto w-full md:-mt-24'>
           <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/dashboard' element={<Dashboard />} />

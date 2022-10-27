@@ -34,7 +34,7 @@ const Login = () => {
   }, [navigate, userInfo]);
   const showPassword = () => setEye(!Eye);
   const SigninSchema = Yup.object().shape({
-    username: Yup.string().required("Email Không để trống"),
+    username: Yup.string().email().required("Email Không để trống"),
     password: Yup.string()
       .min(6, "Tối thiểu 6 kí tự")
       .required("Không để trống"),
@@ -58,6 +58,7 @@ const Login = () => {
           src='https://viblo.asia/logo_full.svg'
           alt=''
         />
+
         <h1 className='font-semibold text-xl text-center'>Đăng nhập</h1>
         <Formik
           initialValues={{

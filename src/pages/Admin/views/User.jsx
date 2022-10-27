@@ -2,8 +2,99 @@ import React from "react";
 import { BsPlusCircle } from "react-icons/bs";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { RiEditBoxLine } from "react-icons/ri";
-
+import Table from "../../../components/Table/Table";
 function User({ color }) {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        columns: [
+          {
+            Header: "First Name",
+            accessor: "firstName",
+          },
+          {
+            Header: "Last Name",
+            accessor: "lastName",
+          },
+        ],
+      },
+      {
+        Header: "Info",
+        columns: [
+          {
+            Header: "Age",
+            accessor: "age",
+          },
+          {
+            Header: "Visits",
+            accessor: "visits",
+          },
+          {
+            Header: "Status",
+            accessor: "status",
+          },
+          {
+            Header: "Profile Progress",
+            accessor: "progress",
+          },
+        ],
+      },
+    ],
+    []
+  );
+  const data = [];
+  // const data = [
+  //   {
+  //     name: "Nguyen Van A",
+  //     age: 26,
+  //     friend: {
+  //       name: "Do Van C",
+  //       age: 23,
+  //     },
+  //   },
+  //   {
+  //     name: "Dao Thi B",
+  //     age: 22,
+  //     friend: {
+  //       name: "Ngo Trung V",
+  //       age: 24,
+  //     },
+  //   },
+  //   {
+  //     name: "Tran Duc C",
+  //     age: 25,
+  //     friend: {
+  //       name: "Ngo Thanh E",
+  //       age: 25,
+  //     },
+  //   },
+  //   {
+  //     name: "Le Tien N",
+  //     age: 27,
+  //     friend: {
+  //       name: "Cao Cong G",
+  //       age: 24,
+  //     },
+  //   },
+  //   {
+  //     name: "Pham Hoang M",
+  //     age: 26,
+  //     friend: {
+  //       name: "Lai Hai D",
+  //       age: 25,
+  //     },
+  //   },
+  //   {
+  //     name: "Duong Van L",
+  //     age: 23,
+  //     friend: {
+  //       name: "Le Hoang M",
+  //       age: 23,
+  //     },
+  //   },
+  // ];
+
   return (
     <div>
       {" "}
@@ -38,7 +129,8 @@ function User({ color }) {
             </div>
             <div className='block w-full overflow-x-auto'>
               {/* Projects table */}
-              <table className='items-center w-full bg-transparent border-collapse'>
+              <Table data={data} columns={columns} defaultPageSize={5} />
+              {/* <table className='items-center w-full bg-transparent border-collapse'>
                 <thead>
                   <tr>
                     <th
@@ -58,104 +150,6 @@ function User({ color }) {
                         <label htmlFor="checkbox" className="sr-only">
                           Checkbox
                         </label> */}
-                      </div>
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      ID
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                        //     (color === 'light'
-                        //       ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                        //       : 'bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700')
-                      }
-                    >
-                      Họ và tên
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      Tên đăng nhập
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      Mật khẩu
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      Địa chỉ
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      Roles
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      <div className='flex items-center h-5'>
-                        <input
-                          type='checkbox'
-                          className='text-blue-600 border-gray-200 rounded focus:ring-blue-500'
-                        />
-                        <label htmlFor='checkbox' className='sr-only'>
-                          Checkbox
-                        </label>
-                      </div>
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      1
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Huỳnh Thanh Hưng
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      ttldhung
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      đasdasdasda
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      144 Tân phú Tân Thành Bù đốp bình phước
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Admin
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
