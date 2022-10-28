@@ -25,7 +25,7 @@ function Product() {
             }
           >
             <div className='rounded-t mb-0 py-3 border-0 '>
-              <div className='flex flex-wrap items-center'>
+              <div className='flex flex-wrap items-center p-3'>
                 <div className='relative w-full max-w-full flex-grow flex-1'>
                   <h3 className={"font-semibold text-lg "}>QUẢN LÝ SẢN PHẨM</h3>
                 </div>
@@ -273,42 +273,12 @@ function Product() {
                       Admin
                     </td>
                   </tr>
-                  <tr>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      <div className='flex items-center h-5'>
-                        <input
-                          type='checkbox'
-                          className='text-blue-600 border-gray-200 rounded focus:ring-blue-500'
-                        />
-                        <label htmlFor='checkbox' className='sr-only'>
-                          Checkbox
-                        </label>
-                      </div>
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      1
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Huỳnh Thanh Hưng
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      ttldhung
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'></td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      144 Tân phú Tân Thành Bù đốp bình phước
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Admin
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
-          </div>
-
-          <div className='flex justify-end items-center'>
-            <Paginate />
+            <div className='flex justify-end items-center'>
+              <Paginate />
+            </div>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ const Login = () => {
   }, []);
   useEffect(() => {
     if (userInfo) {
-      if (userInfo.RoleId === 2) navigate("/admin");
+      if (userInfo.RoleId === "admin") navigate("/admin");
       else navigate("/");
       toast.success("Đăng nhập thành công");
     }
