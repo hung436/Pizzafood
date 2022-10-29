@@ -7,7 +7,7 @@
 .imageWrapper{
     position: relative;
     width: 40%;
-    height: 25rem;
+    height: 30rem;
     overflow: hidden;
     display: flex;
     object-fit: cover;
@@ -19,6 +19,13 @@
 
 .imageWrapper>img{
     border-radius: 2rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 80%;
 }
 .imageWrapper:hover img{
     transform: scale(1.2);
