@@ -1,8 +1,10 @@
 import css from "./Product.module.scss";
-import p1 from "../../assets/img/p1.jpg";
+import p2 from "../../assets/img/p2.png";
 import LeftArrow from "../../assets/img/arrowLeft.png";
 import RightArrow from "../../assets/img/arrowRight.png";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 function Product() {
   const [Quantity, setQuantity] = useState(1);
 
@@ -14,10 +16,15 @@ function Product() {
   const handleQuanCre = () => {
     setQuantity((prev) => prev * 1 + 1);
   };
+  const AddToCart = () => {
+    toast.success("Thêm thành công !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
   return (
     <div className={css.container}>
       <div className={css.imageWrapper}>
-        <img src={p1} alt="" />
+        <img src={p2} alt="" />
       </div>
       {/* right side */}
       <div className={css.right}>
@@ -63,7 +70,12 @@ function Product() {
             />
           </div>
         </div>
-        <div className={`btn ${css.btn}`}>Thêm vào giỏ hàng</div>
+        <Link to="/cart">
+          <div onClick={AddToCart} className={`btn ${css.btn}`}>
+            Thêm vào giỏ hàng
+          </div>
+        </Link>
+        <ToastContainer />
       </div>
     </div>
   );

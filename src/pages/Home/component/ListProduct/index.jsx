@@ -1,5 +1,5 @@
 import css from "./ListProduct.module.scss";
-import p1 from "../../../../assets/img/p1.jpg";
+import p2 from "../../../../assets/img/p2.png";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { BsArrowRightShort } from "react-icons/bs";
@@ -10,7 +10,7 @@ function ListProduct({ data }) {
         <div key={item.id} className={css.pizza}>
           <Link to="/product/id">
             <div className={css.ImageWrapper}>
-              <img src={p1} alt="P1" />
+              <img src={p2} alt="P1" />
             </div>
           </Link>
           <span>{item.name}</span>
