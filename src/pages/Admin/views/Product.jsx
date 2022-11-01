@@ -1,19 +1,33 @@
-import { Label, Select } from "flowbite-react";
-import React from "react";
+import { Checkbox, Label, Select, Table, ToggleSwitch } from "flowbite-react";
+import React, { useEffect } from "react";
 import { AiFillPrinter } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { RiEditBoxLine } from "react-icons/ri";
 import Paginate from "../../../components/Paginate/Paginate";
+
 import Modal from "../components/Modal/ModalProduct";
+import { getProductList } from "../../../app/Reducer/productSice";
+import { dispatch } from "../../../app/Store/store";
+
 function Product() {
   const [showModal, setShowModal] = React.useState(false);
   const [showOption, setShowOption] = React.useState(false);
+  const [productList, setProductList] = React.useState([]);
   const handleShow = (option) => {
     setShowModal(!showModal);
     option ? setShowOption(false) : setShowOption(true);
   };
+  useEffect(() => {
+    async function getProduct() {
+      const { payload } = await dispatch(getProductList());
+      setProductList(payload);
+    }
+    getProduct();
+    console.log("get", productList);
+  }, []);
+  const onChangeToggleSwitch = () => {};
   return (
     <div>
       <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
@@ -21,7 +35,7 @@ function Product() {
         <div className='w-full '>
           <div
             className={
-              "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white "
+              "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-300 "
             }
           >
             <div className='rounded-t mb-0 py-3 border-0 '>
@@ -81,200 +95,79 @@ function Product() {
               </div>
             </div>
             <div className='block w-full overflow-x-auto '>
-              <table className='items-center w-full bg-transparent border-collapse '>
-                <thead>
-                  <tr>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      <div className='flex items-center h-5'></div>
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      ID
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Tên sản phẩm
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Hình ảnh
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Danh mục
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Giá
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Giảm giá
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Chi tiết
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Số lượng
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                      }
-                    >
-                      Hiển thị
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      <div className='flex items-center h-5'>
-                        <input
-                          type='checkbox'
-                          className='text-blue-600 border-gray-200 rounded focus:ring-blue-500'
-                        />
-                        <label htmlFor='checkbox' className='sr-only'>
-                          Checkbox
-                        </label>
-                      </div>
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      1
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Huỳnh Thanh Hưng
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      ttldhung
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'></td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      144 Tân phú Tân Thành Bù đốp bình phước
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Admin
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      <div className='flex items-center h-5'>
-                        <input
-                          type='checkbox'
-                          className='text-blue-600 border-gray-200 rounded focus:ring-blue-500'
-                        />
-                        <label htmlFor='checkbox' className='sr-only'>
-                          Checkbox
-                        </label>
-                      </div>
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      1
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Huỳnh Thanh Hưng
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      ttldhung
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'></td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      144 Tân phú Tân Thành Bù đốp bình phước
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Admin
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      <div className='flex items-center h-5'>
-                        <input
-                          type='checkbox'
-                          className='text-blue-600 border-gray-200 rounded focus:ring-blue-500'
-                        />
-                        <label htmlFor='checkbox' className='sr-only'>
-                          Checkbox
-                        </label>
-                      </div>
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      1
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Huỳnh Thanh Hưng
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      ttldhung
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'></td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      144 Tân phú Tân Thành Bù đốp bình phước
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Admin
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      <div className='flex items-center h-5'>
-                        <input
-                          type='checkbox'
-                          className='text-blue-600 border-gray-200 rounded focus:ring-blue-500'
-                        />
-                        <label htmlFor='checkbox' className='sr-only'>
-                          Checkbox
-                        </label>
-                      </div>
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      1
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Huỳnh Thanh Hưng
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      ttldhung
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'></td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      144 Tân phú Tân Thành Bù đốp bình phước
-                    </td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
-                      Admin
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table hoverable={true}>
+                <Table.Head>
+                  <Table.HeadCell className='!p-4'>
+                    <Checkbox />
+                  </Table.HeadCell>
+                  <Table.HeadCell>Product name</Table.HeadCell>
+                  <Table.HeadCell>Color</Table.HeadCell>
+                  <Table.HeadCell>Category</Table.HeadCell>
+                  <Table.HeadCell>Price</Table.HeadCell>
+                  <Table.HeadCell>
+                    <span className='sr-only'>Edit</span>
+                  </Table.HeadCell>
+                </Table.Head>
+                <Table.Body className='divide-y'>
+                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                    <Table.Cell className='!p-4'>
+                      <Checkbox />
+                    </Table.Cell>
+                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                      Apple MacBook Pro 17"
+                    </Table.Cell>
+                    <Table.Cell>Sliver</Table.Cell>
+                    <Table.Cell>Laptop</Table.Cell>
+                    <Table.Cell>$2999</Table.Cell>
+                    <Table.Cell>
+                      <a
+                        href='/tables'
+                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
+                      >
+                        Edit
+                      </a>
+                    </Table.Cell>
+                  </Table.Row>
+                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                    <Table.Cell className='!p-4'>
+                      <Checkbox />
+                    </Table.Cell>
+                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                      Microsoft Surface Pro
+                    </Table.Cell>
+                    <Table.Cell>White</Table.Cell>
+                    <Table.Cell>Laptop PC</Table.Cell>
+                    <Table.Cell>$1999</Table.Cell>
+                    <Table.Cell>
+                      <a
+                        href='/tables'
+                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
+                      >
+                        Edit
+                      </a>
+                    </Table.Cell>
+                  </Table.Row>
+                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                    <Table.Cell className='!p-4'>
+                      <Checkbox />
+                    </Table.Cell>
+                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                      Magic Mouse 2
+                    </Table.Cell>
+                    <Table.Cell>Black</Table.Cell>
+                    <Table.Cell>Accessories</Table.Cell>
+                    <Table.Cell>$99</Table.Cell>
+                    <Table.Cell>
+                      <a
+                        href='/tables'
+                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
+                      >
+                        Edit
+                      </a>
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
             </div>
             <div className='flex justify-end items-center'>
               <Paginate />

@@ -149,7 +149,14 @@ export const userSlice = createSlice({
     },
     [getInfor.fulfilled]: (state, { payload }) => {
       console.log("payload", payload);
-      state.userInfo = payload;
+      const { name, email, role, avartar } = payload;
+      const user = {
+        Name: name,
+        RoleId: role,
+        Avatar: avartar,
+        Email: email,
+      };
+      state.userInfo = user;
     },
   },
 });
