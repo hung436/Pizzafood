@@ -20,7 +20,9 @@ const Home = () => {
             MENU
           </Link>
           <li className="underline">YÊU THÍCH</li>
-          <li className="underline">GIỎ HÀNG</li>
+          <Link to="/cart">
+            <li className="underline">GIỎ HÀNG</li>
+          </Link>
           <li className="underline">LIÊN HỆ</li>
           <li className="underline">VỀ CHÚNG TÔI</li>
         </ul>

@@ -12,7 +12,7 @@ function Footer() {
         <div className={css.wrapper}>
           <div className={css.col1}>
             <div className={css.logo}>
-              <img src={Logo} alt='logo' />
+              <img src={Logo} alt="logo" />
             </div>
 
             <div className={css.desc}>
@@ -20,25 +20,25 @@ function Footer() {
                 <BsFillTelephoneInboundFill />
                 <span>Hotline đặt hàng </span>
               </div>
-              <a href='tel:19006099' className={css.hotline}>
+              <a href="tel:19006099" className={css.hotline}>
                 1900 9999
               </a>
             </div>
             <div className={css.socials}>
-              <h4 className={css.socialsTitle}>Follow us</h4>
+              <h4 className={css.socialsTitle}>THEO DÕI CHÚNG TÔI</h4>
               <ol>
                 <li>
-                  <Link to='/'>
+                  <Link to="/">
                     <AiFillFacebook width={500} height={200} />
                   </Link>
                 </li>
                 <li>
-                  <Link to='/'>
+                  <Link to="/">
                     <FaInstagramSquare />
                   </Link>
                 </li>
                 <li>
-                  <Link to='/'>
+                  <Link to="/">
                     <BsFillTelephoneInboundFill />
                   </Link>
                 </li>
@@ -46,40 +46,40 @@ function Footer() {
             </div>
           </div>
           <div className={css.col2}>
-            <h3 className={css.textTitle}>Links</h3>
+            <h3 className={css.textTitle}>DANH MỤC</h3>
             <ol className={css.text}>
               <li>
-                <Link to='./index.html'>Trang chủ</Link>
+                <Link to="#">Trang chủ</Link>
               </li>
               <li>
-                <Link to='./menu.html'>Menu</Link>
+                <Link to="./menu">Menu</Link>
               </li>
               <li>
-                <Link to='./booking.html'>Đặt hàng</Link>
+                <Link to="./booking.html">Yêu thích</Link>
               </li>
               <li>
-                <Link to='./about.html'>About Us</Link>
+                <Link to="./cart">Giỏ hàng </Link>
               </li>
               <li>
-                <Link to='./contact.html'>Contact Us</Link>
+                <Link to="./conta">Liên hệ </Link>
               </li>
               <li>
-                <Link to='#'>Privacy Policy</Link>
+                <Link to="#">Về chúng tôi </Link>
               </li>
             </ol>
           </div>
 
           <div className={css.col3}>
-            <h3 className={css.textTitle}>Support</h3>
+            <h3 className={css.textTitle}>CHĂM SÓC KHÁCH HÀNG </h3>
             <ol className={css.text}>
               <li>
-                <Link to='./contact.html'>Liên hệ</Link>
+                <Link to="./contact.html">Liên hệ</Link>
               </li>
               <li>
-                <Link to='#'>Hỗ trợ</Link>
+                <Link to="#">Hỗ trợ</Link>
               </li>
               <li>
-                <Link to='#'>Phản hồi</Link>
+                <Link to="#">Phản hồi</Link>
               </li>
             </ol>
           </div>
@@ -88,16 +88,16 @@ function Footer() {
             <h3 className={css.textTitle}>Contact</h3>
             <ol className={css.text}>
               <li>
-                <Link to='tel:0374954603'>0374954603</Link>
+                <Link to="tel:0374954603">0374954603</Link>
               </li>
               <li>
-                <Link to='#'>Đoàn Văn Thắng</Link>
+                <Link to="#">Đoàn Văn Thắng</Link>
               </li>
               <li>
-                <Link to='#'>Huỳnh Thanh Hưng</Link>
+                <Link to="#">Huỳnh Thanh Hưng</Link>
               </li>
               <li>
-                <Link to='mailto:Fodu@gmail.com'>Fodu@gmail.com</Link>
+                <Link to="mailto:Fodu@gmail.com">Fodu@gmail.com</Link>
               </li>
             </ol>
           </div>
