@@ -21,6 +21,7 @@ function Product() {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
+  const [active, setActive] = useState(0);
   return (
     <div className={css.container}>
       <div className={css.imageWrapper}>
@@ -39,9 +40,24 @@ function Product() {
         <div className={css.size}>
           <span>Size</span>
           <div className={css.sizeVaraints}>
-            <div>Nhỏ</div>
-            <div>Trung Bình</div>
-            <div>Lớn</div>
+            <div
+              onClick={() => setActive(0)}
+              className={` ${active === 0 ? css.sizePrimary : ""}`}
+            >
+              Nhỏ
+            </div>
+            <div
+              onClick={() => setActive(1)}
+              className={` ${active === 1 ? css.sizePrimary : ""}`}
+            >
+              Trung Bình
+            </div>
+            <div
+              onClick={() => setActive(2)}
+              className={` ${active === 2 ? css.sizePrimary : ""}`}
+            >
+              Lớn
+            </div>
           </div>
         </div>
         {/* quantity counter */}

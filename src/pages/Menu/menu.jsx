@@ -2,6 +2,7 @@ import ListProduct from "../Home/component/ListProduct";
 import css from "./menu.module.scss";
 import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
+import { useState } from "react";
 function Menu() {
   const fake = [
     { id: 1, image: "", name: "hungdt", price: "30000" },
@@ -11,15 +12,26 @@ function Menu() {
     { id: 3, image: "", name: "hungdt", price: "30000" },
   ];
   const category = ["Pizza", "Mì Ý", "Salad", "Thức uống"];
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeFilter, setActiveFilter] = useState(0);
   return (
     <div className={css.container}>
-      <div className={css.right}>
+      <div className={css.left}>
         <nav className={css.category}>
           <h3 className={css.heading}>Danh mục</h3>
           <ul className={css.listCategory}>
-            {category.map((item) => (
-              <li className={`${css.categoryItem} ${css.ItemActi} `} key={item}>
-                <Link to="" className={css.itemLink}>
+            {category.map((item, index) => (
+              <li
+                className={css.categoryItem}
+                key={index}
+                onClick={() => setActiveCategory(index)}
+              >
+                <Link
+                  to=""
+                  className={`${css.itemLink} ${
+                    activeCategory === index ? css.ItemActi : ""
+                  }`}
+                >
                   {item}
                 </Link>
               </li>
@@ -27,14 +39,33 @@ function Menu() {
           </ul>
         </nav>
       </div>
-      <div className={css.left}>
+      <div className={css.right}>
         <div className={css.filter}>
           <span class={css.filterLabel}>Sắp xếp theo</span>
-          <button className={`${css.filterBtn} ${css.btnPrimary}`}>
+          <button
+            className={`${css.filterBtn} ${
+              activeFilter === 0 ? css.btnPrimary : ""
+            }`}
+            onClick={() => setActiveFilter(0)}
+          >
             Phổ biến
           </button>
-          <button className={css.filterBtn}>Mới nhất</button>
-          <button className={css.filterBtn}>Bán chạy</button>
+          <button
+            className={`${css.filterBtn} ${
+              activeFilter === 1 ? css.btnPrimary : ""
+            }`}
+            onClick={() => setActiveFilter(1)}
+          >
+            Mới nhất
+          </button>
+          <button
+            className={`${css.filterBtn} ${
+              activeFilter === 2 ? css.btnPrimary : ""
+            }`}
+            onClick={() => setActiveFilter(2)}
+          >
+            Bán chạy
+          </button>
 
           <div className={css.selectInput}>
             <span className={css.selectInputLabel}>Giá</span>

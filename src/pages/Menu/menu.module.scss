@@ -1,66 +1,65 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    padding: 3rem 2rem;
+.container {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	padding: 3rem 2rem;
 }
-.right{
-  
-    flex: 1;
-    margin-right: 10px;
+.left {
+	flex: 1;
+	margin-right: 10px;
+}
+.right {
+	flex: 5;
+	margin-left: 10px;
+}
+.category {
+	background-color: #fff;
+	border-radius: 2px;
+}
+.heading {
+	font-size: 1.4rem;
+	font-weight: 400;
+	color: var(--themeRed);
+	padding: 16px 16px 0;
+	margin-top: 0;
+	text-transform: uppercase;
+}
+.listCategory {
+	padding: 16px 16px;
+	& > li {
+		padding: 16px 16px;
+		font-size: 1.2rem;
+	}
+}
+.categoryItem {
+	position: relative;
+	&::before {
+		content: "";
+		border-top: 1px solid #e1e1e1;
+		position: absolute;
+		top: 0;
+		left: 2px;
+		right: 2px;
+	}
+}
+.itemLink {
+	position: relative;
+	text-decoration: none;
+	font-size: 1.2rem;
+	padding: 10px 20px;
+	display: block;
+	transition: right linear 0.1s;
+	right: 0;
+	&:hover {
+		right: -4px;
+		color: var(--themeRed);
+	}
+}
+.ItemActi {
+	color: var(--themeRed);
+	font-weight: 600;
+}
 
-}
-.left{
-  
-    flex: 5;
-    margin-left: 10px;
-
-}
-.category{
-    background-color: #fff;
-    border-radius: 2px;
-}
-.heading{
-    font-size: 1.4rem;
-     font-weight: 400;
-     color: var(--themeRed);
-     padding: 16px 16px 0;
-     margin-top: 0;
-     text-transform: uppercase;
-}
-.listCategory{
-    padding: 16px 16px ;
-}
-.listCategory > li{
-    padding: 16px 16px ;
-    font-size: 1.2rem;
-}
-.categoryItem{
-    position:relative;
-}
-.categoryItem::before{
-    content: "";
-    border-top: 1px solid #e1e1e1;
-   
-    position: absolute;
-    top: 0;
-    left: 2px;
-    right: 2px;
-}
-.itemLink{
-    position: relative;
-     
-    text-decoration: none;
-    font-size: 1.2rem;
-   padding: 10px 20px;
-   display: block;
-   transition: right linear 0.1s;  /* định nghĩa chuyển động */
-   right: 0;
-}
-.itemLink:hover{
-    right: -4px;
-    color:var(--themeRed)
-}
 
 // fitter
 .filter{
@@ -106,8 +105,12 @@
     justify-content: space-between;
     align-items: center;
 }
-.selectInput:hover .selectInputList{
-    display: block;
+.selectInput {
+	&:hover {
+		.selectInputList {
+			display: block;
+		}
+	}
 }
 .selectInputList{
     position: absolute;
@@ -130,4 +133,16 @@
 }
 .selectInputLink:hover{
     color: var(--themeRed);
+}
+ /* table  */
+ @media (min-width: 740px) and (max-width: 1023px) {
+    .left{
+        display: none;
+    }
+    
+}
+
+/* mobile */
+@media (max-width:739px) {
+ 
 }
