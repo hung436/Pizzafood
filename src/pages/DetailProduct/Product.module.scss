@@ -7,7 +7,7 @@
 .imageWrapper{
     position: relative;
     width: 40%;
-    height: 30rem;
+    max-height: 40rem;
     overflow: hidden;
     display: flex;
     object-fit: cover;
@@ -70,9 +70,13 @@
      border-radius: 2rem;
 }
 .sizeVaraints>div:hover{
-    background-color: var(--themeRed);
-    color: white;
     cursor: pointer;
+  
+}
+.sizePrimary{
+    background-color:var(--themeRed);
+    color: white;
+      cursor: pointer;
 }
 .counter{
     display: flex;
@@ -134,9 +138,12 @@
        
     }
     .imageWrapper{
-        width: 90%;
+        width: 80%;
         height: 20rem;
         margin: auto;
+    }
+    .imageWrapper>img{
+        max-height: 20rem;
     }
     
 }
@@ -181,5 +188,11 @@
      
         padding: 0.5rem 1rem ; 
         font-size: 0.6rem;
+    }
+    .quantity>span{
+       font-size: 1.2rem;
+       align-items: center;
+       display: flex ;
+    
     }
 }
