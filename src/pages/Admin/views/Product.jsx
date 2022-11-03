@@ -100,72 +100,42 @@ function Product() {
                   <Table.HeadCell className='!p-4'>
                     <Checkbox />
                   </Table.HeadCell>
-                  <Table.HeadCell>Product name</Table.HeadCell>
-                  <Table.HeadCell>Color</Table.HeadCell>
-                  <Table.HeadCell>Category</Table.HeadCell>
-                  <Table.HeadCell>Price</Table.HeadCell>
+                  <Table.HeadCell>ID</Table.HeadCell>
+                  <Table.HeadCell>Tên</Table.HeadCell>
+                  <Table.HeadCell>Tiêu đề</Table.HeadCell>
+                  <Table.HeadCell>Size</Table.HeadCell>
+                  <Table.HeadCell>Giảm giá</Table.HeadCell>
+                  <Table.HeadCell>Giá</Table.HeadCell>
+                  <Table.HeadCell>Số lượng</Table.HeadCell>
                   <Table.HeadCell>
                     <span className='sr-only'>Edit</span>
                   </Table.HeadCell>
                 </Table.Head>
                 <Table.Body className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='!p-4'>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                      Apple MacBook Pro 17"
-                    </Table.Cell>
-                    <Table.Cell>Sliver</Table.Cell>
-                    <Table.Cell>Laptop</Table.Cell>
-                    <Table.Cell>$2999</Table.Cell>
-                    <Table.Cell>
-                      <a
-                        href='/tables'
-                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
-                      >
-                        Edit
-                      </a>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='!p-4'>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                      Microsoft Surface Pro
-                    </Table.Cell>
-                    <Table.Cell>White</Table.Cell>
-                    <Table.Cell>Laptop PC</Table.Cell>
-                    <Table.Cell>$1999</Table.Cell>
-                    <Table.Cell>
-                      <a
-                        href='/tables'
-                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
-                      >
-                        Edit
-                      </a>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='!p-4'>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                      Magic Mouse 2
-                    </Table.Cell>
-                    <Table.Cell>Black</Table.Cell>
-                    <Table.Cell>Accessories</Table.Cell>
-                    <Table.Cell>$99</Table.Cell>
-                    <Table.Cell>
-                      <a
-                        href='/tables'
-                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
-                      >
-                        Edit
-                      </a>
-                    </Table.Cell>
-                  </Table.Row>
+                  {productList.map((product) => (
+                    <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Cell className='!p-4'>
+                        <Checkbox />
+                      </Table.Cell>
+                      <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                        {product.id}
+                      </Table.Cell>
+                      <Table.Cell>{product.name}</Table.Cell>
+                      <Table.Cell>{product.title}</Table.Cell>
+                      <Table.Cell>{product.size}</Table.Cell>
+                      <Table.Cell>{product.promotionPrice}</Table.Cell>
+                      <Table.Cell>{product.price}</Table.Cell>
+                      <Table.Cell>{product.quantity}</Table.Cell>
+                      <Table.Cell>
+                        <a
+                          href='/tables'
+                          className='font-medium text-blue-600 hover:underline dark:text-blue-500'
+                        >
+                          Edit
+                        </a>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
                 </Table.Body>
               </Table>
             </div>
