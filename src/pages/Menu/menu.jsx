@@ -29,7 +29,7 @@ function Menu() {
                 <Link
                   to=""
                   className={`${css.itemLink} ${
-                    activeCategory === index ? css.ItemActi : ""
+                    activeCategory === index ? css.itemActi : ""
                   }`}
                 >
                   {item}
@@ -40,6 +40,27 @@ function Menu() {
         </nav>
       </div>
       <div className={css.right}>
+        <div className={css.menuCategory}>
+          <h2 className={css.headingMobile}>MENU</h2>
+          <ul className={css.listCategory}>
+            {category.map((item, index) => (
+              <li
+                className={css.categoryItem}
+                key={index}
+                onClick={() => setActiveCategory(index)}
+              >
+                <Link
+                  to=""
+                  className={`${css.itemLink} ${
+                    activeCategory === index ? css.itemActi : ""
+                  }`}
+                >
+                  {item}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className={css.filter}>
           <span class={css.filterLabel}>Sắp xếp theo</span>
           <button

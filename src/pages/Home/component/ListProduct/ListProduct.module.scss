@@ -49,6 +49,9 @@
     display: flex;
     align-items: center;
 }
+.price>span{
+    display: flex;
+}
 .favorite{
     margin-left: 10px;
     cursor: pointer;
