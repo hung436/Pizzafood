@@ -41,7 +41,7 @@ function Menu() {
       </div>
       <div className={css.right}>
         <div className={css.menuCategory}>
-          <h2 className={css.headingMobile}>MENU</h2>
+          <h2 className={css.headingMobile}>THỰC ĐƠN</h2>
           <ul className={css.listCategory}>
             {category.map((item, index) => (
               <li
@@ -63,30 +63,32 @@ function Menu() {
         </div>
         <div className={css.filter}>
           <span class={css.filterLabel}>Sắp xếp theo</span>
-          <button
-            className={`${css.filterBtn} ${
-              activeFilter === 0 ? css.btnPrimary : ""
-            }`}
-            onClick={() => setActiveFilter(0)}
-          >
-            Phổ biến
-          </button>
-          <button
-            className={`${css.filterBtn} ${
-              activeFilter === 1 ? css.btnPrimary : ""
-            }`}
-            onClick={() => setActiveFilter(1)}
-          >
-            Mới nhất
-          </button>
-          <button
-            className={`${css.filterBtn} ${
-              activeFilter === 2 ? css.btnPrimary : ""
-            }`}
-            onClick={() => setActiveFilter(2)}
-          >
-            Bán chạy
-          </button>
+          <div className={css.button}>
+            <button
+              className={`${css.filterBtn} ${
+                activeFilter === 0 ? css.btnPrimary : ""
+              }`}
+              onClick={() => setActiveFilter(0)}
+            >
+              Phổ biến
+            </button>
+            <button
+              className={`${css.filterBtn} ${
+                activeFilter === 1 ? css.btnPrimary : ""
+              }`}
+              onClick={() => setActiveFilter(1)}
+            >
+              Mới nhất
+            </button>
+            <button
+              className={`${css.filterBtn} ${
+                activeFilter === 2 ? css.btnPrimary : ""
+              }`}
+              onClick={() => setActiveFilter(2)}
+            >
+              Bán chạy
+            </button>
+          </div>
 
           <div className={css.selectInput}>
             <span className={css.selectInputLabel}>Giá</span>
