@@ -1,20 +1,33 @@
-import { Checkbox, Label, Select, Table, ToggleSwitch } from "flowbite-react";
-import React, { useEffect } from "react";
+import {
+  Badge,
+  Checkbox,
+  Label,
+  Select,
+  Table,
+  ToggleSwitch,
+  Tooltip,
+} from "flowbite-react";
+import React, { useEffect, useState } from "react";
 import { AiFillPrinter } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { RiEditBoxLine } from "react-icons/ri";
-import Paginate from "../../../components/Paginate/Paginate";
+import Paginate from "../../../../components/Paginate/Paginate";
 
-import Modal from "../components/Modal/ModalProduct";
-import { getProductList } from "../../../app/Reducer/productSice";
-import { dispatch } from "../../../app/Store/store";
+import Modal from "../../components/Modal/ModalProduct";
+import { getProductList } from "../../../../app/Reducer/productSice";
+import { dispatch } from "../../../../app/Store/store";
+import { useNavigate } from "react-router-dom";
 
 function Product() {
   const [showModal, setShowModal] = React.useState(false);
   const [showOption, setShowOption] = React.useState(false);
   const [productList, setProductList] = React.useState([]);
+  const [isCheckAll, setIsCheckAll] = useState(false);
+  const [isCheck, setIsCheck] = useState([]);
+  // const [list, setList] = useState([]);
+  const navigate = useNavigate();
   const handleShow = (option) => {
     setShowModal(!showModal);
     option ? setShowOption(false) : setShowOption(true);
@@ -28,8 +41,25 @@ function Product() {
     console.log("get", productList);
   }, []);
   const onChangeToggleSwitch = () => {};
+  /////////===========================================================
+  const handleSelectAll = (e) => {
+    setIsCheckAll(!isCheckAll);
+    setIsCheck(productList.map((li) => li.id));
+    if (isCheckAll) {
+      setIsCheck([]);
+    }
+  };
+  const handleClick = (e) => {
+    const { id, checked } = e.target;
+
+    setIsCheck([...isCheck, id]);
+    if (!checked) {
+      setIsCheck(isCheck.filter((item) => item !== id));
+    }
+  };
+  console.log(isCheck);
   return (
-    <div>
+    <div className=' md:px-10 mx-auto w-full mt-20'>
       <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
       <div className='flex flex-wrap mt-4 '>
         <div className='w-full '>
@@ -46,7 +76,7 @@ function Product() {
                 <div className='text-xs text-bold text-white space-x-2 flex'>
                   <button
                     className='bg-green-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'
-                    onClick={() => handleShow(0)}
+                    onClick={() => navigate("/admin/product/create")}
                   >
                     <BsPlusCircle size={25} />
                     <span>Tạo mới</span>
@@ -98,10 +128,16 @@ function Product() {
               <Table hoverable={true}>
                 <Table.Head>
                   <Table.HeadCell className='!p-4'>
-                    <Checkbox />
+                    <Checkbox
+                      name='selectAll'
+                      id='selectAll'
+                      onClick={handleSelectAll}
+                      checked={isCheckAll}
+                    />
                   </Table.HeadCell>
                   <Table.HeadCell>ID</Table.HeadCell>
                   <Table.HeadCell>Tên</Table.HeadCell>
+                  <Table.HeadCell>Mục</Table.HeadCell>
                   <Table.HeadCell>Tiêu đề</Table.HeadCell>
                   <Table.HeadCell>Size</Table.HeadCell>
                   <Table.HeadCell>Giảm giá</Table.HeadCell>
@@ -115,25 +151,44 @@ function Product() {
                   {productList.map((product) => (
                     <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                       <Table.Cell className='!p-4'>
-                        <Checkbox />
+                        <Checkbox
+                          id={product.id}
+                          onClick={handleClick}
+                          checked={isCheck.includes(product.id)}
+                        />
                       </Table.Cell>
                       <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
                         {product.id}
                       </Table.Cell>
                       <Table.Cell>{product.name}</Table.Cell>
+                      <Table.Cell>{product.category.name}</Table.Cell>
                       <Table.Cell>{product.title}</Table.Cell>
-                      <Table.Cell>{product.size}</Table.Cell>
+                      <Table.Cell>
+                        <div className='flex flex-wrap items-center gap-2'>
+                          {product.productToSizes?.map((item) => (
+                            <Tooltip
+                              content={item.price}
+                              style={"auto"}
+                              placement='right'
+                            >
+                              <Badge>{item.size.name}</Badge>
+                            </Tooltip>
+                          ))}
+                        </div>
+
+                        {/* {product.productToSizes[0]?.size.name} */}
+                      </Table.Cell>
                       <Table.Cell>{product.promotionPrice}</Table.Cell>
                       <Table.Cell>{product.price}</Table.Cell>
                       <Table.Cell>{product.quantity}</Table.Cell>
-                      <Table.Cell>
+                      {/* <Table.Cell>
                         <a
                           href='/tables'
                           className='font-medium text-blue-600 hover:underline dark:text-blue-500'
                         >
                           Edit
                         </a>
-                      </Table.Cell>
+                      </Table.Cell> */}
                     </Table.Row>
                   ))}
                 </Table.Body>
