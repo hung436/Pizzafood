@@ -34,15 +34,15 @@ instance.interceptors.response.use(
     return data;
   },
   function (error) {
-    //     const { config, status } = error.response;
-    // console.log(error)_;
-    //     if (status === 401 && !config._retry) {
-    //       config._retry = true;
-    //       try {
-    //       } catch (err) {
-    //         return Promise.reject(err);
-    //       }
-    //     }
+    const { config, status } = error.response;
+    console.log(error);
+    if (status === 401 && !config._retry) {
+      config._retry = true;
+      try {
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
 
     return Promise.reject(error);
   }
