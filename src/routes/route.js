@@ -16,6 +16,7 @@ const Home = React.lazy(() => import("../pages/Home"));
 const AdminPage = React.lazy(() => import("../pages/Admin"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart.jsx"));
 const Contacts =  React.lazy(() => import("../pages/Contacts/contacts.jsx"));
+const About = React.lazy(() => import("../pages/About/about.jsx"));
 const routes = (isAdmin) => [
   {
     path: "",
@@ -32,7 +33,8 @@ const routes = (isAdmin) => [
       { path: "/product/:id", element: <Product /> },
       { path: "/menu", element: <Menu /> },
       { path: "/cart", element: <Cart /> },
-      {path: "/contacts", element: <Contacts /> },
+      { path: "/contacts", element: <Contacts /> },
+      { path: "/about", element: <About /> },
     ],
   },
   {
