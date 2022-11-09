@@ -1,15 +1,15 @@
 // import { store } from "../Store/store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import categoryApi from "../../api/Category";
 
-import productApi from "../../api/Product";
 import { StorageKeys } from "../../constant/storage-key";
 
-export const getProductList = createAsyncThunk(
-  "/getproductlist",
+export const getCategoryList = createAsyncThunk(
+  "/getcategorylist",
   async (payload, { rejectWithValue }) => {
     try {
-      // console.log(payload);
-      const data = await productApi.getProductList();
+      console.log("aloo");
+      const data = await categoryApi.getCategoryList();
       console.log("data", data);
       return data;
     } catch (error) {
@@ -21,11 +21,11 @@ export const getProductList = createAsyncThunk(
   }
 );
 const initialState = {
-  products: [],
+  categories: [],
 };
 
-export const productSlice = createSlice({
-  name: "product",
+export const categorySlice = createSlice({
+  name: "category",
   initialState,
   reducers: {},
   extraReducers: {
@@ -33,11 +33,11 @@ export const productSlice = createSlice({
     //
     //   // state.error = null;
     // },
-    [getProductList.fulfilled]: (state, { payload }) => {
-      state.products = payload.data;
+    [getCategoryList.fulfilled]: (state, { payload }) => {
+      state.categories = payload.data;
     },
   },
 });
 
 // export const {} = productSlice.actions;
-export default productSlice.reducer;
+export default categorySlice.reducer;

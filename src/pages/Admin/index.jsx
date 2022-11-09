@@ -22,11 +22,12 @@ const AdminPage = () => {
         <title>ADMIN</title>
       </Helmet>
       <Sidebar />
-      <div className=' md:ml-64 bg-blueGray-100'>
+      <div className=' md:ml-64 bg-blueGray-100 relative'>
         <AdminNavbar />
         {/* Header */}
-
-        <Outlet />
+        <div className='pt-20'>
+          <Outlet />
+        </div>
       </div>
     </>
   );
