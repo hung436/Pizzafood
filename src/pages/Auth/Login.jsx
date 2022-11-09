@@ -23,20 +23,20 @@ const Login = () => {
   const navigate = useNavigate();
   const [Eye, setEye] = useState(false);
   const { loading, userInfo } = useSelector((state) => state.user);
+  //========================================================================================================
   useEffect(() => {
     if (userInfo && userInfo.RoleId) {
       if (userInfo.RoleId === "admin") navigate("/admin");
       else navigate("/");
-      toast.success("Đăng nhập thành công");
     }
-  }, [navigate, userInfo]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo]);
   const showPassword = () => setEye(!Eye);
   const SigninSchema = Yup.object().shape({
-    username: Yup.string().email().required("Email Không để trống"),
-    password: Yup.string()
-      .min(6, "Tối thiểu 6 kí tự")
-      .required("Không để trống"),
+    username: Yup.string().email().required(),
+    password: Yup.string().min(6, "Tối thiểu 6 kí tự").required(),
   });
+  //======================================================================================================
   const loginSubmit = async (values) => {
     console.log(values);
     const action = loginUser(values);
@@ -48,6 +48,7 @@ const Login = () => {
     console.log(response);
     await dispatch(action);
   };
+
   return (
     <>
       <Helmet>
@@ -55,11 +56,11 @@ const Login = () => {
       </Helmet>
       <div className='flex  h-screen justify-center items-center'>
         <div className='w-[445px]  border-2 flex flex-col justify-between items-center px-5 py-10 space-y-2 shadow-md rounded-md'>
-          <img
+          {/* <img
             className='w-[120px] flex justify-center'
             src='https://viblo.asia/logo_full.svg'
             alt=''
-          />
+          /> */}
 
           <h1 className='font-semibold text-xl text-center'>Đăng nhập</h1>
           <Formik

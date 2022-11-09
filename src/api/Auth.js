@@ -25,4 +25,7 @@ const loginFB = (data) => {
 const getInforUser = () => {
   return instance.get("/users/infor");
 };
-export { login, register, loginFB, getInforUser };
+const refreshTK = () => {
+  return instance.post("/auth/refresh");
+};
+export { login, register, loginFB, getInforUser, refreshTK };

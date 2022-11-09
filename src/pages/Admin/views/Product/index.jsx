@@ -16,7 +16,7 @@ import { RiEditBoxLine } from "react-icons/ri";
 import Paginate from "../../../../components/Paginate/Paginate";
 
 import Modal from "../../components/Modal/ModalProduct";
-import { getProductList } from "../../../../app/Reducer/productSice";
+import { getProductList } from "../../../../app/Reducer/productSlice";
 import { dispatch } from "../../../../app/Store/store";
 import { useNavigate } from "react-router-dom";
 
@@ -59,7 +59,7 @@ function Product() {
   };
   console.log(isCheck);
   return (
-    <div className=' md:px-10 mx-auto w-full mt-20'>
+    <div className=' md:px-10 mx-auto w-full'>
       <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
       <div className='flex flex-wrap mt-4 '>
         <div className='w-full '>

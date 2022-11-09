@@ -1,4 +1,7 @@
+// import { dispatch } from "../app/Store/store";
+// import { refresh } from "../app/Reducer/authSlice";
 import axios from "axios";
+
 import { StorageKeys } from "../constant/storage-key";
 const instance = axios.create({
   baseURL: process.env.REACT_APP_URL_BE,
@@ -39,6 +42,7 @@ instance.interceptors.response.use(
     if (status === 401 && !config._retry) {
       config._retry = true;
       try {
+        // dispatch(refresh());
       } catch (err) {
         return Promise.reject(err);
       }
