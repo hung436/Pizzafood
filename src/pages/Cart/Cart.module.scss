@@ -63,3 +63,19 @@
 		border: 2px solid var(--themeRed);
 	}
 }
+/* table */
+@media (min-width: 740px) and (max-width: 1023px) {
+	.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	}
+	.cart {
+		margin-top: 2rem;
+		width: 80%;
+	}
+}
+/* mobie */
+@media (max-width:739px) {
+ 
+}

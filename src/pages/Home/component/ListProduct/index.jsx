@@ -1,5 +1,7 @@
 import css from "./ListProduct.module.scss";
 import p2 from "../../../../assets/img/p2.png";
+import p3 from "../../../../assets/img/3.jpg";
+import slide3 from "../../../../assets/img/slide3.jpg";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { BsArrowRightShort } from "react-icons/bs";

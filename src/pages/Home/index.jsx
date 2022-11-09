@@ -9,6 +9,8 @@ import slide2 from "../../assets/img/slide2.jpg";
 import slide3 from "../../assets/img/slide3.jpg";
 import ProductCategory from "./component/ProductCategory";
 import { Link } from "react-router-dom";
+import Contacts from "../Contacts/contacts";
+import About from "../About/about";
 const ImageLink = [slide1, slide2, slide3];
 const Home = () => {
   return (
@@ -20,9 +22,11 @@ const Home = () => {
             MENU
           </Link>
           <li className="underline">YÊU THÍCH</li>
-          <li className="underline">GIỎ HÀNG</li>
-          <li className="underline">LIÊN HỆ</li>
-          <li className="underline">VỀ CHÚNG TÔI</li>
+          <Link to="/cart">
+            <li className="underline">GIỎ HÀNG</li>
+          </Link>
+          <Link to="/contacts" className="underline">LIÊN HỆ</Link>
+          <Link to="/about" className="underline">VỀ CHÚNG TÔI</Link>
         </ul>
       </div>
       <div className="">

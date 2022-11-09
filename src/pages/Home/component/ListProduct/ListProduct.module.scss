@@ -1,6 +1,7 @@
 .menu{
     display: flex;
     flex-wrap: wrap;
+    padding: 0 1rem;
     row-gap: 2rem;
     align-items: center;
     justify-content: space-around;
@@ -14,28 +15,42 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-left: 10px;
-  
-   
+    width: 30%;
+    align-items: center;
 
 }
+  
 .pizza:hover img{
     cursor: pointer;
     transform: rotate(10deg) !important;
 
 }
 .ImageWrapper{
-    max-height: 20rem;
-    width: 22rem; 
+    // max-height: 20rem;
     position: relative;
     overflow: hidden;
     object-fit: cover;
-    object-fit: center;
-    border-radius: 2rem;
-    
+    margin-left: auto;
+    margin-right: auto;  
 }
+.ImageWrapper>img{
+    max-height: 300px;
+    object-fit: conver;
+    border-radius: 2rem;
+    padding-right: 0;
+    padding-top: 0;
+   
+}
+
+
+
+
 .price{
     display: flex;
     align-items: center;
+}
+.price>span{
+    display: flex;
 }
 .favorite{
     margin-left: 10px;
@@ -60,9 +75,11 @@
 /* table */
 @media (min-width: 740px) and (max-width: 1023px) {
     .ImageWrapper{
-        height: 13rem;
-        width: 20rem; 
        margin-right: 10px;
+
+    }
+    .pizza{
+        width: 40%;
     }
     .heading{
         margin:2rem;
@@ -77,11 +94,13 @@
 }
 /* mobie */
 @media (max-width:739px) {
+    .pizza{
+        width: 100%;
+    }
     .ImageWrapper{
-        height: 12rem;
-        width: 18rem; 
         margin-right: 10px;
     }
+
     .heading{
         margin:3rem 2rem;
     
