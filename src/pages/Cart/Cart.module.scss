@@ -63,6 +63,9 @@
 		border: 2px solid var(--themeRed);
 	}
 }
+.cartMobile{
+	display: none;
+}
 /* table */
 @media (min-width: 740px) and (max-width: 1023px) {
 	.container{
@@ -77,5 +80,92 @@
 }
 /* mobie */
 @media (max-width:739px) {
- 
+	.container{
+		display: flex;
+		padding: 1rem;
+		flex-direction: column-reverse;
+	}
+	.details{
+		display: none;
+	}
+
+	.cartMobile{
+		display: block;
+   
+	}
+	.headingMobile{
+		font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 400;
+    text-align: left;
+    margin: 8px 0 8px 8px;
+	}
+	.listItemMobile{
+		padding-left: 0;
+    list-style: none;
+  
+	}
+	.cartItemMobile{
+		display: flex;
+    align-items: center;
+	margin-bottom: 10px;
+	}
+	.imgCartMobile{
+		width: 42px;
+    height: 45px;
+    margin: 12px;
+    border: 1px solid #333;
+	}
+	.itemInfoMobile{
+		width: 100%;
+	}
+	.itemHeadMobile{
+		display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0;
+	}
+	.itemNameMobile{
+	font-size: 1rem;
+    font-weight: 550;
+    color: #333;
+    margin: 0;
+    line-height: 1.2rem;
+    max-height: 3rem;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    flex: 1;
+    padding-right: 16px;
+    text-align: left;
+	}
+	.priceWrapMobile{
+		// margin-right: 12px;
+		// top: 0;
+	}
+	.itemPriceMobile{
+		font-size: 1rem;
+		font-weight: 400;
+		color: var(--themeRed);
+		
+	}
+	.itemMultiply{
+		font-size: 0.8rem;
+    color: #757575;
+
+	}
+	.body{
+		display: flex;
+    justify-content: space-between;
+	}
+	.description{
+		color: #757575;
+    font-size: 0.8rem;
+    font-weight: 300;
+	}
+	.remove{
+		color: #333;
+    font-size: 0.9rem;
+	}
 }

@@ -44,7 +44,7 @@ function MyEditor() {
         <Toolbar
           editor={editor}
           defaultConfig={toolbarConfig}
-          mode='default'
+          mode="default"
           style={{ borderBottom: "1px solid #ccc" }}
         />
         <Editor
@@ -52,7 +52,7 @@ function MyEditor() {
           value={html}
           onCreated={setEditor}
           onChange={(editor) => setHtml(editor.getHtml())}
-          mode='default'
+          mode="default"
           style={{ height: "300px", overflowY: "hidden" }}
         />
       </div>

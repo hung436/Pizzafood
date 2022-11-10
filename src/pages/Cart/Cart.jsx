@@ -63,6 +63,45 @@ function Cart() {
           <button className="btn">Pay Now</button>
         </div>
       </div>
+
+      <div className={css.cartMobile}>
+        {/* chưa có sản phẩm */}
+        {/* <image
+          src="./assets/img/no_cart.png"
+          alt=""
+          class="header__cart-no-cart-img"
+        />
+        <span class="header__cart-list--no-cart-msg">Chưa có sản phẩm</span> */}
+
+        <h4 className={css.headingMobile}>Sản phẩm đã thêm </h4>
+        {/* <!-- giỏ hàng --> */}
+        <ul className={css.listItemMobile}>
+          {/* <!-- cart item --> */}
+
+          <li className={css.cartItemMobile}>
+            <img src={p2} alt="" className={css.imgCartMobile} />
+            <div className={css.itemInfoMobile}>
+              <div className={css.itemHeadMobile}>
+                <h5 className={css.itemNameMobile}>
+                  Pizza Hải Sản Pesto Xanh aaaaaaaaaa
+                </h5>
+                <div className={css.priceWrapMobile}>
+                  <span className={css.itemPriceMobile}>65.000 </span>
+                  <span className={css.itemMultiply}>x </span>
+                  <span className={css.itemQnt}>1</span>
+                </div>
+              </div>
+              <div className={css.body}>
+                <span className={css.description}>Size: Nhỏ </span>
+                <span className={css.remove}>Xóa</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        {/* <a href="#" class="header__cart-view-cart btn btn--primary">
+          Xem giỏ hàng
+        </a> */}
+      </div>
     </div>
   );
 }
