@@ -1,9 +1,16 @@
 // import { store } from "../Store/store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { login, register, loginFB, getInforUser } from "../../api/Auth";
+import {
+  login,
+  register,
+  loginFB,
+  getInforUser,
+  refreshTK,
+} from "../../api/Auth";
 import { StorageKeys } from "../../constant/storage-key";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (payload) => {
@@ -13,13 +20,20 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk("auth/login", async (payload) => {
-  const data = await login(payload);
+  try {
+    const data = await login(payload);
 
-  if (data.success) {
-    await localStorage.setItem(StorageKeys.ACCESSTOKEN, data.data.accessToken);
+    if (data.success) {
+      await localStorage.setItem(
+        StorageKeys.ACCESSTOKEN,
+        data.data.accessToken
+      );
+      toast.success("Đăng nhập thành công");
+    } else toast.warn(data.message);
+    return data;
+  } catch (error) {
+    toast.error(error.message);
   }
-
-  return data;
 });
 export const LoginFacebook = createAsyncThunk(
   "auth/loginfacebook",
@@ -55,6 +69,26 @@ export const getInfor = createAsyncThunk(
     }
   }
 );
+export const refresh = createAsyncThunk(
+  "/refreshtoken",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await refreshTK();
+      console.log("data", data);
+      await localStorage.setItem(
+        StorageKeys.ACCESSTOKEN,
+        data.data.accessToken
+      );
+      return data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   isLogin: false,
@@ -157,6 +191,9 @@ export const userSlice = createSlice({
         Email: email,
       };
       state.userInfo = user;
+    },
+    [refresh.fulfilled]: (state, { payload }) => {
+      state.userToken = payload;
     },
   },
 });

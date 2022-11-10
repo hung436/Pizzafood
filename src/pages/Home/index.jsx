@@ -10,6 +10,7 @@ import slide3 from "../../assets/img/slide3.jpg";
 import ProductCategory from "./component/ProductCategory";
 import { Link } from "react-router-dom";
 import Contacts from "../Contacts/contacts";
+import About from "../About/about";
 const ImageLink = [slide1, slide2, slide3];
 const Home = () => {
   return (
@@ -25,7 +26,7 @@ const Home = () => {
             <li className="underline">GIỎ HÀNG</li>
           </Link>
           <Link to="/contacts" className="underline">LIÊN HỆ</Link>
-          <li className="underline">VỀ CHÚNG TÔI</li>
+          <Link to="/about" className="underline">VỀ CHÚNG TÔI</Link>
         </ul>
       </div>
       <div className="">
@@ -40,9 +41,6 @@ const Home = () => {
       <div>
         <ProductCategory />
         {/* <ListProduct/> */}
-      </div>
-      <div>
-        <Contacts />
       </div>
     </div>
   );

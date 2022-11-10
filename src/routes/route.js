@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer/Footer";
+import CreateProduct from "../pages/Admin/views/Product/CreateProduct";
 
 const Login = React.lazy(() => import("../pages/Auth/Login"));
 const Register = React.lazy(() => import("../pages/Auth/Register"));
@@ -16,6 +17,7 @@ const Home = React.lazy(() => import("../pages/Home"));
 const AdminPage = React.lazy(() => import("../pages/Admin"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart.jsx"));
 const Contacts =  React.lazy(() => import("../pages/Contacts/contacts.jsx"));
+const About = React.lazy(() => import("../pages/About/about.jsx"));
 const routes = (isAdmin) => [
   {
     path: "",
@@ -32,17 +34,22 @@ const routes = (isAdmin) => [
       { path: "/product/:id", element: <Product /> },
       { path: "/menu", element: <Menu /> },
       { path: "/cart", element: <Cart /> },
-      {path: "/contacts", element: <Contacts /> },
+      { path: "/contacts", element: <Contacts /> },
+      { path: "/about", element: <About /> },
     ],
   },
   {
     path: "admin",
-    element: true ? <AdminPage /> : <Navigate to='/login' />,
+    element: isAdmin ? <AdminPage /> : <Navigate to='/login' />,
     children: [
       { path: "", element: <Dashboard /> },
       { path: "dashboard", element: <Dashboard /> },
       { path: "user", element: <User /> },
-      { path: "product", element: <ProductADmin /> },
+      {
+        path: "product",
+        element: <ProductADmin />,
+      },
+      { path: "product/create", element: <CreateProduct /> },
       // { path: "*", element: <NotFound /> },
     ],
   },

@@ -13,11 +13,11 @@ function MyEditor() {
   const [html, setHtml] = useState("");
   i18nChangeLanguage("en");
   // Simulate ajax async set html
-  useEffect(() => {
-    setTimeout(() => {
-      setHtml("<p></p>");
-    }, 1500);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setHtml("<p></p>");
+  //   }, 1500);
+  // }, []);
 
   // const toolbarConfig: Partial<IToolbarConfig> = {}; // TS syntax
   const toolbarConfig = {}; // JS syntax
@@ -40,7 +40,7 @@ function MyEditor() {
 
   return (
     <>
-      <div style={{ border: "1px solid #ccc", zIndex: 100 }}>
+      <div style={{ border: "1px solid #ccc" }}>
         <Toolbar
           editor={editor}
           defaultConfig={toolbarConfig}
@@ -52,11 +52,16 @@ function MyEditor() {
           value={html}
           onCreated={setEditor}
           onChange={(editor) => setHtml(editor.getHtml())}
+<<<<<<< HEAD
           mode="default"
           style={{ height: "300px", overflowY: "hidden" }}
+=======
+          mode='default'
+          style={{ height: "500px" }}
+>>>>>>> bb9b40684c022f7a97ff0316fd20bb22f17664c2
         />
       </div>
-      <div style={{ marginTop: "15px" }}>{html}</div>
+      {/* <div style={{ marginTop: "15px" }}>{html}</div> */}
     </>
   );
 }
