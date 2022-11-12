@@ -78,33 +78,35 @@ textarea {
   border-radius: 5px;
   border: 3px solid rgb(155, 155, 155);
 }
-
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
+  textarea {
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 600px) {
   .lb {
-    width: 500px;
+    width: 380px;
   }
   .lb > .ipt {
     width: 360px;
-    margin-left: 80px;
+    margin-left: 10px;
   }
   textarea {
     width: 360px;
-    margin-left: 80px;
+    margin-left: 10px;
   }
   label {
-    margin-left: 80px;
+    margin-left: 10px;
     margin-top: 20px;
   }
-  .bt{
-    margin-left: 350px;
-    // margin: 0 140px;
-  }
   .accept {
-    margin-left: 100px;
+    margin-left: 10px;
   }
   .accept > label {
     font-size: 14px;
     margin-bottom: 18px;
+  }
+  .bt {
+    margin: 0 140px;
   }
 }
