@@ -1,4 +1,3 @@
-// import { store } from "../Store/store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import {
@@ -55,7 +54,7 @@ export const getInfor = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await getInforUser();
-      console.log("data", data);
+
       return data;
       // const dispatch = useDispatch();
       // const { name, email, role, avartar } = data;
@@ -73,13 +72,13 @@ export const refresh = createAsyncThunk(
   "/refreshtoken",
   async (payload, { rejectWithValue }) => {
     try {
-      const data = await refreshTK();
-      console.log("data", data);
-      await localStorage.setItem(
-        StorageKeys.ACCESSTOKEN,
-        data.data.accessToken
-      );
-      return data;
+      // const data = await refreshTK();
+      console.log("data refeh");
+      // await localStorage.setItem(
+      //   StorageKeys.ACCESSTOKEN,
+      //   data.data.accessToken
+      // );
+      return;
     } catch (error) {
       if (!error.response) {
         throw error;

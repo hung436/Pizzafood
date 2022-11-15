@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { dispatch } from "../../../../../app/Store/store";
 import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
 import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 export default function CreateProduct({ showModal, hideShow, option = true }) {
   const [imgProduct, setImgProduct] = useState();
@@ -45,7 +46,15 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     };
   }, [imgProduct]);
   const Submit = (values) => {
-    console.log(values);
+    // console.log(values);
+    const { name, category, title, promotionPrice, price } = values;
+    const data = new FormData();
+    data.append("name", name);
+    data.append("category", category);
+    data.append("title", title);
+    data.append("promotionPrice", promotionPrice);
+    data.append("price", price);
+    console.log(...data);
   };
   //========================================
   const options = [
@@ -53,16 +62,18 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     { value: 2, label: "M" },
     { value: 3, label: "L" },
   ];
-  const defaultValues = { name: "" };
+  const defaultValues = {
+    name: "",
+    price: [],
+    category: "",
+    promotionPrice: "",
+    title: "",
+  };
   const Schema = Yup.object().shape({
     // name: Yup.string().email().required("Email Không để trống"),
     // password: Yup.string().min(6, "Tối thiểu 6 kí tự").required("Không để trống"),
   });
-  const handleRLDDChange = (newItems) => {
-    setImgProduct(newItems);
-  };
 
-  //================================================
   return (
     <>
       <Formik
@@ -166,67 +177,36 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                         handleChange={(value) => setSizeInput(value)}
                       />
                     </div>
-                    {sizeInput &&
-                      sizeInput.map((item) => (
-                        <div
-                          key={item.value}
-                          className='relative z-0 mb-6 w-full group'
-                        >
-                          <Field
-                            type='number'
-                            name={"price" + item.value}
-                            id='floating_price'
-                            className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                            placeholder=' '
-                          />
-                          <label
-                            for='floating_pricel'
-                            className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
-                          >
-                            Giá {" Size " + item.label}
-                          </label>
-                        </div>
-                      ))}
-                  </div>
-                  <FieldArray
-                    name='friends'
-                    render={(arrayHelpers) => (
-                      <div>
-                        {sizeInput && sizeInput.length > 0 ? (
-                          sizeInput.map((price) => (
-                            <div key={price.value}>
-                              <Field name={`price.${price.value}`} />
-                              <button
-                                type='button'
-                                onClick={() => arrayHelpers.remove(price.value)} // remove a friend from the list
-                              >
-                                -
-                              </button>
-                              <button
-                                type='button'
-                                onClick={() =>
-                                  arrayHelpers.insert(price.value, "")
-                                } // insert an empty string at a position
-                              >
-                                +
-                              </button>
-                            </div>
-                          ))
-                        ) : (
-                          <button
-                            type='button'
-                            onClick={() => arrayHelpers.push("")}
-                          >
-                            {/* show this when user has removed all friends from the list */}
-                            Add a friend
-                          </button>
-                        )}
+                    <FieldArray
+                      name='price'
+                      render={() => (
                         <div>
-                          <button type='submit'>Submit</button>
+                          {sizeInput &&
+                            sizeInput.length > 0 &&
+                            sizeInput.map((price, index) => (
+                              <div
+                                key={price.value}
+                                className='relative z-0 mb-6 w-full group'
+                              >
+                                <Field
+                                  type='number'
+                                  name={`price.${price.value}`}
+                                  className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
+                                  placeholder=' '
+                                />
+                                <label
+                                  for='floating_pricel'
+                                  className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+                                >
+                                  Giá {" Size " + price.label}
+                                </label>
+                              </div>
+                            ))}
                         </div>
-                      </div>
-                    )}
-                  />
+                      )}
+                    />
+                  </div>
+
                   <div className='md:col-span-4'>
                     <h2 className='font-medium text-white p-2 bg-blue-500 mb-2'>
                       2. Chi tiết
@@ -261,9 +241,9 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                             name='file-upload'
                             type='file'
                             className='sr-only'
-                            onChange={() => {
+                            onChange={(e) => {
                               handleInputImgChange();
-                              handleChange();
+                              handleChange(e);
                             }}
                             ref={imgRef}
                             accept='image/*'
@@ -299,10 +279,31 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
             </div>
 
             <div className='flex justify-center space-x-5'>
-              <Button type='submit'>Lưu</Button>
-              <Button color='gray' onClick={() => navigate(-1)}>
-                Đóng
-              </Button>
+              <span className='sm:ml-3'>
+                <button
+                  type='submit'
+                  className='inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                >
+                  <AiOutlineCheck
+                    className='-ml-1 mr-2 h-5 w-5'
+                    aria-hidden='true'
+                  />
+                  Lưu
+                </button>
+              </span>
+              <span className='sm:ml-3'>
+                <button
+                  onClick={() => navigate(-1)}
+                  type='button'
+                  className='inline-flex items-center rounded-md border border-transparent bg-gray-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                >
+                  <AiOutlineClose
+                    className='-ml-1 mr-2 h-5 w-5'
+                    aria-hidden='true'
+                  />
+                  Đóng
+                </button>
+              </span>
             </div>
           </Form>
         )}

@@ -3,12 +3,16 @@ import p1 from "../../../../assets/img/p1.jpg";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ListProduct from "../ListProduct";
-const fake = [
-  { id: 1, image: "", name: "hungdt", price: "30000" },
-  { id: 2, image: "", name: "hungdt", price: "30000" },
-  { id: 3, image: "", name: "hungdt", price: "30000" },
-];
+import { dispatch } from "../../../../app/Store/store";
+import { getProductList } from "../../../../app/Reducer/productSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 function ProductCategory() {
+  const products = useSelector((state) => state.product.products);
+  useEffect(() => {
+    dispatch(getProductList());
+  }, []);
   return (
     <div className={css.container}>
       <div className={css.heading}>
@@ -16,22 +20,22 @@ function ProductCategory() {
         <span className={css.headingProduct}>Pizza</span>
       </div>
 
-      <ListProduct data={fake} />
+      <ListProduct data={products} />
 
       <div className={css.heading}>
         <span className={css.headingProduct}>Mì Ý</span>
       </div>
 
-      <ListProduct data={fake} />
+      <ListProduct data={products} />
 
       <div className={css.heading}>
         <span className={css.headingProduct}>Đồ uống</span>
       </div>
 
-      <ListProduct data={fake} />
+      <ListProduct data={products} />
 
       <div className={css.button}>
-        <Link to="/menu">
+        <Link to='/menu'>
           <button className={`btn ${css.btn}`}>Xem Thêm Menu</button>
         </Link>
       </div>

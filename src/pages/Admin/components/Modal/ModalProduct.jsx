@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Modal as Modals, Button } from "flowbite-react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import RLDD from "react-list-drag-and-drop/lib/RLDD";
+
 import MyEditor from "../../../../components/form-control/RickText";
 
 export default function Modal({ showModal, hideShow, option }) {
