@@ -35,7 +35,7 @@ function Product() {
   useEffect(() => {
     async function getProduct() {
       const { payload } = await dispatch(getProductList());
-      setProductList(payload);
+      setProductList(payload.data);
     }
     getProduct();
     console.log("get", productList);
@@ -49,15 +49,16 @@ function Product() {
       setIsCheck([]);
     }
   };
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     const { id, checked } = e.target;
-
+    console.log(id, checked);
     setIsCheck([...isCheck, id]);
-    if (!checked) {
-      setIsCheck(isCheck.filter((item) => item !== id));
-    }
+    console.log(isCheck);
+    // if (!checked) {
+    //   setIsCheck(isCheck.filter((item) => item !== id));
+    // }
   };
-  console.log(isCheck);
+
   return (
     <div className=' md:px-10 mx-auto w-full'>
       <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
@@ -152,7 +153,8 @@ function Product() {
                     productList.map((product) => (
                       <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                         <Table.Cell className='!p-4'>
-                          <Checkbox
+                          <input
+                            type='checkbox'
                             id={product.id}
                             onClick={handleClick}
                             checked={isCheck.includes(product.id)}
@@ -169,7 +171,7 @@ function Product() {
                             {product.productToSizes?.map((item) => (
                               <Tooltip
                                 content={item.price}
-                                style={"auto"}
+                                style='auto'
                                 placement='right'
                               >
                                 <Badge>{item.size.name}</Badge>

@@ -48,7 +48,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
   const Submit = (values) => {
     // console.log(values);
     const { name, category, title, promotionPrice, price } = values;
-    let data = new FormData();
+    const data = new FormData();
     data.append("name", name);
     data.append("category", category);
     data.append("title", title);
@@ -73,9 +73,6 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     // name: Yup.string().email().required("Email Không để trống"),
     // password: Yup.string().min(6, "Tối thiểu 6 kí tự").required("Không để trống"),
   });
-  const handleRLDDChange = (newItems) => {
-    setImgProduct(newItems);
-  };
 
   return (
     <>
