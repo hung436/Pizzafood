@@ -148,40 +148,41 @@ function Product() {
                   </Table.HeadCell>
                 </Table.Head>
                 <Table.Body className='divide-y'>
-                  {productList.map((product) => (
-                    <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                      <Table.Cell className='!p-4'>
-                        <Checkbox
-                          id={product.id}
-                          onClick={handleClick}
-                          checked={isCheck.includes(product.id)}
-                        />
-                      </Table.Cell>
-                      <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                        {product.id}
-                      </Table.Cell>
-                      <Table.Cell>{product.name}</Table.Cell>
-                      <Table.Cell>{product.category.name}</Table.Cell>
-                      <Table.Cell>{product.title}</Table.Cell>
-                      <Table.Cell>
-                        <div className='flex flex-wrap items-center gap-2'>
-                          {product.productToSizes?.map((item) => (
-                            <Tooltip
-                              content={item.price}
-                              style={"auto"}
-                              placement='right'
-                            >
-                              <Badge>{item.size.name}</Badge>
-                            </Tooltip>
-                          ))}
-                        </div>
+                  {productList &&
+                    productList.map((product) => (
+                      <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                        <Table.Cell className='!p-4'>
+                          <Checkbox
+                            id={product.id}
+                            onClick={handleClick}
+                            checked={isCheck.includes(product.id)}
+                          />
+                        </Table.Cell>
+                        <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                          {product.id}
+                        </Table.Cell>
+                        <Table.Cell>{product.name}</Table.Cell>
+                        <Table.Cell>{product.category.name}</Table.Cell>
+                        <Table.Cell>{product.title}</Table.Cell>
+                        <Table.Cell>
+                          <div className='flex flex-wrap items-center gap-2'>
+                            {product.productToSizes?.map((item) => (
+                              <Tooltip
+                                content={item.price}
+                                style={"auto"}
+                                placement='right'
+                              >
+                                <Badge>{item.size.name}</Badge>
+                              </Tooltip>
+                            ))}
+                          </div>
 
-                        {/* {product.productToSizes[0]?.size.name} */}
-                      </Table.Cell>
-                      <Table.Cell>{product.promotionPrice}</Table.Cell>
-                      <Table.Cell>{product.price}</Table.Cell>
-                      <Table.Cell>{product.quantity}</Table.Cell>
-                      {/* <Table.Cell>
+                          {/* {product.productToSizes[0]?.size.name} */}
+                        </Table.Cell>
+                        <Table.Cell>{product.promotionPrice}</Table.Cell>
+                        <Table.Cell>{product.price}</Table.Cell>
+                        <Table.Cell>{product.quantity}</Table.Cell>
+                        {/* <Table.Cell>
                         <a
                           href='/tables'
                           className='font-medium text-blue-600 hover:underline dark:text-blue-500'
@@ -189,8 +190,8 @@ function Product() {
                           Edit
                         </a>
                       </Table.Cell> */}
-                    </Table.Row>
-                  ))}
+                      </Table.Row>
+                    ))}
                 </Table.Body>
               </Table>
             </div>

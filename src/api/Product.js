@@ -3,6 +3,9 @@ import instance from "./axiosConfig";
 const getProductList = () => {
   return instance.get("/product");
 };
+const getProductById = (id) => {
+  return instance.get("/product/getbyid", { params: { id: id } });
+};
 const ceateProduct = (data) => {
   return instance.post("/product", data);
 };
@@ -16,5 +19,10 @@ const updateProduct = (data) => {
   });
 };
 
-const productApi = { getProductList, ceateProduct, updateProduct };
+const productApi = {
+  getProductList,
+  ceateProduct,
+  updateProduct,
+  getProductById,
+};
 export default productApi;

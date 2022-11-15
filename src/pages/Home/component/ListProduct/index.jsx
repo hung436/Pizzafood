@@ -8,28 +8,30 @@ import { BsArrowRightShort } from "react-icons/bs";
 function ListProduct({ data }) {
   return (
     <div className={css.menu}>
-      {data.map((item) => (
-        <div key={item.id} className={css.pizza}>
-          <Link to="/product/id">
-            <div className={css.ImageWrapper}>
-              <img src={p2} alt="P1" />
-            </div>
-          </Link>
-          <span>{item.name}</span>
-          <div className={css.price}>
-            <span>
-              <span style={{ color: "var(--themeRed)" }}>$</span> {item.price}
-            </span>
-            <MdFavoriteBorder className={css.favorite} />
-            <Link to="/product/:id">
-              <button className={css.buy}>
-                Mua ngay
-                <BsArrowRightShort />
-              </button>
+      {data &&
+        data.map((item) => (
+          <div key={item.id} className={css.pizza}>
+            <Link to={`/product/${item.id}`}>
+              <div className={css.ImageWrapper}>
+                <img src={item?.images[0]?.imageLink} alt='P1' />
+              </div>
             </Link>
+            <span>{item.name}</span>
+            <div className={css.price}>
+              <span>
+                <span style={{ color: "var(--themeRed)" }}>₫</span>{" "}
+                {item?.productToSizes[0]?.price.toLocaleString("it-IT")}
+              </span>
+              <MdFavoriteBorder className={css.favorite} />
+              <Link to={`/product/${item.id}`}>
+                <button className={css.buy}>
+                  Mua ngay
+                  <BsArrowRightShort />
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }
