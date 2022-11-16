@@ -1,8 +1,12 @@
-// import { dispatch } from "../app/Store/store";
 // import { refresh } from "../app/Reducer/authSlice";
 import axios from "axios";
+import { refresh } from "../app/Reducer/authSlice";
 
 import { StorageKeys } from "../constant/storage-key";
+let store;
+export const injectStore = (_store) => {
+  store = _store;
+};
 const instance = axios.create({
   baseURL: process.env.REACT_APP_URL_BE,
   //   headers: { 'X-Custom-Header': 'foobar' },
@@ -38,11 +42,11 @@ instance.interceptors.response.use(
   },
   function (error) {
     const { config, status } = error.response;
-    console.log(error);
+    // console.log(error);
     if (status === 401 && !config._retry) {
       config._retry = true;
       try {
-        // dispatch(refresh());
+        store.dispatch(refresh());
       } catch (err) {
         return Promise.reject(err);
       }

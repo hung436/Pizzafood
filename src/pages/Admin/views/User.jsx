@@ -82,80 +82,345 @@ function User({ color }) {
                 </form>
               </div>
             </div>
-            <div className='block w-full overflow-x-auto '>
-              <Table hoverable={true}>
-                <Table.Head>
-                  <Table.HeadCell className='!p-4'>
-                    <Checkbox />
-                  </Table.HeadCell>
-                  <Table.HeadCell>Product name</Table.HeadCell>
-                  <Table.HeadCell>Color</Table.HeadCell>
-                  <Table.HeadCell>Category</Table.HeadCell>
-                  <Table.HeadCell>Price</Table.HeadCell>
-                  <Table.HeadCell>
-                    <span className='sr-only'>Edit</span>
-                  </Table.HeadCell>
-                </Table.Head>
-                <Table.Body className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='!p-4'>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                      Apple MacBook Pro 17"
-                    </Table.Cell>
-                    <Table.Cell>Sliver</Table.Cell>
-                    <Table.Cell>Laptop</Table.Cell>
-                    <Table.Cell>$2999</Table.Cell>
-                    <Table.Cell>
-                      <a
-                        href='/tables'
-                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
-                      >
-                        Edit
-                      </a>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='!p-4'>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                      Microsoft Surface Pro
-                    </Table.Cell>
-                    <Table.Cell>White</Table.Cell>
-                    <Table.Cell>Laptop PC</Table.Cell>
-                    <Table.Cell>$1999</Table.Cell>
-                    <Table.Cell>
-                      <a
-                        href='/tables'
-                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
-                      >
-                        Edit
-                      </a>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='!p-4'>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                      Magic Mouse 2
-                    </Table.Cell>
-                    <Table.Cell>Black</Table.Cell>
-                    <Table.Cell>Accessories</Table.Cell>
-                    <Table.Cell>$99</Table.Cell>
-                    <Table.Cell>
-                      <a
-                        href='/tables'
-                        className='font-medium text-blue-600 hover:underline dark:text-blue-500'
-                      >
-                        Edit
-                      </a>
-                    </Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              </Table>
+            <div className='overflow-x-auto w-full'>
+              <table className='table w-full'>
+                <thead>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Favorite Color</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-2@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Hart Hagerty</div>
+                          <div className='text-sm opacity-50'>
+                            United States
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Zemlak, Daniel and Leannon
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Desktop Support Technician
+                      </span>
+                    </td>
+                    <td>Purple</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-3@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Brice Swyre</div>
+                          <div className='text-sm opacity-50'>China</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Carroll Group
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Tax Accountant
+                      </span>
+                    </td>
+                    <td>Red</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-4@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Marjy Ferencz</div>
+                          <div className='text-sm opacity-50'>Russia</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Rowe-Schoen
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Office Assistant I
+                      </span>
+                    </td>
+                    <td>Crimson</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-5@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Yancy Tear</div>
+                          <div className='text-sm opacity-50'>Brazil</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Wyman-Ledner
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Community Outreach Specialist
+                      </span>
+                    </td>
+                    <td>Indigo</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+                </tbody>
+
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Favorite Color</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div className='overflow-x-auto w-full'>
+              <table className='table w-full'>
+                <thead>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Favorite Color</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-2@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Hart Hagerty</div>
+                          <div className='text-sm opacity-50'>
+                            United States
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Zemlak, Daniel and Leannon
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Desktop Support Technician
+                      </span>
+                    </td>
+                    <td>Purple</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-3@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Brice Swyre</div>
+                          <div className='text-sm opacity-50'>China</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Carroll Group
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Tax Accountant
+                      </span>
+                    </td>
+                    <td>Red</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-4@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Marjy Ferencz</div>
+                          <div className='text-sm opacity-50'>Russia</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Rowe-Schoen
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Office Assistant I
+                      </span>
+                    </td>
+                    <td>Crimson</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>
+                      <label>
+                        <input type='checkbox' className='checkbox' />
+                      </label>
+                    </th>
+                    <td>
+                      <div className='flex items-center space-x-3'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src='/tailwind-css-component-profile-5@56w.png'
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className='font-bold'>Yancy Tear</div>
+                          <div className='text-sm opacity-50'>Brazil</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      Wyman-Ledner
+                      <br />
+                      <span className='badge badge-ghost badge-sm'>
+                        Community Outreach Specialist
+                      </span>
+                    </td>
+                    <td>Indigo</td>
+                    <th>
+                      <button className='btn btn-ghost btn-xs'>details</button>
+                    </th>
+                  </tr>
+                </tbody>
+
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Favorite Color</th>
+                    <th></th>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
             <div className='flex justify-end items-center'>
               <Paginate />

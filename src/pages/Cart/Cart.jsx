@@ -1,11 +1,20 @@
 import css from "./Cart.module.scss";
 import p2 from "../../assets/img/p2.png";
-// const fake = [
-//   { id: 1, image: "", name: "hungdt", price: "30000" },
-//   { id: 2, image: "", name: "hungdt", price: "30000" },
-//   { id: 3, image: "", name: "hungdt", price: "30000" },
-// ];
+import { useSelector } from "react-redux";
+import { dispatch } from "../../app/Store/store";
+import { changeToCart, deleteItemCart } from "../../app/Reducer/cartSlice";
+import Quantity from "../../components/Quantity";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FiDelete } from "react-icons/fi";
 function Cart() {
+  const navigate = useNavigate();
+  const carts = useSelector((state) => state.cart.carts);
+  // const [quantity, setQuantity] = useState(null);
+  const handleChangeQuantity = (id, size, value) => {
+    console.log(id, value);
+    dispatch(changeToCart({ id, size: size, quantity: value }));
+  };
   return (
     <div className={css.container}>
       {/* details */}
@@ -22,24 +31,52 @@ function Cart() {
           </thead>
 
           <tbody className={css.tbody}>
-            <tr>
-              <td className={css.imageTd}>
-                <img src={p2} />
-              </td>
-              <td>Pizza bánh xèo tôm nhảy</td>
-              <td>Nhỏ</td>
-              <td>49.000 đồng</td>
-              <td>2</td>
-              <td>49.000 đồng </td>
-              <td
-                style={{
-                  color: "var(--themeRed)",
-                  cursor: "pointer",
-                }}
-              >
-                x
-              </td>
-            </tr>
+            {carts &&
+              carts.map((cart) => (
+                <tr key={cart.id}>
+                  <td
+                    className={css.imageTd}
+                    onClick={() => navigate(`/product/${cart.id}`)}
+                  >
+                    <img src={cart.image} alt='logo product' />
+                  </td>
+                  <td onClick={() => navigate(`/product/${cart.id}`)}>
+                    {cart.name}
+                  </td>
+                  <td>{cart.size}</td>
+                  <td>
+                    {cart.price.toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </td>
+                  <td className='flex justify-center pt-5'>
+                    <Quantity
+                      value={cart.quantity}
+                      onChange={(value) =>
+                        handleChangeQuantity(cart.id, cart.size, value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    {(cart.price * cart.quantity).toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })}{" "}
+                  </td>
+                  <td
+                    onClick={() =>
+                      dispatch(deleteItemCart({ id: cart.id, size: cart.size }))
+                    }
+                    style={{
+                      color: "var(--themeRed)",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <FiDelete />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
@@ -59,8 +96,8 @@ function Cart() {
         </div>
 
         <div className={css.buttons}>
-          <button className="btn">Pay on Delivery</button>
-          <button className="btn">Pay Now</button>
+          <button className='btn'>Pay on Delivery</button>
+          <button className='btn'>Pay Now</button>
         </div>
       </div>
 
@@ -77,26 +114,30 @@ function Cart() {
         {/* <!-- giỏ hàng --> */}
         <ul className={css.listItemMobile}>
           {/* <!-- cart item --> */}
-
-          <li className={css.cartItemMobile}>
-            <img src={p2} alt="" className={css.imgCartMobile} />
-            <div className={css.itemInfoMobile}>
-              <div className={css.itemHeadMobile}>
-                <h5 className={css.itemNameMobile}>
-                  Pizza Hải Sản Pesto Xanh aaaaaaaaaa
-                </h5>
-                <div className={css.priceWrapMobile}>
-                  <span className={css.itemPriceMobile}>65.000 </span>
-                  <span className={css.itemMultiply}>x </span>
-                  <span className={css.itemQnt}>1</span>
+          {carts.map((cart) => (
+            <li key={cart.id} className={css.cartItemMobile}>
+              <img src={cart.image} alt='' className={css.imgCartMobile} />
+              <div className={css.itemInfoMobile}>
+                <div className={css.itemHeadMobile}>
+                  <h5 className={css.itemNameMobile}>{cart.name}</h5>
+                  <div className={css.priceWrapMobile}>
+                    <span className={css.itemPriceMobile}>{cart.price} </span>
+                    <span className={css.itemMultiply}>x </span>
+                    <span className={css.itemQnt}>{cart.quantity}</span>
+                  </div>
+                </div>
+                <div className={css.body}>
+                  <span className={css.description}>Size: {cart.size} </span>
+                  <span
+                    className={css.remove}
+                    onClick={() => dispatch(deleteItemCart(cart.id))}
+                  >
+                    Xóa
+                  </span>
                 </div>
               </div>
-              <div className={css.body}>
-                <span className={css.description}>Size: Nhỏ </span>
-                <span className={css.remove}>Xóa</span>
-              </div>
-            </div>
-          </li>
+            </li>
+          ))}
         </ul>
         {/* <a href="#" class="header__cart-view-cart btn btn--primary">
           Xem giỏ hàng

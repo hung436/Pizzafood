@@ -7,12 +7,14 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { store } from "./app/Store/store";
+import { injectStore } from "./api/axiosConfig";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+injectStore(store);
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
         <ToastContainer
           position='top-center'
@@ -25,8 +27,8 @@ root.render(
           draggable
           pauseOnHover={false}
         />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

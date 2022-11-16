@@ -2,18 +2,23 @@ import ListProduct from "../Home/component/ListProduct";
 import css from "./menu.module.scss";
 import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { dispatch } from "../../app/Store/store";
+import { getCategoryList } from "../../app/Reducer/categorySlice";
+import { getProductList } from "../../app/Reducer/productSlice";
 function Menu() {
-  const fake = [
-    { id: 1, image: "", name: "hungdt", price: "30000" },
-    { id: 2, image: "", name: "hungdt", price: "30000" },
-    { id: 3, image: "", name: "hungdt", price: "30000" },
-    { id: 3, image: "", name: "hungdt", price: "30000" },
-    { id: 3, image: "", name: "hungdt", price: "30000" },
-  ];
-  const category = ["Pizza", "Mì Ý", "Salad", "Thức uống"];
+  const category = useSelector((state) => state.category.categories);
+  const products = useSelector((state) => state.product.products);
+  console.log("products", products);
+
   const [activeCategory, setActiveCategory] = useState(0);
   const [activeFilter, setActiveFilter] = useState(0);
+  //==================================
+  useEffect(() => {
+    dispatch(getCategoryList());
+    dispatch(getProductList());
+  }, []);
   return (
     <div className={css.container}>
       <div className={css.left}>
@@ -27,12 +32,12 @@ function Menu() {
                 onClick={() => setActiveCategory(index)}
               >
                 <Link
-                  to=""
+                  to=''
                   className={`${css.itemLink} ${
                     activeCategory === index ? css.itemActi : ""
                   }`}
                 >
-                  {item}
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -50,19 +55,19 @@ function Menu() {
                 onClick={() => setActiveCategory(index)}
               >
                 <Link
-                  to=""
+                  to=''
                   className={`${css.itemLink} ${
                     activeCategory === index ? css.itemActi : ""
                   }`}
                 >
-                  {item}
+                  {item.name}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
         <div className={css.filter}>
-          <span class={css.filterLabel}>Sắp xếp theo</span>
+          <span className={css.filterLabel}>Sắp xếp theo</span>
           <div className={css.button}>
             <button
               className={`${css.filterBtn} ${
@@ -96,12 +101,12 @@ function Menu() {
 
             <ul className={css.selectInputList}>
               <li className={css.selectInputItem}>
-                <Link to="" className={css.selectInputLink}>
+                <Link to='' className={css.selectInputLink}>
                   Giá: Thấp đến Cao
                 </Link>
               </li>
               <li className={css.selectInputItem}>
-                <Link to="" className={css.selectInputLink}>
+                <Link to='' className={css.selectInputLink}>
                   Giá: Cao đến thấp
                 </Link>
               </li>
@@ -110,7 +115,7 @@ function Menu() {
         </div>
 
         <div className={css.listProduct}>
-          <ListProduct data={fake} />
+          <ListProduct data={products} />
         </div>
       </div>
     </div>
