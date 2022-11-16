@@ -1,6 +1,6 @@
 import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
-import UserDropdown from "../../../../components/Dropdowns/UserDropdown.js";
+import UserDropdown from "../../../../components/Dropdowns/UserDropdown.jsx";
 
 export default function Navbar() {
   return (

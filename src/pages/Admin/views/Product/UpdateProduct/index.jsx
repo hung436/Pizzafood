@@ -4,26 +4,35 @@ import { Field, Form, Formik, FieldArray } from "formik";
 import * as Yup from "yup";
 
 import MyEditor from "../../../../../components/form-control/RickText";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../../../../app/Store/store";
 import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
 import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import { createProduct } from "../../../../../app/Reducer/productSlice";
+import productApi from "../../../../../api/Product";
 
-export default function CreateProduct({ showModal, hideShow, option = true }) {
+export default function UpdateProduct({ showModal, hideShow, option = true }) {
+  const { id } = useParams();
   const [imgProduct, setImgProduct] = useState();
   const [priceInput, setPriceInput] = useState();
   const [sizeInput, setSizeInput] = useState();
-
+  const [product, setProduct] = useState({});
   const [inputSizeArray, setInputSizeArray] = useState([]);
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
   console.log("catelist", categoryList);
   //=================================================================================
+
+  const getProductById = async () => {
+    try {
+      const { data } = await productApi.getProductById(id);
+      setProduct(data);
+    } catch (error) {}
+  };
   useEffect(() => {
+    getProductById();
     dispatch(getCategoryList());
   }, []);
   const handleInputImgChange = () => {
@@ -56,9 +65,6 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     data.append("promotionPrice", promotionPrice);
     data.append("price", price);
     console.log(...data);
-    try {
-      dispatch(createProduct(data));
-    } catch (error) {}
   };
   //========================================
   const options = [

@@ -144,14 +144,17 @@ function Product() {
                   <Table.HeadCell>Giảm giá</Table.HeadCell>
                   <Table.HeadCell>Giá</Table.HeadCell>
                   <Table.HeadCell>Số lượng</Table.HeadCell>
-                  <Table.HeadCell>
+                  {/* <Table.HeadCell>
                     <span className='sr-only'>Edit</span>
-                  </Table.HeadCell>
+                  </Table.HeadCell> */}
                 </Table.Head>
                 <Table.Body className='divide-y'>
                   {productList &&
                     productList.map((product) => (
-                      <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Row
+                        onClick={() => navigate(`update/${product.id}`)}
+                        className='bg-white dark:border-gray-700 dark:bg-gray-800'
+                      >
                         <Table.Cell className='!p-4'>
                           <input
                             type='checkbox'

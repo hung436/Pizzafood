@@ -20,6 +20,22 @@ export const getProductList = createAsyncThunk(
     }
   }
 );
+export const createProduct = createAsyncThunk(
+  "/createProduct",
+  async (payload, { rejectWithValue }) => {
+    try {
+      // console.log(payload);
+      const data = await productApi.createProduct(payload);
+      console.log("data", data);
+      return data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 const initialState = {
   products: [],
 };
