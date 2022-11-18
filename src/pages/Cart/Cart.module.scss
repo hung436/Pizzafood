@@ -62,6 +62,9 @@
 		color: var(--themeRed);
 		border: 2px solid var(--themeRed);
 	}
+	&:hover{
+		background-color: var(--background-color);
+	}
 }
 .cartMobile{
 	display: none;
@@ -167,5 +170,16 @@
 	.remove{
 		color: #333;
     font-size: 0.9rem;
+	}
+	.buttons {
+		flex-direction: column-reverse;
+		margin: 10px 0;
+		& > :nth-child(2) {
+			text-align: center;
+			left: 0;
+			right: 0;
+			margin-left: 15%;
+			
+		}
 	}
 }

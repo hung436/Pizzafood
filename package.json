@@ -3,16 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@mantine/core": "^5.8.0",
+    "@mantine/hooks": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "@tippyjs/react": "^4.2.6",
-<<<<<<< HEAD
-    "@wangeditor/editor": "^5.1.22",
-=======
     "@wangeditor/editor": "^5.1.23",
->>>>>>> 2c1ccb3395c4bf4de1da104aff163a1e48c11f1f
     "@wangeditor/editor-for-react": "^1.0.6",
     "axios": "^0.27.2",
     "customize-cra": "^1.0.0",
