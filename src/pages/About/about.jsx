@@ -8,16 +8,17 @@ import pic4 from "./sumenh.jpg";
 const About = () => {
   return (
     <div className={css.about}>
-      <img src={pic1} alt="Work place" />
       <div className={css.content__top}>
-        <h1 className={css.aboutus}>Về chúng tôi</h1>
-        <p>
-          FUHO Pizza Việt Nam - nơi bạn được thỏa sức thể hiện chính mình với cơ
-          hội hấp dẫn để phát triển cá nhân lẫn nghề nghiệp toàn diện! Chúng tôi
-          tân tâm mang đến một môi trường làm việc thân thiện và chuyên nghiệp
-          cho từng nhân viên, nỗ lực hoàn thiện giá trị “Cùng nhau hướng đến một
-          FUHO Pizza TUYỆT VỜI!”
-        </p>
+        <div className="content">
+          <h1 className={css.aboutus}>Về chúng tôi</h1>
+          <p>
+            FUHO Pizza Việt Nam - nơi bạn được thỏa sức thể hiện chính mình với
+            cơ hội hấp dẫn để phát triển cá nhân lẫn nghề nghiệp toàn diện!
+            Chúng tôi tân tâm mang đến một môi trường làm việc thân thiện và
+            chuyên nghiệp cho từng nhân viên, nỗ lực hoàn thiện giá trị “Cùng
+            nhau hướng đến một FUHO Pizza TUYỆT VỜI!”
+          </p>
+        </div>
       </div>
       <div className={css.contents}>
         <div className={css.content}>
