@@ -8,11 +8,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "@tippyjs/react": "^4.2.6",
-<<<<<<< HEAD
-    "@wangeditor/editor": "^5.1.22",
-=======
     "@wangeditor/editor": "^5.1.23",
->>>>>>> 2c1ccb3395c4bf4de1da104aff163a1e48c11f1f
     "@wangeditor/editor-for-react": "^1.0.6",
     "axios": "^0.27.2",
     "customize-cra": "^1.0.0",
