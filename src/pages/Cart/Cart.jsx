@@ -7,13 +7,19 @@ import Quantity from "../../components/Quantity";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
+import OrderModal from "../../components/OrderModal/OrderModal";
 function Cart() {
   const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
   const carts = useSelector((state) => state.cart.carts);
   // const [quantity, setQuantity] = useState(null);
   const handleChangeQuantity = (id, size, value) => {
     console.log(id, value);
     dispatch(changeToCart({ id, size: size, quantity: value }));
+  };
+  const handleOnDelivery = () => {
+    setShowModal(true);
   };
   return (
     <div className={css.container}>
@@ -38,7 +44,7 @@ function Cart() {
                     className={css.imageTd}
                     onClick={() => navigate(`/product/${cart.id}`)}
                   >
-                    <img src={cart.image} alt='logo product' />
+                    <img src={cart.image} alt="logo product" />
                   </td>
                   <td onClick={() => navigate(`/product/${cart.id}`)}>
                     {cart.name}
@@ -50,7 +56,7 @@ function Cart() {
                       currency: "VND",
                     })}
                   </td>
-                  <td className='flex justify-center pt-5'>
+                  <td className="flex justify-center pt-5">
                     <Quantity
                       value={cart.quantity}
                       onChange={(value) =>
@@ -96,11 +102,18 @@ function Cart() {
         </div>
 
         <div className={css.buttons}>
-          <button className='btn'>Pay on Delivery</button>
-          <button className='btn'>Pay Now</button>
+          <button className="btn" onClick={handleOnDelivery}>
+            Thanh toán khi giao hàng
+          </button>
+          <button className="btn">Thanh toán ngay</button>
         </div>
       </div>
-
+      {/* Modal */}
+      <OrderModal
+        opened={showModal === true}
+        setOpened={setShowModal}
+        showModal={showModal}
+      />
       <div className={css.cartMobile}>
         {/* chưa có sản phẩm */}
         {/* <image
@@ -116,7 +129,7 @@ function Cart() {
           {/* <!-- cart item --> */}
           {carts.map((cart) => (
             <li key={cart.id} className={css.cartItemMobile}>
-              <img src={cart.image} alt='' className={css.imgCartMobile} />
+              <img src={cart.image} alt="" className={css.imgCartMobile} />
               <div className={css.itemInfoMobile}>
                 <div className={css.itemHeadMobile}>
                   <h5 className={css.itemNameMobile}>{cart.name}</h5>
