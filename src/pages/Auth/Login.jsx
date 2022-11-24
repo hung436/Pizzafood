@@ -29,8 +29,7 @@ const Login = () => {
       if (userInfo.RoleId === "admin") navigate("/admin");
       else navigate("/");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo]);
+  }, [userInfo, navigate]);
   const showPassword = () => setEye(!Eye);
   const SigninSchema = Yup.object().shape({
     username: Yup.string().email().required(),

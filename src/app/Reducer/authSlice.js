@@ -72,7 +72,7 @@ export const refresh = createAsyncThunk(
   "/refreshtoken",
   async (payload, { rejectWithValue }) => {
     try {
-      // const data = await refreshTK();
+      const data = await refreshTK();
       console.log("data refeh");
       // await localStorage.setItem(
       //   StorageKeys.ACCESSTOKEN,
@@ -181,7 +181,7 @@ export const userSlice = createSlice({
       state.loading = true;
     },
     [getInfor.fulfilled]: (state, { payload }) => {
-      console.log("payload", payload);
+      state.loading = false;
       const { name, email, role, avartar } = payload;
       const user = {
         Name: name,
@@ -190,6 +190,11 @@ export const userSlice = createSlice({
         Email: email,
       };
       state.userInfo = user;
+    },
+    [getInfor.rejected]: (state, { payload }) => {
+      state.loading = false;
+
+      state.userInfo = null;
     },
     [refresh.fulfilled]: (state, { payload }) => {
       state.userToken = payload;

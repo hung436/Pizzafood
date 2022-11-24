@@ -26,6 +26,6 @@ const getInforUser = () => {
   return instance.get("/users/infor");
 };
 const refreshTK = () => {
-  return instance.post("/auth/refresh");
+  return instance.post("/auth/refresh", { withCredentials: true });
 };
 export { login, register, loginFB, getInforUser, refreshTK };

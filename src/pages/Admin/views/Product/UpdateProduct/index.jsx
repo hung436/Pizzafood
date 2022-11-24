@@ -4,26 +4,37 @@ import { Field, Form, Formik, FieldArray } from "formik";
 import * as Yup from "yup";
 
 import MyEditor from "../../../../../components/form-control/RickText";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../../../../app/Store/store";
 import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
 import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import { createProduct } from "../../../../../app/Reducer/productSlice";
-import { toast } from "react-toastify";
-export default function CreateProduct({ showModal, hideShow, option = true }) {
+import productApi from "../../../../../api/Product";
+
+export default function UpdateProduct({ showModal, hideShow, option = true }) {
+  const { id } = useParams();
   const [imgProduct, setImgProduct] = useState();
   const [priceInput, setPriceInput] = useState();
   const [sizeInput, setSizeInput] = useState();
-  const [errorImage, setErrorImage] = useState("");
-  const [editor, setEditor] = useState("");
+  const [product, setProduct] = useState({});
+  const [inputSizeArray, setInputSizeArray] = useState([]);
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
   console.log("catelist", categoryList);
   //=================================================================================
+
+  const getProductById = async () => {
+    try {
+      const { data } = await productApi.getProductById(id);
+      console.log("data by id", data);
+      setProduct(data);
+      setImgProduct(data?.images);
+    } catch (error) {}
+  };
   useEffect(() => {
+    getProductById();
     dispatch(getCategoryList());
   }, []);
   const handleInputImgChange = () => {
@@ -38,42 +49,24 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     // console.log(file.preview);
     setImgProduct(selectedFIles);
   };
-
+  useEffect(() => {
+    console.log(sizeInput);
+  }, [sizeInput]);
   useEffect(() => {
     return () => {
       imgProduct && URL.revokeObjectURL(imgProduct.preview);
     };
   }, [imgProduct]);
-  const Submit = async (values) => {
-    const file =
-      imgRef.current && imgRef.current.files && imgRef.current.files[0];
-
-    if (!file) {
-      setErrorImage("Vui lòng chọn file hình ảnh sản phẩm");
-      return;
-    }
+  const Submit = (values) => {
     // console.log(values);
     const { name, category, title, promotionPrice, price } = values;
-    const prices = [];
-    price.forEach((value, index) => {
-      if (value) prices.push({ size: index, price: value });
-    });
-    console.log("price", JSON.stringify(prices));
     const data = new FormData();
     data.append("name", name);
     data.append("category", category);
     data.append("title", title);
     data.append("promotionPrice", promotionPrice);
-    data.append("prices", JSON.stringify(prices));
-    data.append("description", editor);
-    data.append("file", imgRef.current.files[0]);
-
+    data.append("price", price);
     console.log(...data);
-
-    try {
-      await dispatch(createProduct(data));
-      // navigate(-1);
-    } catch (error) {}
   };
   //========================================
   const options = [
@@ -82,11 +75,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     { value: 3, label: "L" },
   ];
   const defaultValues = {
-    name: "",
-    price: [],
-    category: "",
-    promotionPrice: "",
-    title: "",
+    name: product.name,
+    price: product?.productToSizes?.map((item) => [item]) || [],
+    category: product.category?.id,
+    promotionPrice: product.promotionPrice,
+    title: product.title,
   };
   const Schema = Yup.object().shape({
     // name: Yup.string().email().required("Email Không để trống"),
@@ -96,6 +89,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
   return (
     <>
       <Formik
+        enableReinitialize={true}
         initialValues={defaultValues}
         validationSchema={Schema}
         onSubmit={(values) => {
@@ -105,7 +99,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
         {({ errors, touched, handleSubmit, handleChange, values }) => (
           <Form className='bg-white'>
             <h3 className='font-extrabold font-sans text-2xl  text-blue-600 ml-10'>
-              {option ? "Tạo mới" : "Cập nhật"}
+              Cập nhật
             </h3>
             <div className='overflow-y-scroll'>
               <div className='space-y-6 p-6'>
@@ -202,7 +196,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                         <div>
                           {sizeInput &&
                             sizeInput.length > 0 &&
-                            sizeInput.map((price) => (
+                            sizeInput.map((price, index) => (
                               <div
                                 key={price.value}
                                 className='relative z-0 mb-6 w-full group'
@@ -230,7 +224,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     <h2 className='font-medium text-white p-2 bg-blue-500 mb-2'>
                       2. Chi tiết
                     </h2>
-                    <MyEditor value={editor} onChange={setEditor} />
+                    <MyEditor />
                   </div>
 
                   <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
@@ -277,8 +271,6 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     </div>
                   </div>
                   <div className='md:col-span-3 flex flex-wrap'>
-                    <div className='text-red-500'> {errorImage}</div>
-
                     {
                       imgProduct &&
                         // <RLDD
@@ -286,7 +278,12 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                         //   itemRenderer={(item, index) => {
                         //     return (
                         imgProduct.map((item, index) => (
-                          <img key={index} width={"25%"} src={item} alt='' />
+                          <img
+                            key={index}
+                            width={"25%"}
+                            src={item.imageLink ? item.imageLink : item}
+                            alt=''
+                          />
                         ))
 
                       //     );

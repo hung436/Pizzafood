@@ -19,11 +19,14 @@ import Modal from "../../components/Modal/ModalProduct";
 import { getProductList } from "../../../../app/Reducer/productSlice";
 import { dispatch } from "../../../../app/Store/store";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import Loading from "../../../../components/Loading";
+import { getObjKey } from "../../../../utils";
 function Product() {
+  const { isLoading, products } = useSelector((state) => state.product);
   const [showModal, setShowModal] = React.useState(false);
   const [showOption, setShowOption] = React.useState(false);
-  const [productList, setProductList] = React.useState([]);
+
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   // const [list, setList] = useState([]);
@@ -33,34 +36,48 @@ function Product() {
     option ? setShowOption(false) : setShowOption(true);
   };
   useEffect(() => {
-    async function getProduct() {
-      const { payload } = await dispatch(getProductList());
-      setProductList(payload.data);
-    }
-    getProduct();
-    console.log("get", productList);
+    dispatch(getProductList());
   }, []);
   const onChangeToggleSwitch = () => {};
   /////////===========================================================
-  const handleSelectAll = (e) => {
-    setIsCheckAll(!isCheckAll);
-    setIsCheck(productList.map((li) => li.id));
-    if (isCheckAll) {
-      setIsCheck([]);
+  const [allSelected, setAllSelected] = useState(false);
+  const [selected, setSelected] = useState({});
+
+  const toggleAllSelected = (e) => {
+    const { checked } = e.target;
+    setAllSelected(checked);
+
+    products &&
+      setSelected(
+        products.reduce(
+          (selected, { id }) => ({
+            ...selected,
+            [id]: checked,
+          }),
+          {}
+        )
+      );
+  };
+  const toggleSelected = (id) => (e) => {
+    if (!e.target.checked) {
+      setAllSelected(false);
     }
+
+    setSelected((selected) => ({
+      ...selected,
+      [id]: !selected[id],
+    }));
   };
-  const handleClick = async (e) => {
-    const { id, checked } = e.target;
-    console.log(id, checked);
-    setIsCheck([...isCheck, id]);
-    console.log(isCheck);
-    // if (!checked) {
-    //   setIsCheck(isCheck.filter((item) => item !== id));
-    // }
-  };
+
+  const selectedCount = Object.values(selected).filter(Boolean).length;
+
+  const isAllSelected = selectedCount === products.length;
+
+  const isIndeterminate = selectedCount && selectedCount !== products.length;
 
   return (
     <div className=' md:px-10 mx-auto w-full'>
+      {isLoading && <Loading />}
       <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
       <div className='flex flex-wrap mt-4 '>
         <div className='w-full '>
@@ -83,13 +100,24 @@ function Product() {
                     <span>Tạo mới</span>
                   </button>
                   <button
-                    className='bg-yellow-300 px-2 py-1 rounded flex space-x-1 justify-center items-center'
-                    onClick={() => handleShow(1)}
+                    className={`px-2 py-1 rounded flex space-x-1 justify-center items-center ${
+                      selectedCount !== 1 ? "bg-slate-400" : "bg-yellow-300"
+                    }`}
+                    onClick={() => {
+                      const id = getObjKey(selected, true);
+                      navigate("update/" + id);
+                    }}
+                    disabled={selectedCount !== 1}
                   >
                     <RiEditBoxLine size={25} />
                     <span>Cập nhật</span>
                   </button>
-                  <button className='bg-red-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'>
+                  <button
+                    disabled={selectedCount < 1}
+                    className={`bg-red-500 px-2 py-1 rounded flex space-x-1 justify-center items-center ${
+                      selectedCount < 1 ? "bg-slate-400" : "bg-red-500"
+                    }`}
+                  >
                     <MdOutlineDeleteOutline size={25} /> <span>Xóa</span>
                   </button>
                   <button className='bg-blue-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'>
@@ -129,11 +157,14 @@ function Product() {
               <Table hoverable={true}>
                 <Table.Head>
                   <Table.HeadCell className='!p-4'>
-                    <Checkbox
+                    <input
+                      type='checkbox'
+                      className='checkbox'
                       name='selectAll'
-                      id='selectAll'
-                      onClick={handleSelectAll}
-                      checked={isCheckAll}
+                      checked={allSelected || isAllSelected}
+                      onChange={toggleAllSelected}
+                      indeterminate={isIndeterminate}
+                      inputProps={{ "aria-label": "select all desserts" }}
                     />
                   </Table.HeadCell>
                   <Table.HeadCell>ID</Table.HeadCell>
@@ -144,46 +175,46 @@ function Product() {
                   <Table.HeadCell>Giảm giá</Table.HeadCell>
                   <Table.HeadCell>Giá</Table.HeadCell>
                   <Table.HeadCell>Số lượng</Table.HeadCell>
-                  <Table.HeadCell>
+                  {/* <Table.HeadCell>
                     <span className='sr-only'>Edit</span>
-                  </Table.HeadCell>
+                  </Table.HeadCell> */}
                 </Table.Head>
                 <Table.Body className='divide-y'>
-                  {productList &&
-                    productList.map((product) => (
+                  {products &&
+                    products.map((product) => (
                       <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                         <Table.Cell className='!p-4'>
                           <input
                             type='checkbox'
-                            id={product.id}
-                            onClick={handleClick}
-                            checked={isCheck.includes(product.id)}
+                            className='checkbox'
+                            checked={selected[product.id] || allSelected}
+                            onChange={toggleSelected(product.id)}
                           />
                         </Table.Cell>
                         <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
                           {product.id}
                         </Table.Cell>
-                        <Table.Cell>{product.name}</Table.Cell>
-                        <Table.Cell>{product.category.name}</Table.Cell>
-                        <Table.Cell>{product.title}</Table.Cell>
+                        <Table.Cell>{product?.name}</Table.Cell>
+                        <Table.Cell>{product?.category?.name}</Table.Cell>
+                        <Table.Cell>{product?.title}</Table.Cell>
                         <Table.Cell>
                           <div className='flex flex-wrap items-center gap-2'>
                             {product.productToSizes?.map((item) => (
                               <Tooltip
-                                content={item.price}
+                                content={item?.price}
                                 style='auto'
                                 placement='right'
                               >
-                                <Badge>{item.size.name}</Badge>
+                                <Badge>{item?.size && item?.size.name}</Badge>
                               </Tooltip>
                             ))}
                           </div>
 
                           {/* {product.productToSizes[0]?.size.name} */}
                         </Table.Cell>
-                        <Table.Cell>{product.promotionPrice}</Table.Cell>
-                        <Table.Cell>{product.price}</Table.Cell>
-                        <Table.Cell>{product.quantity}</Table.Cell>
+                        <Table.Cell>{product?.promotionPrice}</Table.Cell>
+                        <Table.Cell>{product?.price}</Table.Cell>
+                        <Table.Cell>{product?.quantity}</Table.Cell>
                         {/* <Table.Cell>
                         <a
                           href='/tables'

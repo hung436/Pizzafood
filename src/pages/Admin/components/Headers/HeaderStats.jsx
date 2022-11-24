@@ -5,7 +5,7 @@ import { SiProducthunt } from "react-icons/si";
 
 // components
 
-import CardStats from "../../components/Cards/CardStats.js";
+import CardStats from "../Cards/CardStats.jsx";
 
 export default function HeaderStats() {
   return (

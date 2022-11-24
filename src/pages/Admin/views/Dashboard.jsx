@@ -2,11 +2,11 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 // components
 
-import CardLineChart from "../components/Cards/CardLineChart.js";
-import CardBarChart from "../components/Cards/CardBarChart.js";
-import CardPageVisits from "../components/Cards/CardPageVisits.js";
-import CardSocialTraffic from "../components/Cards/CardSocialTraffic.js";
-import HeaderStats from "../components/Headers/HeaderStats.js";
+import CardLineChart from "../components/Cards/CardLineChart.jsx";
+import CardBarChart from "../components/Cards/CardBarChart.jsx";
+import CardPageVisits from "../components/Cards/CardPageVisits.jsx";
+import CardSocialTraffic from "../components/Cards/CardSocialTraffic.jsx";
+import HeaderStats from "../components/Headers/HeaderStats.jsx";
 
 export default function Dashboard() {
   return (

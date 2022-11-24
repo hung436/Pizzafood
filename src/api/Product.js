@@ -6,8 +6,10 @@ const getProductList = () => {
 const getProductById = (id) => {
   return instance.get("/product/getbyid", { params: { id: id } });
 };
-const ceateProduct = (data) => {
-  return instance.post("/product", data);
+const createProduct = (data) => {
+  return instance.post("/product/create", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
 const updateProduct = (data) => {
   console.log(data);
@@ -21,7 +23,7 @@ const updateProduct = (data) => {
 
 const productApi = {
   getProductList,
-  ceateProduct,
+  createProduct,
   updateProduct,
   getProductById,
 };

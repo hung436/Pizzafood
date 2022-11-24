@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { GrClose, GrMenu, GrProductHunt } from "react-icons/gr";
 import { MdOutlineDashboard, MdOutlineCategory } from "react-icons/md";
 import { FaShopify, FaUser } from "react-icons/fa";
-import NotificationDropdown from "../../../../components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "../../../../components/Dropdowns/UserDropdown.js";
+import NotificationDropdown from "../../../../components/Dropdowns/NotificationDropdown.jsx";
+import UserDropdown from "../../../../components/Dropdowns/UserDropdown.jsx";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = useState("hidden");
