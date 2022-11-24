@@ -7,7 +7,7 @@ const getProductById = (id) => {
   return instance.get("/product/getbyid", { params: { id: id } });
 };
 const createProduct = (data) => {
-  return instance.post("/product", data, {
+  return instance.post("/product/create", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };

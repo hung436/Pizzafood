@@ -11,13 +11,13 @@ import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
 import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { createProduct } from "../../../../../app/Reducer/productSlice";
-
+import { toast } from "react-toastify";
 export default function CreateProduct({ showModal, hideShow, option = true }) {
   const [imgProduct, setImgProduct] = useState();
   const [priceInput, setPriceInput] = useState();
   const [sizeInput, setSizeInput] = useState();
-
-  const [inputSizeArray, setInputSizeArray] = useState([]);
+  const [errorImage, setErrorImage] = useState("");
+  const [editor, setEditor] = useState("");
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
@@ -38,26 +38,41 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     // console.log(file.preview);
     setImgProduct(selectedFIles);
   };
-  useEffect(() => {
-    console.log(sizeInput);
-  }, [sizeInput]);
+
   useEffect(() => {
     return () => {
       imgProduct && URL.revokeObjectURL(imgProduct.preview);
     };
   }, [imgProduct]);
-  const Submit = (values) => {
+  const Submit = async (values) => {
+    const file =
+      imgRef.current && imgRef.current.files && imgRef.current.files[0];
+
+    if (!file) {
+      setErrorImage("Vui lòng chọn file hình ảnh sản phẩm");
+      return;
+    }
     // console.log(values);
     const { name, category, title, promotionPrice, price } = values;
+    const prices = [];
+    price.forEach((value, index) => {
+      if (value) prices.push({ size: index, price: value });
+    });
+    console.log("price", JSON.stringify(prices));
     const data = new FormData();
     data.append("name", name);
     data.append("category", category);
     data.append("title", title);
     data.append("promotionPrice", promotionPrice);
-    data.append("price", price);
+    data.append("prices", JSON.stringify(prices));
+    data.append("description", editor);
+    data.append("file", imgRef.current.files[0]);
+
     console.log(...data);
+
     try {
-      dispatch(createProduct(data));
+      await dispatch(createProduct(data));
+      // navigate(-1);
     } catch (error) {}
   };
   //========================================
@@ -187,7 +202,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                         <div>
                           {sizeInput &&
                             sizeInput.length > 0 &&
-                            sizeInput.map((price, index) => (
+                            sizeInput.map((price) => (
                               <div
                                 key={price.value}
                                 className='relative z-0 mb-6 w-full group'
@@ -215,7 +230,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     <h2 className='font-medium text-white p-2 bg-blue-500 mb-2'>
                       2. Chi tiết
                     </h2>
-                    <MyEditor />
+                    <MyEditor value={editor} onChange={setEditor} />
                   </div>
 
                   <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>
@@ -262,6 +277,8 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     </div>
                   </div>
                   <div className='md:col-span-3 flex flex-wrap'>
+                    <div className='text-red-500'> {errorImage}</div>
+
                     {
                       imgProduct &&
                         // <RLDD

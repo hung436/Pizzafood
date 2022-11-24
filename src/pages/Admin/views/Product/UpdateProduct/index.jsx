@@ -28,7 +28,9 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
   const getProductById = async () => {
     try {
       const { data } = await productApi.getProductById(id);
+      console.log("data by id", data);
       setProduct(data);
+      setImgProduct(data?.images);
     } catch (error) {}
   };
   useEffect(() => {
@@ -73,11 +75,11 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
     { value: 3, label: "L" },
   ];
   const defaultValues = {
-    name: "",
-    price: [],
-    category: "",
-    promotionPrice: "",
-    title: "",
+    name: product.name,
+    price: product?.productToSizes?.map((item) => [item]) || [],
+    category: product.category?.id,
+    promotionPrice: product.promotionPrice,
+    title: product.title,
   };
   const Schema = Yup.object().shape({
     // name: Yup.string().email().required("Email Không để trống"),
@@ -87,6 +89,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
   return (
     <>
       <Formik
+        enableReinitialize={true}
         initialValues={defaultValues}
         validationSchema={Schema}
         onSubmit={(values) => {
@@ -96,7 +99,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
         {({ errors, touched, handleSubmit, handleChange, values }) => (
           <Form className='bg-white'>
             <h3 className='font-extrabold font-sans text-2xl  text-blue-600 ml-10'>
-              {option ? "Tạo mới" : "Cập nhật"}
+              Cập nhật
             </h3>
             <div className='overflow-y-scroll'>
               <div className='space-y-6 p-6'>
@@ -275,7 +278,12 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
                         //   itemRenderer={(item, index) => {
                         //     return (
                         imgProduct.map((item, index) => (
-                          <img key={index} width={"25%"} src={item} alt='' />
+                          <img
+                            key={index}
+                            width={"25%"}
+                            src={item.imageLink ? item.imageLink : item}
+                            alt=''
+                          />
                         ))
 
                       //     );

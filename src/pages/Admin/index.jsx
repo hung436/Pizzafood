@@ -13,7 +13,7 @@ import FooterAdmin from "./components/Footers/FooterAdmin";
 import NotFound from "../Notfound";
 const Category = React.lazy(() => import("./views/Category"));
 const Product = React.lazy(() => import("./views/Product"));
-const User = React.lazy(() => import("./views/User"));
+const User = React.lazy(() => import("./views/User/User"));
 
 const AdminPage = () => {
   return (

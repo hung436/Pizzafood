@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { store } from "./app/Store/store";
 import { injectStore } from "./api/axiosConfig";
+import "antd/dist/reset.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 injectStore(store);

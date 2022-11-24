@@ -4,13 +4,13 @@ import React, { useState, useEffect } from "react";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import { i18nChangeLanguage } from "@wangeditor/editor";
 
-function MyEditor() {
+function MyEditor({ value, onChange }) {
   // editor instance
   // const [editor, setEditor] = (useState < IDomEditor) | (null > null); // TS syntax
   const [editor, setEditor] = useState(null); // JS syntax
 
   // editor content
-  const [html, setHtml] = useState("");
+
   i18nChangeLanguage("en");
   // Simulate ajax async set html
   // useEffect(() => {
@@ -49,9 +49,9 @@ function MyEditor() {
         />
         <Editor
           defaultConfig={editorConfig}
-          value={html}
+          value={value}
           onCreated={setEditor}
-          onChange={(editor) => setHtml(editor.getHtml())}
+          onChange={(editor) => onChange(editor.getHtml())}
           mode='default'
           style={{ height: "300px", overflowY: "hidden" }}
         />

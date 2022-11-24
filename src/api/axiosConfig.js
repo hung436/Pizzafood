@@ -17,12 +17,12 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Làm gì đó trước khi request dược gửi đi
-    const URLS = ["/users/infor"];
-    // const dynamicURL = ["/user/favorites/"];
-    // const dynamicURLNeedToken = dynamicURL.some((item) => {
-    //   return config.url.includes(item);
-    // });
-    if (URLS.includes(config.url)) {
+    const URLS = ["/users/infor", "/users"];
+    const dynamicURL = ["/users/findbyid/"];
+    const dynamicURLNeedToken = dynamicURL.some((item) => {
+      return config.url.includes(item);
+    });
+    if (URLS.includes(config.url) || dynamicURLNeedToken) {
       const token = localStorage.getItem(StorageKeys.ACCESSTOKEN);
       config.headers.Authorization = token ? `Bearer ${token}` : "";
     }
@@ -46,7 +46,7 @@ instance.interceptors.response.use(
     if (status === 401 && !config._retry) {
       config._retry = true;
       try {
-        store.dispatch(refresh());
+        // store.dispatch(refresh());
       } catch (err) {
         return Promise.reject(err);
       }
