@@ -8,20 +8,25 @@ import { Button, Empty, InputNumber } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
-function Cart() {
+import OrderModal from "../../components/OrderModal/OrderModal";
+export default function Cart() {
   const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
   const carts = useSelector((state) => state.cart.carts);
   // const [quantity, setQuantity] = useState(null);
   const handleChangeQuantity = (id, size, value) => {
     console.log(id, value);
     dispatch(changeToCart({ id, size: size, quantity: value }));
   };
+  const handleOnDelivery = () => {
+    setShowModal(true);
+  };
   return (
     <div className={css.container}>
       {/* details */}
       {carts && carts.length > 0 ? (
         <>
-          {" "}
           <div className={css.details}>
             <table className={css.table}>
               <thead>
@@ -104,18 +109,32 @@ function Cart() {
             </div>
 
             <div className={css.buttons}>
-              <button className='btn'>Pay on Delivery</button>
-              <button className='btn'>Pay Now</button>
+              <button className='btn' onClick={handleOnDelivery}>
+                Thanh toán khi giao hàng
+              </button>
+              <button className='btn'>Thanh toán ngay</button>
             </div>
+            <OrderModal
+              opened={showModal === true}
+              setOpened={setShowModal}
+              showModal={showModal}
+            />
           </div>
           <div className={css.cartMobile}>
             {/* chưa có sản phẩm */}
             {/* <image
-          src="./assets/img/no_cart.png"
-          alt=""
-          class="header__cart-no-cart-img"
-        />
-        <span class="header__cart-list--no-cart-msg">Chưa có sản phẩm</span> */}
+       </div>
+
+      
+      </div>
+      {/* Modal */}
+
+            <image
+              src='./assets/img/no_cart.png'
+              alt=''
+              class='header__cart-no-cart-img'
+            />
+            <span class='header__cart-list--no-cart-msg'>Chưa có sản phẩm</span>
 
             <h4 className={css.headingMobile}>Sản phẩm đã thêm </h4>
             {/* <!-- giỏ hàng --> */}
@@ -175,5 +194,3 @@ function Cart() {
     </div>
   );
 }
-
-export default Cart;
