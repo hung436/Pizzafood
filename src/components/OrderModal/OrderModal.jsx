@@ -9,7 +9,7 @@ function OrderModal({ opened, setOpened, showModal }) {
       onCancel={() => {
         setOpened(false);
       }}
-      footer={[<button type='submit'>lhkdjsa</button>]}
+      footer={[]}
     >
       <form action='' className={css.formContainer}>
         <input type='text' name='name' required placeholder='Name' />

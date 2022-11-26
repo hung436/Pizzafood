@@ -95,7 +95,7 @@ export default function Cart() {
           </div>
           {/* summart */}
           <div className={css.cart}>
-            <span>Cart</span>
+            <span>Tổng tiền</span>
             <div className={css.CartDetails}>
               <div>
                 <span>Items</span>
