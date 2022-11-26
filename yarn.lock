@@ -10149,6 +10149,11 @@ react-chartjs-2@^4.3.1:
   resolved "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-4.3.1.tgz"
   integrity sha512-5i3mjP6tU7QSn0jvb8I4hudTzHJqS8l00ORJnVwI2sYu0ihpj83Lv2YzfxunfxTZkscKvZu2F2w9LkwNBhj6xA==
 
+react-confirm@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/react-confirm/-/react-confirm-0.2.3.tgz#3f3ca730b67bc94ffac0459aaf3288be878a7b62"
+  integrity sha512-KYeBgEr88cuwrEozpOibwTWjX32tOVYQ4hKPSqlsDY+66EYeZjAhjhFRZB+TkfU9JcY23zfkLsZyShDqdtipjA==
+
 react-data-grid@^5.0.5:
   version "5.0.5"
   resolved "https://registry.npmjs.org/react-data-grid/-/react-data-grid-5.0.5.tgz"

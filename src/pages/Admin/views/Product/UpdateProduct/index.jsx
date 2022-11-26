@@ -11,12 +11,14 @@ import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
 import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import productApi from "../../../../../api/Product";
+import { updateProduct } from "../../../../../app/Reducer/productSlice";
 
 export default function UpdateProduct({ showModal, hideShow, option = true }) {
   const { id } = useParams();
   const [imgProduct, setImgProduct] = useState();
   const [priceInput, setPriceInput] = useState();
   const [sizeInput, setSizeInput] = useState();
+  const [editor, setEditor] = useState("");
   const [product, setProduct] = useState({});
   const [inputSizeArray, setInputSizeArray] = useState([]);
   const imgRef = useRef();
@@ -31,11 +33,13 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
       console.log("data by id", data);
       setProduct(data);
       setImgProduct(data?.images);
+      setEditor(data.description);
     } catch (error) {}
   };
   useEffect(() => {
     getProductById();
     dispatch(getCategoryList());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleInputImgChange = () => {
     const selectedFIles = [];
@@ -58,15 +62,24 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
     };
   }, [imgProduct]);
   const Submit = (values) => {
-    // console.log(values);
+    console.log(values);
     const { name, category, title, promotionPrice, price } = values;
+    const prices = [];
+    price.forEach((value, index) => {
+      if (value) prices.push({ size: index + 1, price: value });
+    });
     const data = new FormData();
     data.append("name", name);
     data.append("category", category);
     data.append("title", title);
     data.append("promotionPrice", promotionPrice);
-    data.append("price", price);
+    data.append("prices", JSON.stringify(prices));
+    data.append("description", editor);
+    data.append("file", imgRef.current.files[0]);
     console.log(...data);
+    try {
+      dispatch(updateProduct({ id: product.id, data }));
+    } catch (error) {}
   };
   //========================================
   const options = [
@@ -74,9 +87,10 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
     { value: 2, label: "M" },
     { value: 3, label: "L" },
   ];
+
   const defaultValues = {
     name: product.name,
-    price: product?.productToSizes?.map((item) => [item]) || [],
+    price: product?.productToSizes?.map((item, index) => [item?.price]),
     category: product.category?.id,
     promotionPrice: product.promotionPrice,
     title: product.title,
@@ -183,27 +197,20 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
                     </label>
                   </div> */}
                   <div className='md:col-span-2 p-2 border-2'>
-                    <div className='mb-6 w-full '>
-                      <MultiSelect
-                        value={sizeInput}
-                        options={options}
-                        handleChange={(value) => setSizeInput(value)}
-                      />
-                    </div>
                     <FieldArray
                       name='price'
                       render={() => (
                         <div>
-                          {sizeInput &&
-                            sizeInput.length > 0 &&
-                            sizeInput.map((price, index) => (
+                          {options &&
+                            options.length > 0 &&
+                            options.map((price, index) => (
                               <div
                                 key={price.value}
                                 className='relative z-0 mb-6 w-full group'
                               >
                                 <Field
                                   type='number'
-                                  name={`price.${price.value}`}
+                                  name={`price.${index}`}
                                   className='block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
                                   placeholder=' '
                                 />
@@ -224,7 +231,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
                     <h2 className='font-medium text-white p-2 bg-blue-500 mb-2'>
                       2. Chi tiết
                     </h2>
-                    <MyEditor />
+                    <MyEditor value={editor} onChange={setEditor} />
                   </div>
 
                   <div className='mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6'>

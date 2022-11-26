@@ -11,14 +11,11 @@ const createProduct = (data) => {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
-const updateProduct = (data) => {
-  console.log(data);
-  return instance.post("/auth/facebook", {
-    id_fb: data.id,
-    email: data.email,
-    name: data.name,
-    avatar: data.picture.data.url,
-  });
+const updateProduct = (id, data) => {
+  return instance.patch("/product/" + id, data);
+};
+const deleteProduct = (id) => {
+  return instance.delete("/product/" + id);
 };
 
 const productApi = {
@@ -26,5 +23,6 @@ const productApi = {
   createProduct,
   updateProduct,
   getProductById,
+  deleteProduct,
 };
 export default productApi;

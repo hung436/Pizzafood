@@ -22,7 +22,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [Eye, setEye] = useState(false);
-  const { loading, userInfo } = useSelector((state) => state.user);
+  const { loading, userInfo } = useSelector((state) => state.auth);
   //========================================================================================================
   useEffect(() => {
     if (userInfo && userInfo.RoleId) {

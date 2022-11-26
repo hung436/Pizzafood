@@ -1,7 +1,12 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import { dispatch } from "../../app/Store/store";
+import { logout } from "../../app/Reducer/authSlice";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const UserDropdown = () => {
+  const { isAdmin } = useSelector((state) => state.auth);
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -43,43 +48,51 @@ const UserDropdown = () => {
           "bg-white text-base z-50 right-0 py-2 list-none text-left rounded shadow-lg min-w-48 absolute"
         }
       >
-        <a
-          href='#pablo'
+        <Link
+          to='/user/infor'
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+          }
+        >
+          Thông tin người dùng
+        </Link>
+        <Link
+          to='user/order'
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
-          Action
-        </a>
-        <a
-          href='#pablo'
+          Đơn hàng
+        </Link>
+        <Link
+          to='user/favorite'
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
-          Another action
-        </a>
-        <a
-          href='#pablo'
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Something else here
-        </a>
+          Yêu thích
+        </Link>
+        {isAdmin && (
+          <Link
+            to='/admin'
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            }
+          >
+            Trang quản trị
+          </Link>
+        )}
         <div className='h-0 my-2 border border-solid border-blueGray-100' />
-        <a
-          href='#pablo'
+        <div
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={() => dispatch(logout())}
         >
-          Seprated link
-        </a>
+          Đăng xuất
+        </div>
       </div>
     </div>
   );

@@ -247,26 +247,24 @@ import { Link } from "react-router-dom";
 import { logout } from "../../app/Reducer/authSlice";
 import Logo from "../../assets/img/Logo.png";
 import css from "./Header.module.scss";
-import Search from "../Search"
+import Search from "../Search";
+import UserDropdown from "../Dropdowns/UserDropdown";
 // import Tippy from '@tippyjs/react/headless';
 function Header() {
-   
-  const { userInfo, userToken } = useSelector((state) => state.user);
+  const { userInfo, userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
- 
 
   return (
     <div className={css.header}>
       {/* logo side */}
-      <Link to="/">
-          <div className={css.logo}>
-            <img src={Logo} alt='logo' width={50} height={50} />
-            <span>FUDO</span>
-          </div>
+      <Link to='/'>
+        <div className={css.logo}>
+          <img src={Logo} alt='logo' width={50} height={50} />
+          <span>FUDO</span>
+        </div>
       </Link>
       {/* search */}
-    <Search/>
-
+      <Search />
 
       {/* MENU SIDE */}
       {/* <ul className={css.menu}>
@@ -285,12 +283,13 @@ function Header() {
           </div>
         </Link>
         {userInfo ? (
-          <button onClick={() => dispatch(logout())}>
-            <div className=''>
-              <HiOutlineLogout size={35} color='#2E2E2E' />
-            </div>
-          </button>
+          <UserDropdown />
         ) : (
+          // <button onClick={() => dispatch(logout())}>
+          //   <div className=''>
+          //     <HiOutlineLogout size={35} color='#2E2E2E' />
+          //   </div>
+          // </button>
           <Link to='/login'>
             <div className={css.cart}>
               <HiOutlineUser size={35} color='#2E2E2E' />

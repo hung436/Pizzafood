@@ -33,6 +33,53 @@ export const createProduct = createAsyncThunk(
         toast.success("ADD success");
       } else {
         toast.warning(data.message);
+        throw Error(data.message);
+      }
+
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateProduct = createAsyncThunk(
+  "/updateproduct",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await productApi.updateProduct(payload.id, payload.data);
+      console.log("data create", data);
+      if (data.success) {
+        toast.success("Cập nhật thành công");
+      } else {
+        toast.warning(data.message);
+        throw Error(data.message);
+      }
+
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const deleteProduct = createAsyncThunk(
+  "/deleteproduct",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await productApi.deleteProduct(payload);
+      console.log("data create", data);
+      if (data.success) {
+        toast.success("Xóa thành công");
+      } else {
+        toast.warning(data.message);
+        throw Error(data.message);
       }
 
       return data;
