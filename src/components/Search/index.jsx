@@ -2,26 +2,29 @@ import Tippy from "@tippyjs/react/headless";
 import { useEffect, useState, useRef } from "react";
 import { AiOutlineCloseCircle, AiOutlineLoading } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import Logo from "../../assets/img/Logo.png";
+
 import css from "./Search.module.scss";
 // import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from "../Popper/index.jsx";
+import { SearchResult } from "../../app/Reducer/productSlice";
+import { dispatch } from "../../app/Store/store";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function Search() {
-  const [searchValue, setSearchValue] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const { searchResult } = useSelector((state) => state.product);
+  const [searchValue, setSearchValue] = useState(null);
+  // const [searchResult, setSearchResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
-
+  const navigate = useNavigate();
   const inputRef = useRef();
 
   useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1, 1]);
-    }, 0);
-  }, []);
+    dispatch(SearchResult(searchValue));
+  }, [searchValue]);
 
   const handleClear = () => {
     setSearchValue("");
-    setSearchResult([]);
+
     inputRef.current.focus();
   };
 
@@ -37,13 +40,28 @@ function Search() {
         <div className={css.searchResult} tabIndex='-1' {...attrs}>
           <PopperWrapper>
             <h4 className={css.searchTitle}>Sản phẩm</h4>
-            <div className={css.listProduct}>
-              <img className={css.image} src={Logo} alt='Pizza' />
-              <div className={css.info}>
-                <p className={css.name}>Pizza thập cẩm</p>
-                <span className={css.price}>50.000đ</span>
+            {searchResult.map((product) => (
+              <div
+                key={product.id}
+                className={css.listProduct}
+                onClick={() => navigate("/product/" + product.id)}
+              >
+                <img
+                  className={css.image}
+                  src={product.images[0].imageLink}
+                  alt='Pizza'
+                />
+                <div className={css.info}>
+                  <p className={css.name}>{product.name}</p>
+                  <span className={css.price}>
+                    {product.productToSizes[0].price.toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </span>
+                </div>
               </div>
-            </div>
+            ))}
           </PopperWrapper>
         </div>
       )}

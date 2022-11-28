@@ -23,6 +23,8 @@ import { StorageKeys } from "../../constant/storage-key";
 // export const getCartNameById = (id) => `cart-${id}`;
 const initialState = {
   carts: JSON.parse(localStorage.getItem("cart")) || [],
+  totalItems: 0,
+  totalCarts: 0,
 };
 
 export const cartSlice = createSlice({
@@ -42,9 +44,13 @@ export const cartSlice = createSlice({
         (item) => item.id === newItem.id && item.size === newItem.size
       );
       // if avaiable
-      console.log("index: ", index);
+
       if (index >= 0) state.carts[index].quantity += newItem.quantity;
-      else state.carts.push(newItem);
+      else {
+        state.carts.push(newItem);
+        state.totalItems++;
+        state.totalCarts = state.totalCarts + newItem.quantity * newItem.price;
+      }
 
       localStorage.setItem("cart", JSON.stringify(state.carts));
     },
@@ -59,7 +65,9 @@ export const cartSlice = createSlice({
     deleteItemCart(state, action) {
       const { id, size } = action.payload;
       console.log(action.payload);
-      state.carts = state.carts.filter((item) => item.id !== id);
+      state.carts = state.carts.filter(
+        (item) => item.id != id || item.size != size
+      );
       localStorage.setItem("cart", JSON.stringify(state.carts));
     },
     logoutCart: (state) => {
@@ -67,7 +75,7 @@ export const cartSlice = createSlice({
       state.cartItems = null;
     },
     paymentSuccess: (state) => {
-      state.cartItems = [];
+      state.carts = [];
 
       localStorage.removeItem("cart");
     },
@@ -84,5 +92,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, deleteItemCart, changeToCart } = cartSlice.actions;
+export const { addToCart, deleteItemCart, changeToCart, paymentSuccess } =
+  cartSlice.actions;
 export default cartSlice.reducer;

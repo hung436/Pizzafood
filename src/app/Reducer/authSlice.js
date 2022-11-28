@@ -8,7 +8,7 @@ import {
   refreshTK,
 } from "../../api/Auth";
 import { StorageKeys } from "../../constant/storage-key";
-import { useDispatch } from "react-redux";
+
 import { toast } from "react-toastify";
 export const registerUser = createAsyncThunk(
   "auth/register",
@@ -73,12 +73,12 @@ export const refresh = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await refreshTK();
-      console.log("data refeh");
-      // await localStorage.setItem(
-      //   StorageKeys.ACCESSTOKEN,
-      //   data.data.accessToken
-      // );
-      return;
+      console.log("data refeh", data);
+      await localStorage.setItem(
+        StorageKeys.ACCESSTOKEN,
+        data.data.accessToken
+      );
+      return data;
     } catch (error) {
       if (!error.response) {
         throw error;
@@ -105,6 +105,8 @@ export const userSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.userInfo = null;
+      state.isAdmin = false;
+      state.isLogin = false;
       localStorage.removeItem(StorageKeys.ACCESSTOKEN);
       state.loading = false;
       state.userToken = null;
@@ -133,13 +135,15 @@ export const userSlice = createSlice({
       // state.error = null;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      const { name, email, role, avartar } = payload.data;
+      const { name, email, role, avartar, phone } = payload.data;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
+        Phone: phone,
       };
+      state.isLogin = true;
       state.loading = false;
       state.userInfo = user;
 
@@ -182,18 +186,26 @@ export const userSlice = createSlice({
     },
     [getInfor.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      const { name, email, role, avartar } = payload;
+      const { name, email, role, avartar, phone } = payload;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
+        Phone: phone,
       };
+      state.isLogin = true;
+      console.log(role);
+      if (role === "admin") {
+        state.isAdmin = true;
+      }
+
       state.userInfo = user;
     },
     [getInfor.rejected]: (state, { payload }) => {
       state.loading = false;
-
+      state.isAdmin = false;
+      state.isLogin = false;
       state.userInfo = null;
     },
     [refresh.fulfilled]: (state, { payload }) => {

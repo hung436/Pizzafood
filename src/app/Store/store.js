@@ -5,7 +5,7 @@ import categoryReducer from "../Reducer/categorySlice";
 import cartReducer from "../Reducer/cartSlice";
 import usersReducer from "../Reducer/userSlice";
 const rootReducer = {
-  user: userReducer,
+  auth: userReducer,
   product: productReducer,
   category: categoryReducer,
   cart: cartReducer,

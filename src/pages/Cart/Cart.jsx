@@ -9,11 +9,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
 import OrderModal from "../../components/OrderModal/OrderModal";
+import {
+  cartItemsCountSelector,
+  cartTotalSelector,
+} from "../../app/Reducer/selector";
 export default function Cart() {
   const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
-  const carts = useSelector((state) => state.cart.carts);
+  const { carts } = useSelector((state) => state.cart);
   // const [quantity, setQuantity] = useState(null);
   const handleChangeQuantity = (id, size, value) => {
     console.log(id, value);
@@ -22,6 +26,8 @@ export default function Cart() {
   const handleOnDelivery = () => {
     setShowModal(true);
   };
+  const price = useSelector(cartTotalSelector);
+  const total = useSelector(cartItemsCountSelector);
   return (
     <div className={css.container}>
       {/* details */}
@@ -95,16 +101,16 @@ export default function Cart() {
           </div>
           {/* summart */}
           <div className={css.cart}>
-            <span>Cart</span>
+            <span>Tổng tiền</span>
             <div className={css.CartDetails}>
               <div>
                 <span>Items</span>
-                <span>2</span>
+                <span>{total}</span>
               </div>
 
               <div>
                 <span>Total</span>
-                <span>80.000 đồng</span>
+                <span>{price} đồng</span>
               </div>
             </div>
 

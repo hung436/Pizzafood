@@ -16,16 +16,24 @@ import { RiEditBoxLine } from "react-icons/ri";
 import Paginate from "../../../../components/Paginate/Paginate";
 
 import Modal from "../../components/Modal/ModalProduct";
-import { getProductList } from "../../../../app/Reducer/productSlice";
+import {
+  deleteProduct,
+  getProductList,
+} from "../../../../app/Reducer/productSlice";
 import { dispatch } from "../../../../app/Store/store";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import { getObjKey } from "../../../../utils";
+import ModalConfirm from "../../../../components/ModalConfirm";
+import { Pagination } from "antd";
 function Product() {
-  const { isLoading, products } = useSelector((state) => state.product);
+  const { isLoading, products, totalProducts } = useSelector(
+    (state) => state.product
+  );
   const [showModal, setShowModal] = React.useState(false);
   const [showOption, setShowOption] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
@@ -35,10 +43,20 @@ function Product() {
     setShowModal(!showModal);
     option ? setShowOption(false) : setShowOption(true);
   };
+  //==============Page
+  const [pageSizes, setPageSizes] = useState(5);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [searchText, setSearchText] = useState("");
+  const onShowSizeChange = (current, pageSize) => {
+    console.log(current, pageSize);
+  };
+
   useEffect(() => {
-    dispatch(getProductList());
-  }, []);
-  const onChangeToggleSwitch = () => {};
+    dispatch(
+      getProductList({ pageSizes, pageIndex, orderBy: "DESC", searchText })
+    );
+  }, [pageSizes, pageIndex, searchText]);
+
   /////////===========================================================
   const [allSelected, setAllSelected] = useState(false);
   const [selected, setSelected] = useState({});
@@ -74,20 +92,50 @@ function Product() {
   const isAllSelected = selectedCount === products.length;
 
   const isIndeterminate = selectedCount && selectedCount !== products.length;
+  //=====================================================
+  const [result, setResult] = React.useState(false);
+  const handleDeleteProduct = (id) => {
+    try {
+      setOpen(true);
+      if (result === 1) {
+        console.log("okkkkkkkj");
+        dispatch(deleteProduct(id));
+      }
+    } catch (error) {}
+  };
 
   return (
-    <div className=' md:px-10 mx-auto w-full'>
-      {isLoading && <Loading />}
+    <div className=' md:px-10 mx-auto w-full bg-white'>
+      <ModalConfirm
+        open={open}
+        content='Bạn có chắc chắn không ?'
+        onClose={() => setOpen(!open)}
+        result={async () => {
+          const id = getObjKey(selected, true);
+          await dispatch(deleteProduct(id));
+          await dispatch(getProductList());
+          products &&
+            setSelected(
+              products.reduce(
+                (selected, { id }) => ({
+                  ...selected,
+                  [id]: false,
+                }),
+                {}
+              )
+            );
+        }}
+      />
       <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
       <div className='flex flex-wrap mt-4 '>
         <div className='w-full '>
           <div
             className={
-              "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-300 "
+              "relative flex flex-col min-w-0 break-words w-full mb-6 rounded"
             }
           >
-            <div className='rounded-t mb-0 py-3 border-0 '>
-              <div className='flex flex-wrap items-center p-3'>
+            <div className='rounded-t mb-0  border-0 '>
+              <div className='flex flex-wrap items-center p-2 '>
                 <div className='relative w-full max-w-full flex-grow flex-1'>
                   <h3 className={"font-semibold text-lg "}>QUẢN LÝ SẢN PHẨM</h3>
                 </div>
@@ -117,6 +165,9 @@ function Product() {
                     className={`bg-red-500 px-2 py-1 rounded flex space-x-1 justify-center items-center ${
                       selectedCount < 1 ? "bg-slate-400" : "bg-red-500"
                     }`}
+                    onClick={() => {
+                      handleDeleteProduct();
+                    }}
                   >
                     <MdOutlineDeleteOutline size={25} /> <span>Xóa</span>
                   </button>
@@ -126,14 +177,20 @@ function Product() {
                 </div>
               </div>
             </div>
-            <div className='w-full md:flex md:justify-end my-5'>
+            <div className='w-full md:flex md:justify-end my-2'>
               <div className='flex gap-x-4'>
                 <div className='ml-3 w-20'>
                   {/* <div className='mb-2 block'>
                   <Label htmlFor='countries' value='Hiển thị' />
                 </div> */}
-                  <Select id='countries' required={true}>
-                    <option value={5}>5</option>
+                  <Select
+                    required={true}
+                    value={pageSizes}
+                    onChange={(e) => {
+                      setPageSizes(e.target.value);
+                    }}
+                  >
+                    <option value={1}>1</option>
                     <option value={10}>10</option>
                     <option value={50}>50</option>
                     <option value={100}>100</option>
@@ -153,7 +210,8 @@ function Product() {
                 </form>
               </div>
             </div>
-            <div className='block w-full overflow-x-auto '>
+            <div className='block w-full overflow-x-auto md:h-80'>
+              {isLoading && <Loading />}
               <Table hoverable={true}>
                 <Table.Head>
                   <Table.HeadCell className='!p-4'>
@@ -228,8 +286,14 @@ function Product() {
                 </Table.Body>
               </Table>
             </div>
-            <div className='flex justify-end items-center'>
-              <Paginate />
+            <div className='flex justify-end'>
+              <Pagination
+                // onShowSizeChange={onShowSizeChange}
+                current={pageIndex + 1}
+                onChange={(page) => setPageIndex(page - 1)}
+                total={totalProducts}
+                pageSize={pageSizes}
+              />
             </div>
           </div>
         </div>

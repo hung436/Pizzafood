@@ -17,7 +17,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
   const [priceInput, setPriceInput] = useState();
   const [sizeInput, setSizeInput] = useState();
   const [errorImage, setErrorImage] = useState("");
-  const [editor, setEditor] = useState("");
+  const [editor, setEditor] = useState("<p></p>");
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
@@ -72,7 +72,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
 
     try {
       await dispatch(createProduct(data));
-      // navigate(-1);
+      navigate(-1);
     } catch (error) {}
   };
   //========================================
@@ -113,7 +113,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                   1. Thông tin chung
                 </h2>
                 <div className='grid md:grid-cols-4 grid-cols-1 md:gap-6'>
-                  <div className='relative z-0 mb-6 w-full group ' draggable>
+                  <div className='relative z-0 mb-6 w-full group '>
                     <Field
                       type='text'
                       name='name'
@@ -189,20 +189,13 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     </label>
                   </div> */}
                   <div className='md:col-span-2 p-2 border-2'>
-                    <div className='mb-6 w-full '>
-                      <MultiSelect
-                        value={sizeInput}
-                        options={options}
-                        handleChange={(value) => setSizeInput(value)}
-                      />
-                    </div>
                     <FieldArray
                       name='price'
                       render={() => (
                         <div>
-                          {sizeInput &&
-                            sizeInput.length > 0 &&
-                            sizeInput.map((price) => (
+                          {options &&
+                            options.length > 0 &&
+                            options.map((price) => (
                               <div
                                 key={price.value}
                                 className='relative z-0 mb-6 w-full group'

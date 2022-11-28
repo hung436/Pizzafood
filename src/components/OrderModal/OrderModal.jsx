@@ -1,7 +1,23 @@
 import { Modal } from "antd";
+import { Formik, Form, Field } from "formik";
 import { Button } from "react-admin";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./OrderModal.module.scss";
+import * as Yup from "yup";
+import { cartTotalSelector } from "../../app/Reducer/selector";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { paymentSuccess } from "../../app/Reducer/cartSlice";
 function OrderModal({ opened, setOpened, showModal }) {
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const SigninSchema = Yup.object().shape({
+    // name: Yup.string().email().required(),
+    // password: Yup.string().min(6, "Tối thiểu 6 kí tự").required(),
+  });
+  const price = useSelector(cartTotalSelector);
+
   return (
     <Modal
       title='Đặt hàng'
@@ -9,12 +25,26 @@ function OrderModal({ opened, setOpened, showModal }) {
       onCancel={() => {
         setOpened(false);
       }}
-      footer={[<button type='submit'>lhkdjsa</button>]}
+      footer={[]}
     >
-      <form action='' className={css.formContainer}>
-        <input type='text' name='name' required placeholder='Name' />
-        <input type='text' name='phone' required placeholder='Phone Number' />
-        <div>
+      <Formik
+        initialValues={{
+          name: userInfo?.Name || "dfadssd",
+          phone: userInfo?.Phone || "",
+        }}
+        validationSchema={SigninSchema}
+        onSubmit={(values) => {
+          toast.success("Đặt hàng thành công");
+          dispatch(paymentSuccess());
+          navigate("/");
+        }}
+      >
+        {({ errors, touched }) => (
+          <Form className={css.formContainer}>
+            <Field type='text' name='name' placeholder='Name' />
+            <Field type='text' name='phone' placeholder='Phone Number' />
+
+            {/* <div>
           <select
             class='form-select form-select-sm mb-3'
             id='city'
@@ -44,16 +74,19 @@ function OrderModal({ opened, setOpened, showModal }) {
               Chọn phường xã
             </option>
           </select>
-        </div>
-        <textarea name='address' rows={3} placeholder='Ghi chú'></textarea>
+        </div> */}
+            <Field type='text' name='address' placeholder='address' />
+            <textarea name='address' rows={3} placeholder='Ghi chú'></textarea>
 
-        <span>
-          Bạn sẽ trả <span>50.000</span> đồng khi nhận hàng
-        </span>
-        <button type='submit' className='btn'>
-          Đặt hàng{" "}
-        </button>
-      </form>
+            <span>
+              Bạn sẽ trả <span>{price}</span> đồng khi nhận hàng
+            </span>
+            <button type='submit' className='btn'>
+              Đặt hàng
+            </button>
+          </Form>
+        )}
+      </Formik>
       {/* Modal content */}
     </Modal>
   );

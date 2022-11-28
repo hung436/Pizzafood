@@ -12,29 +12,36 @@ function Menu() {
   const products = useSelector((state) => state.product.products);
   console.log("products", products);
 
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeCategory, setActiveCategory] = useState(category[0]?.id);
   const [activeFilter, setActiveFilter] = useState(0);
+  const [fillterPrice, setFillterPrice] = useState("+");
   //==================================
   useEffect(() => {
     dispatch(getCategoryList());
-    dispatch(getProductList());
-  }, []);
+
+    dispatch(
+      getProductList({
+        params: { categoryId: activeCategory },
+        orderBy: "price" + fillterPrice,
+      })
+    );
+  }, [activeCategory, fillterPrice]);
   return (
     <div className={css.container}>
       <div className={css.left}>
         <nav className={css.category}>
           <h3 className={css.heading}>Danh mục</h3>
           <ul className={css.listCategory}>
-            {category.map((item, index) => (
+            {category.map((item) => (
               <li
                 className={css.categoryItem}
-                key={index}
-                onClick={() => setActiveCategory(index)}
+                key={item.id}
+                onClick={() => setActiveCategory(item.id)}
               >
                 <Link
                   to=''
                   className={`${css.itemLink} ${
-                    activeCategory === index ? css.itemActi : ""
+                    activeCategory === item.id ? css.itemActi : ""
                   }`}
                 >
                   {item.name}
@@ -95,11 +102,20 @@ function Menu() {
             </button>
           </div>
 
-          <div className={css.selectInput}>
-            <span className={css.selectInputLabel}>Giá</span>
-            <BsChevronDown className={css.selectInputIcon} />
+          <div className={""}>
+            <select
+              name=''
+              id=''
+              value={fillterPrice}
+              onChange={(e) => setFillterPrice(e.target.value)}
+            >
+              <option value='+'>Thấp đến Cao</option>
+              <option value='-'>Cao đến thấp</option>
+            </select>
+            {/* <span className={css.selectInputLabel}>Giá</span>
+            <BsChevronDown className={css.selectInputIcon} /> */}
 
-            <ul className={css.selectInputList}>
+            {/* <ul className={css.selectInputList}>
               <li className={css.selectInputItem}>
                 <Link to='' className={css.selectInputLink}>
                   Giá: Thấp đến Cao
@@ -110,7 +126,7 @@ function Menu() {
                   Giá: Cao đến thấp
                 </Link>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
 

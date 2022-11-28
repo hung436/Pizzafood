@@ -3,14 +3,14 @@ import { Button, Spinner } from "flowbite-react";
 import loading from "../../assets/img/loading.apng";
 const Loading = () => {
   return (
-    <div>
-      <div className='flex flex-row gap-3 justify-center items-center h-screen'>
+    <div className='absolute top-0 left-0 w-full z-10'>
+      <div className='flex flex-row gap-3 justify-center items-center h-screen '>
         {/* <Button>
           <Spinner aria-label='Spinner button example' />
           <span className='pl-3'>Loading...</span>
         </Button> */}
-        <Button color='gray'>
-          {/* <lord-icon
+
+        {/* <lord-icon
             src='https://cdn.lordicon.com/ememvspi.json'
             trigger='loop'
             colors='primary:#f24c00,secondary:#ffc738'
@@ -19,8 +19,7 @@ const Loading = () => {
               height: "250px",
             }}
           ></lord-icon> */}
-          <img src={loading} alt='' />
-        </Button>
+        <img src={loading} alt='' className='w-48' />
       </div>
     </div>
   );
