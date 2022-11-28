@@ -249,11 +249,15 @@ import Logo from "../../assets/img/Logo.png";
 import css from "./Header.module.scss";
 import Search from "../Search";
 import UserDropdown from "../Dropdowns/UserDropdown";
-// import Tippy from '@tippyjs/react/headless';
-function Header() {
-  const { userInfo, userToken } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+import {
+  cartItemsCountSelector,
+  cartTotalSelector,
+} from "../../app/Reducer/selector";
 
+function Header() {
+  const dispatch = useDispatch();
+  const { userInfo, userToken } = useSelector((state) => state.auth);
+  const total = useSelector(cartItemsCountSelector);
   return (
     <div className={css.header}>
       {/* logo side */}
@@ -279,7 +283,7 @@ function Header() {
         <Link to='/Cart'>
           <div className={css.cart}>
             <AiOutlineShoppingCart size={35} color='#2E2E2E' />
-            <div className={css.badge}>1</div>
+            <div className={css.badge}>{total}</div>
           </div>
         </Link>
         {userInfo ? (

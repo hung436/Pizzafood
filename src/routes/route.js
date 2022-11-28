@@ -5,6 +5,7 @@ import Footer from "../components/Footer/Footer";
 import UpdateProduct from "../pages/Admin/views/Product/UpdateProduct";
 import CreateUser from "../pages/Admin/views/User/CreateUser/CreateUser";
 import UpdateUser from "../pages/Admin/views/User/UpdateUser/UpdateUser";
+import Profile from "../pages/Profile";
 const CreateProduct = React.lazy(() =>
   import("../pages/Admin/views/Product/CreateProduct")
 );
@@ -37,6 +38,7 @@ const routes = (isAdmin) => [
       { path: "/", element: <Home /> },
       { path: "/home", element: <Home /> },
       { path: "/product/:id", element: <Product /> },
+      { path: "/profile", element: <Profile /> },
       { path: "/menu", element: <Menu /> },
       { path: "/cart", element: <Cart /> },
       { path: "/contacts", element: <Contacts /> },

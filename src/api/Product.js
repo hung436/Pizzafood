@@ -1,7 +1,8 @@
 import instance from "./axiosConfig";
 
-const getProductList = () => {
-  return instance.get("/product");
+const getProductList = (data) => {
+  console.log("get", data);
+  return instance.get("/product", { params: data });
 };
 const getProductById = (id) => {
   return instance.get("/product/getbyid", { params: { id: id } });

@@ -135,12 +135,13 @@ export const userSlice = createSlice({
       // state.error = null;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      const { name, email, role, avartar } = payload.data;
+      const { name, email, role, avartar, phone } = payload.data;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
+        Phone: phone,
       };
       state.isLogin = true;
       state.loading = false;
@@ -185,12 +186,13 @@ export const userSlice = createSlice({
     },
     [getInfor.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      const { name, email, role, avartar } = payload;
+      const { name, email, role, avartar, phone } = payload;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
+        Phone: phone,
       };
       state.isLogin = true;
       console.log(role);

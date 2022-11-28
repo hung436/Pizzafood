@@ -8,6 +8,7 @@ import productApi from "../../api/Product.js";
 import { dispatch } from "../../app/Store/store";
 import { addToCart } from "../../app/Reducer/cartSlice";
 import QuantityRC from "../../components/Quantity";
+
 function Product() {
   const { id } = useParams();
   const [Quantity, setQuantity] = useState(1);
@@ -44,11 +45,12 @@ function Product() {
       setActive(data.data.productToSizes[0].postToCategoryId);
       setPrice(data.data.productToSizes[0].price);
       setSize(data.data.productToSizes[0].size.name);
+
       setProduct(data.data);
       // ...
     }
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className={css.container}>
@@ -58,7 +60,12 @@ function Product() {
       {/* right side */}
       <div className={css.right}>
         <span>{product?.name}</span>
-        <span>{product?.description}</span>
+        <span>
+          <p
+            className='content'
+            dangerouslySetInnerHTML={{ __html: product?.description }}
+          ></p>
+        </span>
         <span>
           {price?.toLocaleString("it-IT", {
             style: "currency",

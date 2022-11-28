@@ -26,8 +26,11 @@ import { useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import { getObjKey } from "../../../../utils";
 import ModalConfirm from "../../../../components/ModalConfirm";
+import { Pagination } from "antd";
 function Product() {
-  const { isLoading, products } = useSelector((state) => state.product);
+  const { isLoading, products, totalProducts } = useSelector(
+    (state) => state.product
+  );
   const [showModal, setShowModal] = React.useState(false);
   const [showOption, setShowOption] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -40,10 +43,20 @@ function Product() {
     setShowModal(!showModal);
     option ? setShowOption(false) : setShowOption(true);
   };
+  //==============Page
+  const [pageSizes, setPageSizes] = useState(5);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [searchText, setSearchText] = useState("");
+  const onShowSizeChange = (current, pageSize) => {
+    console.log(current, pageSize);
+  };
+
   useEffect(() => {
-    dispatch(getProductList());
-  }, []);
-  const onChangeToggleSwitch = () => {};
+    dispatch(
+      getProductList({ pageSizes, pageIndex, orderBy: "DESC", searchText })
+    );
+  }, [pageSizes, pageIndex, searchText]);
+
   /////////===========================================================
   const [allSelected, setAllSelected] = useState(false);
   const [selected, setSelected] = useState({});
@@ -93,7 +106,6 @@ function Product() {
 
   return (
     <div className=' md:px-10 mx-auto w-full bg-white'>
-      {isLoading && <Loading />}
       <ModalConfirm
         open={open}
         content='Bạn có chắc chắn không ?'
@@ -171,8 +183,14 @@ function Product() {
                   {/* <div className='mb-2 block'>
                   <Label htmlFor='countries' value='Hiển thị' />
                 </div> */}
-                  <Select id='countries' required={true}>
-                    <option value={5}>5</option>
+                  <Select
+                    required={true}
+                    value={pageSizes}
+                    onChange={(e) => {
+                      setPageSizes(e.target.value);
+                    }}
+                  >
+                    <option value={1}>1</option>
                     <option value={10}>10</option>
                     <option value={50}>50</option>
                     <option value={100}>100</option>
@@ -192,7 +210,8 @@ function Product() {
                 </form>
               </div>
             </div>
-            <div className='block w-full overflow-x-auto '>
+            <div className='block w-full overflow-x-auto md:h-80'>
+              {isLoading && <Loading />}
               <Table hoverable={true}>
                 <Table.Head>
                   <Table.HeadCell className='!p-4'>
@@ -267,8 +286,14 @@ function Product() {
                 </Table.Body>
               </Table>
             </div>
-            <div className='flex justify-end items-center'>
-              <Paginate />
+            <div className='flex justify-end'>
+              <Pagination
+                // onShowSizeChange={onShowSizeChange}
+                current={pageIndex + 1}
+                onChange={(page) => setPageIndex(page - 1)}
+                total={totalProducts}
+                pageSize={pageSizes}
+              />
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
   const [priceInput, setPriceInput] = useState();
   const [sizeInput, setSizeInput] = useState();
   const [errorImage, setErrorImage] = useState("");
-  const [editor, setEditor] = useState("");
+  const [editor, setEditor] = useState("<p></p>");
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
