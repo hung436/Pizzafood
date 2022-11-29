@@ -26,7 +26,7 @@ function ProductCategory() {
         <span className={css.headingProduct}>Mì Ý</span>
       </div>
 
-      <ListProduct data={products.filter(value)} />
+      <ListProduct data={products} />
 
       <div className={css.heading}>
         <span className={css.headingProduct}>Đồ uống</span>
