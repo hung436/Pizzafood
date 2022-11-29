@@ -14,7 +14,7 @@ import { getInfor } from "./app/Reducer/authSlice";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("userInfo", userInfo);
+
   // const PrivateRoute = ({ children }) => {
   //   return userInfo && userInfo.RoleId === 2 ? (
   //     children

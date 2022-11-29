@@ -1,5 +1,8 @@
 import instance from "./axiosConfig";
 
+const order = (data) => {
+  return instance.post("/order", data);
+};
 const getCategoryList = () => {
   return instance.get("/categories");
 };
@@ -15,5 +18,5 @@ const updateProduct = (data) => {
   });
 };
 
-const categoryApi = { getCategoryList };
-export default categoryApi;
+const cartApi = { getCategoryList, order };
+export default cartApi;

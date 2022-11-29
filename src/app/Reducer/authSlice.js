@@ -38,14 +38,14 @@ export const LoginFacebook = createAsyncThunk(
   "auth/loginfacebook",
   async (payload) => {
     const data = await loginFB(payload);
-    console.log("data fb lg", data);
+
     if (data.success) {
       await localStorage.setItem(
         StorageKeys.ACCESSTOKEN,
         data.data.accessToken
       );
     }
-    console.log(data);
+
     return data;
   }
 );
@@ -117,7 +117,6 @@ export const userSlice = createSlice({
       localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
     },
     getUserSuccess: (state, action) => {
-      console.log("payload", action.payload);
       state.userInfo = action.payload;
       // localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
     },
@@ -135,13 +134,14 @@ export const userSlice = createSlice({
       // state.error = null;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      const { name, email, role, avartar, phone } = payload.data;
+      const { name, email, role, avartar, phone, address } = payload.data;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
         Phone: phone,
+        Address: address,
       };
       state.isLogin = true;
       state.loading = false;
@@ -186,16 +186,17 @@ export const userSlice = createSlice({
     },
     [getInfor.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      const { name, email, role, avartar, phone } = payload;
+      const { name, email, role, avartar, phone, address } = payload;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
         Phone: phone,
+        Address: address,
       };
       state.isLogin = true;
-      console.log(role);
+
       if (role === "admin") {
         state.isAdmin = true;
       }

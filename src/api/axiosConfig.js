@@ -18,7 +18,7 @@ instance.interceptors.request.use(
   function (config) {
     // Làm gì đó trước khi request dược gửi đi
     const URLS = ["/users/infor", "/users"];
-    const dynamicURL = ["/users/findbyid/", "/product/"];
+    const dynamicURL = ["/users/findbyid/", "/product/", "/order"];
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item);
     });

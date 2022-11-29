@@ -1,5 +1,6 @@
 // import { store } from "../Store/store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import cartApi from "../../api/Cart";
 
 // import cartApi from "../../api/Cart";
 import { StorageKeys } from "../../constant/storage-key";
@@ -21,6 +22,23 @@ import { StorageKeys } from "../../constant/storage-key";
 //   }
 // );
 // export const getCartNameById = (id) => `cart-${id}`;
+export const paymentSuccess = createAsyncThunk(
+  "/order",
+  async (payload, { rejectWithValue }) => {
+    try {
+      // console.log(payload);
+      const data = await cartApi.order(payload);
+
+      return data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const initialState = {
   carts: JSON.parse(localStorage.getItem("cart")) || [],
   totalItems: 0,
@@ -64,7 +82,7 @@ export const cartSlice = createSlice({
     },
     deleteItemCart(state, action) {
       const { id, size } = action.payload;
-      console.log(action.payload);
+
       state.carts = state.carts.filter(
         (item) => item.id != id || item.size != size
       );
@@ -74,11 +92,11 @@ export const cartSlice = createSlice({
       state.userId = null;
       state.cartItems = null;
     },
-    paymentSuccess: (state) => {
-      state.carts = [];
+    // paymentSuccess: (state) => {
+    //   state.carts = [];
 
-      localStorage.removeItem("cart");
-    },
+    //   localStorage.removeItem("cart");
+    // },
   },
 
   extraReducers: {
@@ -89,9 +107,16 @@ export const cartSlice = createSlice({
     // [getCartList.fulfilled]: (state, { payload }) => {
     //   state.carts = payload.data;
     // },
+    [paymentSuccess.pending]: (state, { payload }) => {
+      state.error = null;
+    },
+    [paymentSuccess.fulfilled]: (state, { payload }) => {
+      state.carts = [];
+
+      localStorage.removeItem("cart");
+    },
   },
 });
 
-export const { addToCart, deleteItemCart, changeToCart, paymentSuccess } =
-  cartSlice.actions;
+export const { addToCart, deleteItemCart, changeToCart } = cartSlice.actions;
 export default cartSlice.reducer;

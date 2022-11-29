@@ -10,9 +10,8 @@ export const getProductList = createAsyncThunk(
   "/getproductlist",
   async (payload, { rejectWithValue }) => {
     try {
-      console.log(payload);
       const data = await productApi.getProductList(payload);
-      console.log("data", data);
+
       return data;
     } catch (error) {
       if (!error.response) {
@@ -28,7 +27,7 @@ export const createProduct = createAsyncThunk(
     try {
       // console.log(payload);
       const data = await productApi.createProduct(payload);
-      console.log("data create", data);
+
       if (data.success) {
         toast.success("ADD success");
       } else {
@@ -51,7 +50,7 @@ export const updateProduct = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await productApi.updateProduct(payload.id, payload.data);
-      console.log("data create", data);
+
       if (data.success) {
         toast.success("Cập nhật thành công");
       } else {
@@ -75,7 +74,7 @@ export const deleteProduct = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await productApi.deleteProduct(payload);
-      console.log("data create", data);
+
       if (data.success) {
         toast.success("Xóa thành công");
       } else {
@@ -98,7 +97,7 @@ export const SearchResult = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await productApi.getProductList({ searchText: payload });
-      console.log("data create", data);
+
       if (data.success) {
       } else {
         toast.warning(data.message);

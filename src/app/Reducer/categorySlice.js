@@ -8,9 +8,8 @@ export const getCategoryList = createAsyncThunk(
   "/getcategorylist",
   async (payload, { rejectWithValue }) => {
     try {
-      console.log("aloo");
       const data = await categoryApi.getCategoryList();
-      console.log("data", data);
+
       return data;
     } catch (error) {
       if (!error.response) {

@@ -110,7 +110,12 @@ export default function Cart() {
 
               <div>
                 <span>Total</span>
-                <span>{price} đồng</span>
+                <span>
+                  {price.toLocaleString("it-IT", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </span>
               </div>
             </div>
 

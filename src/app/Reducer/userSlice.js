@@ -24,7 +24,7 @@ export const getUserById = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await userApi.getUserById(payload);
-      console.log("data", data);
+
       return data;
     } catch (error) {
       if (!error.response) {
@@ -60,7 +60,6 @@ export const userSlice = createSlice({
       state.isLoading = true;
     },
     [getUserById.fulfilled]: (state, { payload }) => {
-      console.log("userID", payload);
       state.isLoading = false;
       state.userSelected = payload;
     },

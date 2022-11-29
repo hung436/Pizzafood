@@ -47,14 +47,9 @@ function Product() {
   const [pageSizes, setPageSizes] = useState(5);
   const [pageIndex, setPageIndex] = useState(0);
   const [searchText, setSearchText] = useState("");
-  const onShowSizeChange = (current, pageSize) => {
-    console.log(current, pageSize);
-  };
 
   useEffect(() => {
-    dispatch(
-      getProductList({ pageSizes, pageIndex, orderBy: "DESC", searchText })
-    );
+    dispatch(getProductList({ pageSizes, pageIndex, searchText }));
   }, [pageSizes, pageIndex, searchText]);
 
   /////////===========================================================
@@ -98,7 +93,6 @@ function Product() {
     try {
       setOpen(true);
       if (result === 1) {
-        console.log("okkkkkkkj");
         dispatch(deleteProduct(id));
       }
     } catch (error) {}
@@ -190,7 +184,7 @@ function Product() {
                       setPageSizes(e.target.value);
                     }}
                   >
-                    <option value={1}>1</option>
+                    <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={50}>50</option>
                     <option value={100}>100</option>

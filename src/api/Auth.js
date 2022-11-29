@@ -1,7 +1,6 @@
 import instance from "./axiosConfig";
 
 const login = (data) => {
-  console.log("data", data);
   return instance.post(
     "/auth/signin",
     {
