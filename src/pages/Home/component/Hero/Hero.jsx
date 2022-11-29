@@ -47,19 +47,6 @@ function Hero() {
             <AiOutlinePhone color="white" />
           </div>
         </div>
-
-        <div className={css.Pizza}>
-          <div>
-            <img src={Pizzal} alt="anhloi" />
-          </div>
-
-          <div className={css.details}>
-            <span>Italian Pizza</span>
-            <span>
-              <span style={{ color: "var(--themeRed)" }}>$</span>7.39
-            </span>
-          </div>
-        </div>
       </div>
     </div>
   );
