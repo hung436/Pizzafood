@@ -17,6 +17,8 @@
     margin-left: 10px;
     width: 30%;
     align-items: center;
+    // height: 400px;
+    position: relative;
 
 }
   
@@ -33,22 +35,34 @@
     margin-left: auto;
     margin-right: auto; 
     max-width: 250px; 
+    height: 250px;
 }
 .ImageWrapper>img{
-    max-height: 300px;
+   min-height: 200px;
     object-fit: conver;
     border-radius: 2rem;
     padding-right: 0;
     padding-top: 0;
-    min-height: 200px;
+   
+}
+
+.textProduct{
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    height: 1.8rem;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 
 
-
-
 .price{
+
     display: flex;
     align-items: center;
+    
 }
 .price>span{
     display: flex;
@@ -57,7 +71,6 @@
     margin-left: 10px;
     cursor: pointer;
 }
-
 .buy{
     font-size: 1.1rem;
     font-weight: 500;
