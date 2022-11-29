@@ -7,7 +7,6 @@ const NotificationDropdown = () => {
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
-    console.log("hey");
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "bottom-start",
     });
@@ -19,15 +18,15 @@ const NotificationDropdown = () => {
   return (
     <>
       <a
-        className="text-blueGray-500 block py-1 px-3"
-        href="#pablo"
+        className='text-blueGray-500 block py-1 px-3'
+        href='#pablo'
         ref={btnDropdownRef}
         onClick={(e) => {
           e.preventDefault();
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <i className="fas fa-bell"></i>
+        <i className='fas fa-bell'></i>
       </a>
       <div
         ref={popoverDropdownRef}
@@ -37,7 +36,7 @@ const NotificationDropdown = () => {
         }
       >
         <a
-          href="#pablo"
+          href='#pablo'
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
@@ -46,7 +45,7 @@ const NotificationDropdown = () => {
           Action
         </a>
         <a
-          href="#pablo"
+          href='#pablo'
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
@@ -55,7 +54,7 @@ const NotificationDropdown = () => {
           Another action
         </a>
         <a
-          href="#pablo"
+          href='#pablo'
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
@@ -63,9 +62,9 @@ const NotificationDropdown = () => {
         >
           Something else here
         </a>
-        <div className="h-0 my-2 border border-solid border-blueGray-100" />
+        <div className='h-0 my-2 border border-solid border-blueGray-100' />
         <a
-          href="#pablo"
+          href='#pablo'
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }

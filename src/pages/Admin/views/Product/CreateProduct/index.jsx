@@ -21,7 +21,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
-  console.log("catelist", categoryList);
+
   //=================================================================================
   useEffect(() => {
     dispatch(getCategoryList());
@@ -58,7 +58,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     price.forEach((value, index) => {
       if (value) prices.push({ size: index, price: value });
     });
-    console.log("price", JSON.stringify(prices));
+
     const data = new FormData();
     data.append("name", name);
     data.append("category", category);
@@ -67,8 +67,6 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     data.append("prices", JSON.stringify(prices));
     data.append("description", editor);
     data.append("file", imgRef.current.files[0]);
-
-    console.log(...data);
 
     try {
       await dispatch(createProduct(data));

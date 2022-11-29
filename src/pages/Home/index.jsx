@@ -14,22 +14,26 @@ import About from "../About/about";
 const ImageLink = [slide1, slide2, slide3];
 const Home = () => {
   return (
-    <div className="">
-      <div className="h-[67px] bg-[#F54748] flex justify-center font-semibold text-xs w-full">
-        <ul className="flex text-sm text-white items-center justify-around  md:w-[1140px] overflow-x-auto whitespace-nowrap">
-          <li className="underline active w-fit">TRANG CHỦ</li>
-          <Link to="/menu" className="underline">
+    <div className=''>
+      <div className='h-[67px] bg-[#F54748] flex md:justify-center font-semibold text-xs w-full'>
+        <ul className='flex md:text-sm text-xs text-white md:justify-around items-center md:gap-0 gap-x-5  md:w-[1140px] overflow-x-auto whitespace-nowrap'>
+          <li className='underline active w-fit'>TRANG CHỦ</li>
+          <Link to='/menu' className='underline'>
             MENU
           </Link>
-          <li className="underline">YÊU THÍCH</li>
-          <Link to="/cart">
-            <li className="underline">GIỎ HÀNG</li>
+          <li className='underline'>YÊU THÍCH</li>
+          <Link to='/cart'>
+            <li className='underline'>GIỎ HÀNG</li>
           </Link>
-          <Link to="/contacts" className="underline">LIÊN HỆ</Link>
-          <Link to="/about" className="underline">VỀ CHÚNG TÔI</Link>
+          <Link to='/contacts' className='underline'>
+            LIÊN HỆ
+          </Link>
+          <Link to='/about' className='underline'>
+            VỀ CHÚNG TÔI
+          </Link>
         </ul>
       </div>
-      <div className="">
+      <div className=''>
         <Slide ImageLink={ImageLink} />
       </div>
       <div>
