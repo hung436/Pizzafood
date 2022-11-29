@@ -43,9 +43,9 @@
     position: relative;
 }
 .imagerContainer{
-    width: 38rem;
+    width: 35rem;
     position: absolute;
-    left: -5rem;
+    left: 3rem;
 }
 
 .ContactUs{
@@ -116,7 +116,7 @@
     }
     .imagerContainer{
         width: 29rem;
-        top:30px;
+        top:-50px;
         left: -100px;
        
     }
@@ -185,9 +185,9 @@
       
     }
     .ContactUs{
-        top: 350px;
-        margin-left:60%;
-        padding: 0.4rem;
+        top: 400px;
+    margin-left: 50%;
+    padding: 0.4rem;
         
     }
 }
