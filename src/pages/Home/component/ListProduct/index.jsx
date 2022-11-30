@@ -14,7 +14,7 @@ function ListProduct({ data }) {
                 <img src={item?.images[0]?.imageLink} alt="P1" />
               </div>
             </Link>
-            <span>{item.name}</span>
+            <span className={css.textProduct}>{item.name}</span>
             <div className={css.price}>
               <span>
                 {item?.productToSizes[0]?.price.toLocaleString("it-IT")}

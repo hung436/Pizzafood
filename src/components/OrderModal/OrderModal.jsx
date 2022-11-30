@@ -8,6 +8,8 @@ import { cartTotalSelector } from "../../app/Reducer/selector";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { paymentSuccess } from "../../app/Reducer/cartSlice";
+// import Order from "../../pages/Order"
+import { Link } from "react-router-dom";
 function OrderModal({ opened, setOpened, showModal }) {
   const { userInfo } = useSelector((state) => state.auth);
   const { carts } = useSelector((state) => state.cart);
@@ -21,7 +23,7 @@ function OrderModal({ opened, setOpened, showModal }) {
 
   return (
     <Modal
-      title='Đặt hàng'
+      title="Đặt hàng"
       open={opened}
       onCancel={() => {
         setOpened(false);
@@ -55,8 +57,8 @@ function OrderModal({ opened, setOpened, showModal }) {
       >
         {({ errors, touched }) => (
           <Form className={css.formContainer}>
-            <Field type='text' name='name' placeholder='Name' />
-            <Field type='text' name='phone' placeholder='Phone Number' />
+            <Field type="text" name="name" placeholder="Name" />
+            <Field type="text" name="phone" placeholder="Phone Number" />
 
             {/* <div>
           <select
@@ -89,15 +91,17 @@ function OrderModal({ opened, setOpened, showModal }) {
             </option>
           </select>
         </div> */}
-            <Field type='text' name='address' placeholder='address' />
-            <textarea name='note' rows={3} placeholder='Ghi chú'></textarea>
+            <Field type="text" name="address" placeholder="address" />
+            <textarea name="note" rows={3} placeholder="Ghi chú"></textarea>
 
             <span>
               Bạn sẽ trả <span>{price}</span> đồng khi nhận hàng
             </span>
-            <button type='submit' className='btn'>
-              Đặt hàng
-            </button>
+            <Link to="/order">
+              <button type="submit" className="btn">
+                Đặt hàng
+              </button>
+            </Link>
           </Form>
         )}
       </Formik>
