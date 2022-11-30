@@ -8,19 +8,20 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../../../../app/Store/store";
 import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
-import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
+
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { createProduct } from "../../../../../app/Reducer/productSlice";
-import { toast } from "react-toastify";
+
+import Loading from "../../../../../components/Loading";
 export default function CreateProduct({ showModal, hideShow, option = true }) {
   const [imgProduct, setImgProduct] = useState();
-  const [priceInput, setPriceInput] = useState();
-  const [sizeInput, setSizeInput] = useState();
+
   const [errorImage, setErrorImage] = useState("");
   const [editor, setEditor] = useState("<p></p>");
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
+  const { isLoading } = useSelector((state) => state.product);
 
   //=================================================================================
   useEffect(() => {
@@ -69,7 +70,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     data.append("file", imgRef.current.files[0]);
 
     try {
-      await dispatch(createProduct(data));
+      await dispatch(createProduct(data)).unwrap();
       navigate(-1);
     } catch (error) {}
   };
@@ -102,6 +103,7 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
       >
         {({ errors, touched, handleSubmit, handleChange, values }) => (
           <Form className='bg-white'>
+            {isLoading && <Loading />}
             <h3 className='font-extrabold font-sans text-2xl  text-blue-600 ml-10'>
               {option ? "Tạo mới" : "Cập nhật"}
             </h3>

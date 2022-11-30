@@ -9,15 +9,18 @@ import User from "../User";
 import userApi from "../../../../../api/User";
 import { dispatch } from "../../../../../app/Store/store";
 import { useSelector } from "react-redux";
-import { getUserById } from "../../../../../app/Reducer/userSlice";
-import { useParams } from "react-router-dom";
+import { getUserById, updateUser } from "../../../../../app/Reducer/userSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loading from "../../../../../components/Loading";
 function UpdateUser() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [province, setProvince] = useState([]);
+  const { userSelected, isLoading } = useSelector((state) => state.users);
 
-  const [provinceSelected, setProvinceSelected] = useState(null);
+  const [provinceSelected, setProvinceSelected] = useState();
   const [district, setDistrict] = useState([]);
-  const { userSelected } = useSelector((state) => state.users);
   useEffect(() => {
     dispatch(getUserById(id));
   }, [id]);
@@ -25,17 +28,29 @@ function UpdateUser() {
   const defaultValues = {
     name: userSelected?.name || "",
     email: userSelected?.email || "",
-    province: userSelected?.address?.slit(",")[0] || "",
-    district: userSelected?.address?.slit(",")[1] || "",
-    street_address: userSelected?.address?.slit(",")[2] || "",
+    province: userSelected?.address?.split(",")[2] || "",
+    district: userSelected?.address?.split(",")[1] || "",
+    street_address: userSelected?.address?.split(",")[0] || "",
     phone: userSelected?.phone || "",
   };
   const Schema = Yup.object().shape({
     // name: Yup.string().email().required("Email Không để trống"),
     // password: Yup.string().min(6, "Tối thiểu 6 kí tự").required("Không để trống"),
   });
-  const Submit = (values) => {
-    console.log("vluae", values);
+  const Submit = async (values) => {
+    try {
+      const body = {
+        id: userSelected.id,
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        address:
+          values.street_address + "," + values.district + "," + values.province,
+      };
+      await dispatch(updateUser(body));
+      toast.success("Sửa thành công");
+      navigate(-1);
+    } catch (error) {}
   };
   useEffect(() => {
     (async () => {
@@ -58,6 +73,7 @@ function UpdateUser() {
 
   return (
     <div>
+      {isLoading && <Loading />}
       <Formik
         enableReinitialize={true}
         initialValues={defaultValues}
@@ -129,7 +145,6 @@ function UpdateUser() {
                       </label>
                       <Field
                         as='select'
-                        id='province'
                         name='province'
                         autoComplete='province-name'
                         className='mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
@@ -162,8 +177,7 @@ function UpdateUser() {
                         as={"select"}
                         id='district'
                         name='district'
-                        disabled={provinceSelected === null}
-                        autoComplete='district-name'
+                        // disabled={provinceSelected === null}
                         className='mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
                       >
                         <option value={null} selected>
@@ -191,7 +205,7 @@ function UpdateUser() {
                       </label>
                       <Field
                         type='text'
-                        name='street-address'
+                        name='street_address'
                         id='street-address'
                         autoComplete='street-address'
                         className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
@@ -199,12 +213,19 @@ function UpdateUser() {
                     </div>
                   </div>
                 </div>
-                <div className='bg-gray-50 px-4 py-3 text-right sm:px-6'>
+                <div className='bg-gray-50 px-4 py-3 text-right sm:px-6 flex justify-center space-x-5'>
                   <button
                     type='submit'
                     className='inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
                   >
                     Save
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => navigate(-1)}
+                    className='inline-flex justify-center rounded-md border border-transparent bg-gray-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                  >
+                    Đóng
                   </button>
                 </div>
               </div>

@@ -1,31 +1,37 @@
-import { Checkbox, Select, Table } from "flowbite-react";
+import { Select, Table } from "flowbite-react";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { AiFillPrinter, AiOutlineEdit } from "react-icons/ai";
+import { AiFillPrinter } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { IoMdRemoveCircleOutline } from "react-icons/io";
+
 import { RiEditBoxLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { getObjKey } from "../../../../utils";
+
+import { useNavigate } from "react-router-dom";
 import { getUserList } from "../../../../app/Reducer/userSlice";
 import { dispatch } from "../../../../app/Store/store";
 import Loading from "../../../../components/Loading";
-import Paginate from "../../../../components/Paginate/Paginate";
-import { Avatar, Button } from "antd";
+
+import { Avatar, Pagination } from "antd";
 function User() {
-  const { isLoading, users } = useSelector((state) => state.users);
+  const { isLoading, users, totalUser } = useSelector((state) => state.users);
   const navigate = useNavigate();
   const [allSelected, setAllSelected] = useState(false);
   const [selected, setSelected] = useState({});
 
+  //Paginate
+  const [pageSizes, setPageSizes] = useState(5);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [searchText, setSearchText] = useState("");
+
   useEffect(() => {
     dispatch(getUserList());
   }, []);
-  console.log(users);
 
-  //==========================
+  //========================== Checkbox =================================
   const toggleAllSelected = (e) => {
     const { checked } = e.target;
     setAllSelected(checked);
@@ -61,15 +67,15 @@ function User() {
   return (
     <div>
       {isLoading && <Loading />}
-      <div className='flex flex-wrap mt-4'>
+      <div className='flex flex-wrap mt-4 bg-white'>
         <div className='w-full mb-12 px-4'>
           <div
             className={
-              "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-slate-300 "
+              "relative flex flex-col min-w-0 break-words w-full mb-6 rounded "
             }
           >
-            <div className='rounded-t mb-0 py-3 border-0 '>
-              <div className='flex flex-wrap items-center p-3'>
+            <div className='rounded-t mb-0 py-2 border-0 '>
+              <div className='flex flex-wrap items-center'>
                 <div className='relative w-full max-w-full flex-grow flex-1'>
                   <h3 className={"font-semibold text-lg "}>QUẢN LÝ SẢN PHẨM</h3>
                 </div>
@@ -82,13 +88,27 @@ function User() {
                     <span>Tạo mới</span>
                   </button>
                   <button
-                    className='bg-yellow-300 px-2 py-1 rounded flex space-x-1 justify-center items-center'
-                    // onClick={() => handleShow(1)}
+                    className={`px-2 py-1 rounded flex space-x-1 justify-center items-center ${
+                      selectedCount !== 1 ? "bg-slate-400" : "bg-yellow-300"
+                    }`}
+                    onClick={() => {
+                      const id = getObjKey(selected, true);
+                      navigate("update/" + id);
+                    }}
+                    disabled={selectedCount !== 1}
                   >
                     <RiEditBoxLine size={25} />
                     <span>Cập nhật</span>
                   </button>
-                  <button className='bg-red-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'>
+                  <button
+                    disabled={selectedCount < 1}
+                    className={`bg-red-500 px-2 py-1 rounded flex space-x-1 justify-center items-center ${
+                      selectedCount < 1 ? "bg-slate-400" : "bg-red-500"
+                    }`}
+                    onClick={() => {
+                      // handleDeleteProduct();
+                    }}
+                  >
                     <MdOutlineDeleteOutline size={25} /> <span>Xóa</span>
                   </button>
                   <button className='bg-blue-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'>
@@ -97,9 +117,9 @@ function User() {
                 </div>
               </div>
             </div>
-            <div className='w-full md:flex md:justify-end my-5'>
+            <div className='w-full md:flex md:justify-end py-2'>
               <div className='flex gap-x-4'>
-                <div className='ml-3 w-20'>
+                <div className=' w-20'>
                   {/* <div className='mb-2 block'>
                   <Label htmlFor='countries' value='Hiển thị' />
                 </div> */}
@@ -142,11 +162,11 @@ function User() {
                       </label>
                     </th>
 
-                    <th>Tên</th>
+                    <th>Họ và Tên</th>
                     <th>Email</th>
                     <th>SĐT</th>
                     <th>Phân quyền</th>
-                    <th>Hành động</th>
+                    <th>Địa chỉ</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -165,21 +185,7 @@ function User() {
                           </label>
                         </th>
                         <td>
-                          <div className='flex items-center space-x-3'>
-                            <Avatar
-                              style={{
-                                backgroundColor: "red",
-                                verticalAlign: "middle",
-                              }}
-                              size='large'
-                              gap={4}
-                            >
-                              {user.name[0]}
-                            </Avatar>
-                            <div>
-                              <div className='font-bold'>{user.name}</div>
-                            </div>
-                          </div>
+                          <div className='font-bold'>{user.name}</div>
                         </td>
                         <td>
                           <br />
@@ -194,30 +200,19 @@ function User() {
                           </span>
                         </td>
 
-                        <th>
-                          <div className='flex items-center justify-center gap-x-2'>
-                            <Button
-                              primary
-                              icon={<AiOutlineEdit />}
-                              size={30}
-                              onClick={() => navigate("update/" + user.id)}
-                              className='flex item-center justify-center'
-                            />
-                            <Button
-                              danger
-                              icon={<IoMdRemoveCircleOutline />}
-                              size={30}
-                              className='flex item-center justify-center'
-                            />
-                          </div>
-                        </th>
+                        <td>{user.address}</td>
                       </tr>
                     ))}
                 </tbody>
               </table>
             </div>
-            <div className='flex justify-end items-center'>
-              <Paginate />
+            <div className='flex justify-end'>
+              <Pagination
+                current={pageIndex + 1}
+                onChange={(page) => setPageIndex(page - 1)}
+                total={totalUser}
+                pageSize={pageSizes}
+              />
             </div>
           </div>
         </div>

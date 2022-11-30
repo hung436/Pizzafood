@@ -18,7 +18,7 @@ import Loading from "../../../../components/Loading";
 import { getObjKey } from "../../../../utils";
 import ModalConfirm from "../../../../components/ModalConfirm";
 import { Pagination } from "antd";
-function Product() {
+function Order() {
   const { isLoading, products, totalProducts } = useSelector(
     (state) => state.product
   );
@@ -288,4 +288,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default Order;

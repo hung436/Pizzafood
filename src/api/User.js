@@ -12,7 +12,7 @@ const createUser = (data) => {
   });
 };
 const updateUser = (data) => {
-  return instance.post("/users/update", data);
+  return instance.patch("/users/update", data);
 };
 
 const userApi = {

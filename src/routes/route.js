@@ -6,6 +6,7 @@ import UpdateProduct from "../pages/Admin/views/Product/UpdateProduct";
 import CreateUser from "../pages/Admin/views/User/CreateUser/CreateUser";
 import UpdateUser from "../pages/Admin/views/User/UpdateUser/UpdateUser";
 import Profile from "../pages/Profile";
+import Order from "../pages/Admin/views/Order";
 const CreateProduct = React.lazy(() =>
   import("../pages/Admin/views/Product/CreateProduct")
 );
@@ -60,6 +61,7 @@ const routes = (isAdmin) => [
       },
       { path: "product/create", element: <CreateProduct /> },
       { path: "product/update/:id", element: <UpdateProduct /> },
+      { path: "order", element: <Order /> },
       // { path: "*", element: <NotFound /> },
     ],
   },

@@ -12,19 +12,20 @@ import MultiSelect from "../../../../../components/form-control/MultiSelect/Mult
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import productApi from "../../../../../api/Product";
 import { updateProduct } from "../../../../../app/Reducer/productSlice";
-
+import Loading from "../../../../../components/Loading";
 export default function UpdateProduct({ showModal, hideShow, option = true }) {
   const { id } = useParams();
   const [imgProduct, setImgProduct] = useState();
-  const [priceInput, setPriceInput] = useState();
+
   const [sizeInput, setSizeInput] = useState();
   const [editor, setEditor] = useState("");
   const [product, setProduct] = useState({});
-  const [inputSizeArray, setInputSizeArray] = useState([]);
+
   const imgRef = useRef();
   const navigate = useNavigate();
   const categoryList = useSelector((state) => state.category.categories);
-  console.log("catelist", categoryList);
+  const { isLoading } = useSelector((state) => state.product);
+
   //=================================================================================
 
   const getProductById = async () => {
@@ -61,7 +62,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
       imgProduct && URL.revokeObjectURL(imgProduct.preview);
     };
   }, [imgProduct]);
-  const Submit = (values) => {
+  const Submit = async (values) => {
     console.log(values);
     const { name, category, title, promotionPrice, price } = values;
     const prices = [];
@@ -78,7 +79,8 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
     data.append("file", imgRef.current.files[0]);
     console.log(...data);
     try {
-      dispatch(updateProduct({ id: product.id, data }));
+      await dispatch(updateProduct({ id: product.id, data }));
+      navigate(-1);
     } catch (error) {}
   };
   //========================================
@@ -112,6 +114,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
       >
         {({ errors, touched, handleSubmit, handleChange, values }) => (
           <Form className='bg-white'>
+            {isLoading && <Loading />}
             <h3 className='font-extrabold font-sans text-2xl  text-blue-600 ml-10'>
               Cập nhật
             </h3>
