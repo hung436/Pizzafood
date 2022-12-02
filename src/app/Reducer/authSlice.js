@@ -105,6 +105,7 @@ const initialState = {
   isLogin: false,
   isAdmin: false,
   userInfo: null,
+  userOrder: [],
   userToken: localStorage.getItem(StorageKeys.ACCESSTOKEN)
     ? localStorage.getItem("userToken")
     : null,
@@ -146,7 +147,8 @@ export const userSlice = createSlice({
       // state.error = null;
     },
     [loginUser.fulfilled]: (state, { payload }) => {
-      const { name, email, role, avartar, phone, address } = payload.data;
+      const { name, email, role, avartar, phone, address, order } =
+        payload.data;
       const user = {
         Name: name,
         RoleId: role,
@@ -155,6 +157,7 @@ export const userSlice = createSlice({
         Phone: phone,
         Address: address,
       };
+      state.userOrder = order;
       state.isLogin = true;
       state.loading = false;
       state.userInfo = user;
@@ -198,7 +201,7 @@ export const userSlice = createSlice({
     },
     [getInfor.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      const { name, email, role, avartar, phone, address } = payload;
+      const { name, email, role, avartar, phone, address, order } = payload;
       const user = {
         Name: name,
         RoleId: role,
@@ -207,6 +210,7 @@ export const userSlice = createSlice({
         Phone: phone,
         Address: address,
       };
+      state.userOrder = order;
       state.isLogin = true;
 
       if (role === "admin") {

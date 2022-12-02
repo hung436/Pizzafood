@@ -4,7 +4,7 @@ import { AiFillPrinter } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { RiEditBoxLine } from "react-icons/ri";
+import { HiOutlineEye } from "react-icons/hi";
 
 import Modal from "../../components/Modal/ModalProduct";
 import {
@@ -17,8 +17,12 @@ import { useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
 import { getObjKey } from "../../../../utils";
 import ModalConfirm from "../../../../components/ModalConfirm";
-import { Pagination } from "antd";
-import { getOrderList } from "../../../../app/Reducer/orderSlice";
+import { Button, Pagination } from "antd";
+import {
+  getOrderDetails,
+  getOrderList,
+} from "../../../../app/Reducer/orderSlice";
+import ModalViewOrder from "./components/ModalViewOrder";
 function Order() {
   const { isLoading, orders, totalOrders } = useSelector(
     (state) => state.order
@@ -29,9 +33,8 @@ function Order() {
 
   // const [list, setList] = useState([]);
   const navigate = useNavigate();
-  const handleShow = (option) => {
+  const handleShow = () => {
     setShowModal(!showModal);
-    option ? setShowOption(false) : setShowOption(true);
   };
   //==============Page
   const [pageSizes, setPageSizes] = useState(5);
@@ -110,7 +113,7 @@ function Order() {
             );
         }}
       />
-      <Modal showModal={showModal} hideShow={handleShow} option={showOption} />
+      <ModalViewOrder isModalOpen={showModal} onHide={handleShow} />
       <div className='flex flex-wrap mt-4 '>
         <div className='w-full '>
           <div
@@ -169,17 +172,7 @@ function Order() {
               {isLoading && <Loading />}
               <Table hoverable={true}>
                 <Table.Head className='bg-blue-500'>
-                  <Table.HeadCell className='!p-4'>
-                    <input
-                      type='checkbox'
-                      className='checkbox'
-                      name='selectAll'
-                      checked={allSelected || isAllSelected}
-                      onChange={toggleAllSelected}
-                      indeterminate={isIndeterminate}
-                      inputProps={{ "aria-label": "select all desserts" }}
-                    />
-                  </Table.HeadCell>
+                  <Table.HeadCell>Xem chi tiết</Table.HeadCell>
                   <Table.HeadCell>ID</Table.HeadCell>
                   <Table.HeadCell>Tên khách hàng</Table.HeadCell>
                   <Table.HeadCell>Phương thức</Table.HeadCell>
@@ -188,6 +181,7 @@ function Order() {
                   <Table.HeadCell>Tổng tiền</Table.HeadCell>
                   <Table.HeadCell>Ngày đặt</Table.HeadCell>
                   <Table.HeadCell>Trạng thái</Table.HeadCell>
+
                   {/* <Table.HeadCell>
                     <span className='sr-only'>Edit</span>
                   </Table.HeadCell> */}
@@ -196,13 +190,17 @@ function Order() {
                   {orders &&
                     orders.map((order) => (
                       <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                        <Table.Cell className='!p-4'>
-                          <input
-                            type='checkbox'
-                            className='checkbox'
-                            checked={selected[order.id] || allSelected}
-                            onChange={toggleSelected(order.id)}
-                          />
+                        <Table.Cell>
+                          <Button
+                            onClick={async () => {
+                              await dispatch(
+                                getOrderDetails(order.orderDetail)
+                              );
+                              handleShow();
+                            }}
+                          >
+                            <HiOutlineEye />
+                          </Button>
                         </Table.Cell>
                         <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
                           {order.id}
@@ -217,7 +215,27 @@ function Order() {
                         </Table.Cell>
                         <Table.Cell>{order?.totalPrice}</Table.Cell>
                         <Table.Cell>{order?.created_at}</Table.Cell>
-                        <Table.Cell>{order?.status}</Table.Cell>
+                        <Table.Cell>
+                          {order?.status !== "1" ? (
+                            <Button>Chờ xác nhậnád</Button>
+                          ) : (
+                            () => {
+                              let text = "ádsa";
+                              switch (order?.status) {
+                                case "1":
+                                  text = "text";
+
+                                  break;
+
+                                default:
+                                  text = "hung";
+                                  break;
+                              }
+                              console.log(text);
+                              return text;
+                            }
+                          )}
+                        </Table.Cell>
                         {/* <Table.Cell>
                         <a
                           href='/tables'

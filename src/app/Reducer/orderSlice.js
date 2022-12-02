@@ -21,12 +21,17 @@ const initialState = {
   isLoading: false,
   orders: [],
   totalOrders: 0,
+  orderSelected: null,
 };
 
 export const orderSlice = createSlice({
   name: "order",
   initialState,
-  reducers: {},
+  reducers: {
+    getOrderDetails(state, { payload }) {
+      state.orderSelected = payload;
+    },
+  },
   extraReducers: {
     [getOrderList.pending]: (state, { payload }) => {
       state.isLoading = true;
@@ -41,5 +46,5 @@ export const orderSlice = createSlice({
   },
 });
 
-// export const {} = productSlice.actions;
+export const { getOrderDetails } = orderSlice.actions;
 export default orderSlice.reducer;
