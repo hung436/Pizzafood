@@ -1,7 +1,11 @@
 import React from "react";
 import { Button, Spinner } from "flowbite-react";
 import loading from "../../assets/img/loading.apng";
+import { useEffect } from "react";
 const Loading = () => {
+  useEffect(() => {
+    document.querySelector("body").scrollTo(0, 0);
+  }, []);
   return (
     <div className='absolute top-0 left-0 w-full z-10'>
       <div className='flex flex-row gap-3 justify-center items-center h-screen '>

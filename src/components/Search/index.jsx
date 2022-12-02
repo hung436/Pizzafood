@@ -44,7 +44,10 @@ function Search() {
               <div
                 key={product.id}
                 className={css.listProduct}
-                onClick={() => navigate("/product/" + product.id)}
+                onClick={() => {
+                  navigate("/product/" + product.id);
+                  setShowResult(false);
+                }}
               >
                 <img
                   className={css.image}

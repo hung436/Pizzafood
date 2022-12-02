@@ -18,9 +18,10 @@ import Loading from "../../../../components/Loading";
 import { getObjKey } from "../../../../utils";
 import ModalConfirm from "../../../../components/ModalConfirm";
 import { Pagination } from "antd";
-function Product() {
-  const { isLoading, products, totalProducts } = useSelector(
-    (state) => state.product
+import { getOrderList } from "../../../../app/Reducer/orderSlice";
+function Order() {
+  const { isLoading, orders, totalOrders } = useSelector(
+    (state) => state.order
   );
   const [showModal, setShowModal] = React.useState(false);
   const [showOption, setShowOption] = React.useState(false);
@@ -38,7 +39,7 @@ function Product() {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    dispatch(getProductList({ pageSizes, pageIndex, searchText }));
+    dispatch(getOrderList({ pageSizes, pageIndex, searchText }));
   }, [pageSizes, pageIndex, searchText]);
 
   /////////===========================================================
@@ -49,9 +50,9 @@ function Product() {
     const { checked } = e.target;
     setAllSelected(checked);
 
-    products &&
+    orders &&
       setSelected(
-        products.reduce(
+        orders.reduce(
           (selected, { id }) => ({
             ...selected,
             [id]: checked,
@@ -73,9 +74,9 @@ function Product() {
 
   const selectedCount = Object.values(selected).filter(Boolean).length;
 
-  const isAllSelected = selectedCount === products.length;
+  const isAllSelected = selectedCount === orders?.length;
 
-  const isIndeterminate = selectedCount && selectedCount !== products.length;
+  const isIndeterminate = selectedCount && selectedCount !== orders.length;
   //=====================================================
   const [result, setResult] = React.useState(false);
   const handleDeleteProduct = (id) => {
@@ -97,9 +98,9 @@ function Product() {
           const id = getObjKey(selected, true);
           await dispatch(deleteProduct(id));
           await dispatch(getProductList());
-          products &&
+          orders &&
             setSelected(
-              products.reduce(
+              orders.reduce(
                 (selected, { id }) => ({
                   ...selected,
                   [id]: false,
@@ -123,37 +124,6 @@ function Product() {
                   <h3 className={"font-semibold text-lg "}>QUẢN LÝ SẢN PHẨM</h3>
                 </div>
                 <div className='text-xs text-bold text-white space-x-2 flex'>
-                  <button
-                    className='bg-green-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'
-                    onClick={() => navigate("/admin/product/create")}
-                  >
-                    <BsPlusCircle size={25} />
-                    <span>Tạo mới</span>
-                  </button>
-                  <button
-                    className={`px-2 py-1 rounded flex space-x-1 justify-center items-center ${
-                      selectedCount !== 1 ? "bg-slate-400" : "bg-yellow-300"
-                    }`}
-                    onClick={() => {
-                      const id = getObjKey(selected, true);
-                      navigate("update/" + id);
-                    }}
-                    disabled={selectedCount !== 1}
-                  >
-                    <RiEditBoxLine size={25} />
-                    <span>Cập nhật</span>
-                  </button>
-                  <button
-                    disabled={selectedCount < 1}
-                    className={`bg-red-500 px-2 py-1 rounded flex space-x-1 justify-center items-center ${
-                      selectedCount < 1 ? "bg-slate-400" : "bg-red-500"
-                    }`}
-                    onClick={() => {
-                      handleDeleteProduct();
-                    }}
-                  >
-                    <MdOutlineDeleteOutline size={25} /> <span>Xóa</span>
-                  </button>
                   <button className='bg-blue-500 px-2 py-1 rounded flex space-x-1 justify-center items-center'>
                     <AiFillPrinter size={25} /> <span>In</span>
                   </button>
@@ -211,54 +181,43 @@ function Product() {
                     />
                   </Table.HeadCell>
                   <Table.HeadCell>ID</Table.HeadCell>
-                  <Table.HeadCell>Tên</Table.HeadCell>
-                  <Table.HeadCell>Mục</Table.HeadCell>
-                  <Table.HeadCell>Tiêu đề</Table.HeadCell>
-                  <Table.HeadCell>Size</Table.HeadCell>
-                  <Table.HeadCell>Giảm giá</Table.HeadCell>
-                  <Table.HeadCell>Giá</Table.HeadCell>
-                  <Table.HeadCell>Số lượng</Table.HeadCell>
+                  <Table.HeadCell>Tên khách hàng</Table.HeadCell>
+                  <Table.HeadCell>Phương thức</Table.HeadCell>
+                  <Table.HeadCell>Địa chỉ</Table.HeadCell>
+                  <Table.HeadCell>Số điện thoại</Table.HeadCell>
+                  <Table.HeadCell>Tổng tiền</Table.HeadCell>
+                  <Table.HeadCell>Ngày đặt</Table.HeadCell>
+                  <Table.HeadCell>Trạng thái</Table.HeadCell>
                   {/* <Table.HeadCell>
                     <span className='sr-only'>Edit</span>
                   </Table.HeadCell> */}
                 </Table.Head>
                 <Table.Body className='divide-y'>
-                  {products &&
-                    products.map((product) => (
+                  {orders &&
+                    orders.map((order) => (
                       <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                         <Table.Cell className='!p-4'>
                           <input
                             type='checkbox'
                             className='checkbox'
-                            checked={selected[product.id] || allSelected}
-                            onChange={toggleSelected(product.id)}
+                            checked={selected[order.id] || allSelected}
+                            onChange={toggleSelected(order.id)}
                           />
                         </Table.Cell>
                         <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                          {product.id}
+                          {order.id}
                         </Table.Cell>
-                        <Table.Cell>{product?.name}</Table.Cell>
-                        <Table.Cell>{product?.category?.name}</Table.Cell>
-                        <Table.Cell>{product?.title}</Table.Cell>
+                        <Table.Cell>{order?.user.name}</Table.Cell>
+                        <Table.Cell>{order?.methor_payment}</Table.Cell>
+                        <Table.Cell>{order?.address}</Table.Cell>
                         <Table.Cell>
-                          <div className='flex flex-wrap items-center gap-2'>
-                            {product.productToSizes?.map((item) => (
-                              <Tooltip
-                                content={item?.price}
-                                // eslint-disable-next-line react/style-prop-object
-                                style={"auto"}
-                                placement='right'
-                              >
-                                <Badge>{item?.size && item?.size.name}</Badge>
-                              </Tooltip>
-                            ))}
-                          </div>
+                          {order.phone}
 
-                          {/* {product.productToSizes[0]?.size.name} */}
+                          {/* {order.orderToSizes[0]?.size.name} */}
                         </Table.Cell>
-                        <Table.Cell>{product?.promotionPrice}</Table.Cell>
-                        <Table.Cell>{product?.price}</Table.Cell>
-                        <Table.Cell>{product?.quantity}</Table.Cell>
+                        <Table.Cell>{order?.totalPrice}</Table.Cell>
+                        <Table.Cell>{order?.created_at}</Table.Cell>
+                        <Table.Cell>{order?.status}</Table.Cell>
                         {/* <Table.Cell>
                         <a
                           href='/tables'
@@ -277,7 +236,7 @@ function Product() {
                 // onShowSizeChange={onShowSizeChange}
                 current={pageIndex + 1}
                 onChange={(page) => setPageIndex(page - 1)}
-                total={totalProducts}
+                total={totalOrders}
                 pageSize={pageSizes}
               />
             </div>
@@ -288,4 +247,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default Order;

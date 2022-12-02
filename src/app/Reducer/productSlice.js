@@ -31,7 +31,6 @@ export const createProduct = createAsyncThunk(
       if (data.success) {
         toast.success("ADD success");
       } else {
-        toast.warning(data.message);
         throw Error(data.message);
       }
 
@@ -145,6 +144,15 @@ export const productSlice = createSlice({
       state.isLoading = false;
     },
     [SearchResult.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+    },
+    [createProduct.pending]: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    [createProduct.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+    },
+    [createProduct.rejected]: (state, { payload }) => {
       state.isLoading = false;
     },
   },

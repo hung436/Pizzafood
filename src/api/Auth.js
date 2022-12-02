@@ -11,7 +11,7 @@ const login = (data) => {
   );
 };
 const register = (data) => {
-  return instance.post("/register", data);
+  return instance.post("/auth/signin", data);
 };
 const loginFB = (data) => {
   return instance.post("/auth/facebook", {

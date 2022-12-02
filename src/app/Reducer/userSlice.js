@@ -2,8 +2,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userApi from "../../api/User";
 
-import { StorageKeys } from "../../constant/storage-key";
-
 export const getUserList = createAsyncThunk(
   "/getuserlist",
   async (payload, { rejectWithValue }) => {
@@ -34,11 +32,27 @@ export const getUserById = createAsyncThunk(
     }
   }
 );
+export const updateUser = createAsyncThunk(
+  "/updateUser",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await userApi.updateUser(payload);
+
+      return data;
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const initialState = {
   isLoading: false,
   users: [],
   userSelected: null,
+  totalUser: 0,
 };
 
 export const userSlice = createSlice({
@@ -51,6 +65,7 @@ export const userSlice = createSlice({
     },
     [getUserList.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
+      state.totalUser = payload?.totalCountItem;
       state.users = payload;
     },
     [getUserList.rejected]: (state, { payload }) => {
@@ -64,6 +79,15 @@ export const userSlice = createSlice({
       state.userSelected = payload;
     },
     [getUserById.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+    },
+    [updateUser.pending]: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    [updateUser.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+    },
+    [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false;
     },
   },
