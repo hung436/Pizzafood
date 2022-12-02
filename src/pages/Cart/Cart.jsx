@@ -14,9 +14,10 @@ import {
   cartItemsCountSelector,
   cartTotalSelector,
 } from "../../app/Reducer/selector";
+import { toast } from "react-toastify";
 export default function Cart() {
   const navigate = useNavigate();
-
+  const { userInfo } = useSelector((state) => state.auth);
   const [showModal, setShowModal] = useState(false);
   const { carts } = useSelector((state) => state.cart);
   // const [quantity, setQuantity] = useState(null);
@@ -31,7 +32,7 @@ export default function Cart() {
   const total = useSelector(cartItemsCountSelector);
   if (carts && carts.length < 1)
     return (
-      <div className="flex items-center justify-center ml-300">
+      <div className='flex items-center justify-center ml-300'>
         <Empty
           image={noCart}
           imageStyle={{
@@ -40,7 +41,7 @@ export default function Cart() {
           }}
           description={<span className={css.textEmpty}>Giỏ hàng trống</span>}
         >
-          <Button type="primary">Create Now</Button>
+          <Button type='primary'>Create Now</Button>
         </Empty>
       </div>
     );
@@ -69,7 +70,7 @@ export default function Cart() {
                       className={css.imageTd}
                       onClick={() => navigate(`/product/${cart.id}`)}
                     >
-                      <img src={cart.image} alt="logo product" />
+                      <img src={cart.image} alt='logo product' />
                     </td>
                     <td onClick={() => navigate(`/product/${cart.id}`)}>
                       {cart.name}
@@ -81,7 +82,7 @@ export default function Cart() {
                         currency: "VND",
                       })}
                     </td>
-                    <td className="">
+                    <td className=''>
                       <InputNumber
                         min={1}
                         max={10}
@@ -131,10 +132,16 @@ export default function Cart() {
           </div>
 
           <div className={css.buttons}>
-            <button className="btn" onClick={handleOnDelivery}>
+            <button
+              className='btn'
+              onClick={() => {
+                userInfo
+                  ? handleOnDelivery()
+                  : toast.warn("Đăng nhập để thanh toán");
+              }}
+            >
               Thanh toán khi giao hàng
             </button>
-            <button className="btn">Thanh toán ngay</button>
           </div>
           <OrderModal
             opened={showModal === true}
@@ -152,9 +159,9 @@ export default function Cart() {
       {/* Modal */}
 
           <image
-            src="./assets/img/no_cart.png"
-            alt=""
-            class="header__cart-no-cart-img"
+            src='./assets/img/no_cart.png'
+            alt=''
+            class='header__cart-no-cart-img'
           />
           {/* <span class='header__cart-list--no-cart-msg'>Chưa có sản phẩm</span> */}
 
@@ -164,7 +171,7 @@ export default function Cart() {
             {/* <!-- cart item --> */}
             {carts.map((cart) => (
               <li key={cart.id} className={css.cartItemMobile}>
-                <img src={cart.image} alt="" className={css.imgCartMobile} />
+                <img src={cart.image} alt='' className={css.imgCartMobile} />
                 <div className={css.itemInfoMobile}>
                   <div className={css.itemHeadMobile}>
                     <h5 className={css.itemNameMobile}>{cart.name}</h5>
