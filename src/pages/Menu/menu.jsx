@@ -7,25 +7,31 @@ import { useSelector } from "react-redux";
 import { dispatch } from "../../app/Store/store";
 import { getCategoryList } from "../../app/Reducer/categorySlice";
 import { getProductList } from "../../app/Reducer/productSlice";
+import { Pagination } from "antd";
 function Menu() {
   const category = useSelector((state) => state.category.categories);
-  const products = useSelector((state) => state.product.products);
+  const { products, totalProducts } = useSelector((state) => state.product);
   console.log("products", products);
 
-  const [activeCategory, setActiveCategory] = useState(category[0]?.id);
-  const [activeFilter, setActiveFilter] = useState(0);
+  const [activeCategory, setActiveCategory] = useState(() => category[0]?.id);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSizes, setPageSize] = useState(6);
   const [fillterPrice, setFillterPrice] = useState("+");
   //==================================
   useEffect(() => {
+    setActiveCategory(category[0]?.id);
     dispatch(getCategoryList());
-
+  }, []);
+  useEffect(() => {
     dispatch(
       getProductList({
+        pageSizes,
+        pageIndex,
         params: { categoryId: activeCategory },
         orderBy: "price" + fillterPrice,
       })
     );
-  }, [activeCategory, fillterPrice]);
+  }, [activeCategory, fillterPrice, pageIndex, pageSizes]);
   return (
     <div className={css.container}>
       <div className={css.left}>
@@ -75,7 +81,7 @@ function Menu() {
         </div>
         <div className={css.filter}>
           <span className={css.filterLabel}>Sắp xếp theo</span>
-          <div className={css.button}>
+          {/* <div className={css.button}>
             <button
               className={`${css.filterBtn} ${
                 activeFilter === 0 ? css.btnPrimary : ""
@@ -100,7 +106,7 @@ function Menu() {
             >
               Bán chạy
             </button>
-          </div>
+          </div> */}
 
           <div className={""}>
             <select
@@ -132,6 +138,15 @@ function Menu() {
 
         <div className={css.listProduct}>
           <ListProduct data={products} />
+        </div>
+        <div className='flex justify-center items-center mt-3'>
+          <Pagination
+            // onShowSizeChange={onShowSizeChange}
+            current={pageIndex + 1}
+            onChange={(page) => setPageIndex(page - 1)}
+            total={totalProducts}
+            pageSize={pageSizes}
+          />
         </div>
       </div>
     </div>

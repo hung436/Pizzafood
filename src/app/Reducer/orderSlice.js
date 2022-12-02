@@ -6,8 +6,8 @@ export const getOrderList = createAsyncThunk(
   "/getorderlist",
   async (payload, { rejectWithValue }) => {
     try {
-      const data = await orderApi.getOrderList();
-
+      const data = await orderApi.getOrderList(payload);
+      console.log("order", data);
       return data;
     } catch (error) {
       if (!error.response) {
@@ -20,6 +20,7 @@ export const getOrderList = createAsyncThunk(
 const initialState = {
   isLoading: false,
   orders: [],
+  totalOrders: 0,
 };
 
 export const orderSlice = createSlice({
@@ -31,7 +32,7 @@ export const orderSlice = createSlice({
       state.isLoading = true;
     },
     [getOrderList.fulfilled]: (state, { payload }) => {
-      state.categories = payload.data;
+      state.orders = payload.data;
       state.isLoading = false;
     },
     [getOrderList.rejected]: (state, { payload }) => {

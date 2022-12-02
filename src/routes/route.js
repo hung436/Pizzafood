@@ -6,7 +6,7 @@ import UpdateProduct from "../pages/Admin/views/Product/UpdateProduct";
 import CreateUser from "../pages/Admin/views/User/CreateUser/CreateUser";
 import UpdateUser from "../pages/Admin/views/User/UpdateUser/UpdateUser";
 import Profile from "../pages/Profile";
-import Order from "../pages/Admin/views/Order";
+import OrderAdmin from "../pages/Admin/views/Order";
 const CreateProduct = React.lazy(() =>
   import("../pages/Admin/views/Product/CreateProduct")
 );
@@ -25,7 +25,7 @@ const AdminPage = React.lazy(() => import("../pages/Admin"));
 const Cart = React.lazy(() => import("../pages/Cart/Cart.jsx"));
 const Contacts = React.lazy(() => import("../pages/Contacts/contacts.jsx"));
 const About = React.lazy(() => import("../pages/About/about.jsx"));
-const Order = React.lazy(()=> import("../pages/Order/Order.jsx"))
+const Order = React.lazy(() => import("../pages/Order/Order.jsx"));
 const routes = (isAdmin) => [
   {
     path: "",
@@ -45,7 +45,7 @@ const routes = (isAdmin) => [
       { path: "/cart", element: <Cart /> },
       { path: "/contacts", element: <Contacts /> },
       { path: "/about", element: <About /> },
-      {path:"/order", element:<Order/>}
+      { path: "/order", element: <Order /> },
     ],
   },
   {
@@ -63,7 +63,7 @@ const routes = (isAdmin) => [
       },
       { path: "product/create", element: <CreateProduct /> },
       { path: "product/update/:id", element: <UpdateProduct /> },
-      { path: "order", element: <Order /> },
+      { path: "order", element: <OrderAdmin /> },
       // { path: "*", element: <NotFound /> },
     ],
   },

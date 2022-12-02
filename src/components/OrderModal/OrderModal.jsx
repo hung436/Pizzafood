@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { paymentSuccess } from "../../app/Reducer/cartSlice";
 // import Order from "../../pages/Order"
 import { Link } from "react-router-dom";
+import Address from "../Address";
 function OrderModal({ opened, setOpened, showModal }) {
   const { userInfo } = useSelector((state) => state.auth);
   const { carts } = useSelector((state) => state.cart);
@@ -23,7 +24,7 @@ function OrderModal({ opened, setOpened, showModal }) {
 
   return (
     <Modal
-      title="Đặt hàng"
+      title='Đặt hàng'
       open={opened}
       onCancel={() => {
         setOpened(false);
@@ -57,48 +58,19 @@ function OrderModal({ opened, setOpened, showModal }) {
       >
         {({ errors, touched }) => (
           <Form className={css.formContainer}>
-            <Field type="text" name="name" placeholder="Name" />
-            <Field type="text" name="phone" placeholder="Phone Number" />
+            <Field type='text' name='name' placeholder='Name' />
+            <Field type='text' name='phone' placeholder='Phone Number' />
 
-            {/* <div>
-          <select
-            class='form-select form-select-sm mb-3'
-            id='city'
-            aria-label='.form-select-sm'
-          >
-            <option value='' selected>
-              Chọn tỉnh thành
-            </option>
-          </select>
+            <Field type='text' name='address' placeholder='address' />
 
-          <select
-            class='form-select form-select-sm mb-3'
-            id='district'
-            aria-label='.form-select-sm'
-          >
-            <option value='' selected>
-              Chọn quận huyện
-            </option>
-          </select>
-
-          <select
-            class='form-select form-select-sm'
-            id='ward'
-            aria-label='.form-select-sm'
-          >
-            <option value='' selected>
-              Chọn phường xã
-            </option>
-          </select>
-        </div> */}
-            <Field type="text" name="address" placeholder="address" />
-            <textarea name="note" rows={3} placeholder="Ghi chú"></textarea>
+            <Address />
+            <textarea name='note' rows={3} placeholder='Ghi chú'></textarea>
 
             <span>
               Bạn sẽ trả <span>{price}</span> đồng khi nhận hàng
             </span>
-            <Link to="/order">
-              <button type="submit" className="btn">
+            <Link to='/order'>
+              <button type='submit' className='btn'>
                 Đặt hàng
               </button>
             </Link>

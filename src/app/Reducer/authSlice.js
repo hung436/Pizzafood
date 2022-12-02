@@ -10,14 +10,26 @@ import {
 import { StorageKeys } from "../../constant/storage-key";
 
 import { toast } from "react-toastify";
+
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (payload) => {
-    const data = await register(payload);
-    return data;
+    try {
+      const data = await register(payload);
+
+      if (data.success) {
+        await localStorage.setItem(
+          StorageKeys.ACCESSTOKEN,
+          data.data.accessToken
+        );
+        toast.success("Đăng nhập thành công");
+      } else toast.warn(data.message);
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 );
-
 export const loginUser = createAsyncThunk("auth/login", async (payload) => {
   try {
     const data = await login(payload);
