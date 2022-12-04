@@ -13,13 +13,12 @@ function Menu() {
   const { products, totalProducts } = useSelector((state) => state.product);
   console.log("products", products);
 
-  const [activeCategory, setActiveCategory] = useState(() => category[0]?.id);
+  const [activeCategory, setActiveCategory] = useState(2);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSizes, setPageSize] = useState(6);
   const [fillterPrice, setFillterPrice] = useState("+");
   //==================================
   useEffect(() => {
-    setActiveCategory(category[0]?.id);
     dispatch(getCategoryList());
   }, []);
   useEffect(() => {
