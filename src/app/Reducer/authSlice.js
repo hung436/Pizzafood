@@ -86,10 +86,7 @@ export const refresh = createAsyncThunk(
     try {
       const data = await refreshTK();
       console.log("data refeh", data);
-      await localStorage.setItem(
-        StorageKeys.ACCESSTOKEN,
-        data.data.accessToken
-      );
+      localStorage.setItem(StorageKeys.ACCESSTOKEN, data.data.accessToken);
       return data;
     } catch (error) {
       if (!error.response) {
@@ -226,7 +223,7 @@ export const userSlice = createSlice({
       state.userInfo = null;
     },
     [refresh.fulfilled]: (state, { payload }) => {
-      state.userToken = payload;
+      state.userToken = payload.data.accessToken;
     },
   },
 });

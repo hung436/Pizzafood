@@ -1,22 +1,22 @@
-import ListProduct from "../Home/component/ListProduct";
-import css from "./menu.module.scss";
-import { Link } from "react-router-dom";
-import { BsChevronDown } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { dispatch } from "../../app/Store/store";
-import { getCategoryList } from "../../app/Reducer/categorySlice";
-import { getProductList } from "../../app/Reducer/productSlice";
-import { Pagination } from "antd";
+import ListProduct from '../Home/component/ListProduct';
+import css from './menu.module.scss';
+import { Link } from 'react-router-dom';
+import { BsChevronDown } from 'react-icons/bs';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { dispatch } from '../../app/Store/store';
+import { getCategoryList } from '../../app/Reducer/categorySlice';
+import { getProductList } from '../../app/Reducer/productSlice';
+import { Pagination } from 'antd';
 function Menu() {
   const category = useSelector((state) => state.category.categories);
   const { products, totalProducts } = useSelector((state) => state.product);
-  console.log("products", products);
+  console.log('products', products);
 
   const [activeCategory, setActiveCategory] = useState(() => category[0]?.id);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSizes, setPageSize] = useState(6);
-  const [fillterPrice, setFillterPrice] = useState("+");
+  const [fillterPrice, setFillterPrice] = useState('+');
   //==================================
   useEffect(() => {
     setActiveCategory(category[0]?.id);
@@ -28,7 +28,7 @@ function Menu() {
         pageSizes,
         pageIndex,
         params: { categoryId: activeCategory },
-        orderBy: "price" + fillterPrice,
+        orderBy: 'price' + fillterPrice,
       })
     );
   }, [activeCategory, fillterPrice, pageIndex, pageSizes]);
@@ -45,9 +45,9 @@ function Menu() {
                 onClick={() => setActiveCategory(item.id)}
               >
                 <Link
-                  to=""
+                  to=''
                   className={`${css.itemLink} ${
-                    activeCategory === item.id ? css.itemActi : ""
+                    activeCategory === item.id ? css.itemActi : ''
                   }`}
                 >
                   {item.name}
@@ -68,9 +68,9 @@ function Menu() {
                 onClick={() => setActiveCategory(index)}
               >
                 <Link
-                  to=""
+                  to=''
                   className={`${css.itemLink} ${
-                    activeCategory === index ? css.itemActi : ""
+                    activeCategory === index ? css.itemActi : ''
                   }`}
                 >
                   {item.name}
@@ -110,13 +110,13 @@ function Menu() {
 
           <div className={css.sapxep}>
             <select
-              name=""
-              id=""
+              name=''
+              id=''
               value={fillterPrice}
               onChange={(e) => setFillterPrice(e.target.value)}
             >
-              <option value="+">Thấp đến Cao</option>
-              <option value="-">Cao đến thấp</option>
+              <option value='+'>Thấp đến Cao</option>
+              <option value='-'>Cao đến thấp</option>
             </select>
             {/* <span className={css.selectInputLabel}>Giá</span>
             <BsChevronDown className={css.selectInputIcon} /> */}
@@ -139,7 +139,7 @@ function Menu() {
         <div className={css.listProduct}>
           <ListProduct data={products} />
         </div>
-        <div className="flex justify-center items-center mt-3">
+        <div className='flex justify-center items-center mt-3'>
           <Pagination
             // onShowSizeChange={onShowSizeChange}
             current={pageIndex + 1}
