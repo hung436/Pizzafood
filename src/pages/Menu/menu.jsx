@@ -45,7 +45,7 @@ function Menu() {
                 onClick={() => setActiveCategory(item.id)}
               >
                 <Link
-                  to=""
+                  to=''
                   className={`${css.itemLink} ${
                     activeCategory === item.id ? css.itemActi : ""
                   }`}
@@ -68,7 +68,7 @@ function Menu() {
                 onClick={() => setActiveCategory(index)}
               >
                 <Link
-                  to=""
+                  to=''
                   className={`${css.itemLink} ${
                     activeCategory === index ? css.itemActi : ""
                   }`}
@@ -110,13 +110,13 @@ function Menu() {
 
           <div className={css.sapxep}>
             <select
-              name=""
-              id=""
+              name=''
+              id=''
               value={fillterPrice}
               onChange={(e) => setFillterPrice(e.target.value)}
             >
-              <option value="+">Thấp đến Cao</option>
-              <option value="-">Cao đến thấp</option>
+              <option value='+'>Thấp đến Cao</option>
+              <option value='-'>Cao đến thấp</option>
             </select>
             {/* <span className={css.selectInputLabel}>Giá</span>
             <BsChevronDown className={css.selectInputIcon} /> */}
@@ -139,7 +139,7 @@ function Menu() {
         <div className={css.listProduct}>
           <ListProduct data={products} />
         </div>
-        <div className="flex justify-center items-center mt-3">
+        <div className='flex justify-center items-center mt-3'>
           <Pagination
             // onShowSizeChange={onShowSizeChange}
             current={pageIndex + 1}
