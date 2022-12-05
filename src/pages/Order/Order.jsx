@@ -1,5 +1,6 @@
 import { Badge, Label, Select, Table, Tooltip } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import { Select as SelectV2 } from "antd";
 import { AiFillPrinter } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
 import { BsPlusCircle } from "react-icons/bs";
@@ -11,6 +12,7 @@ import { dispatch } from "../../app/Store/store";
 import {
   getOrderDetails,
   getOrderSelected,
+  updateStatus,
 } from "../../app/Reducer/orderSlice";
 import { deleteProduct, getProductList } from "../../app/Reducer/productSlice";
 import ModalConfirm from "../../components/ModalConfirm";
@@ -210,25 +212,52 @@ function Order() {
                         <Table.Cell>{order?.totalPrice}</Table.Cell>
                         <Table.Cell>{order?.created_at}</Table.Cell>
                         <Table.Cell>
-                          {order?.status !== "1" ? (
-                            <Button>Chờ xác nhậnád</Button>
-                          ) : (
-                            () => {
-                              let text = "ádsa";
-                              switch (order?.status) {
-                                case "1":
-                                  text = "text";
-
-                                  break;
-
-                                default:
-                                  text = "hung";
-                                  break;
+                          <SelectV2
+                            defaultValue={order?.status}
+                            style={{ width: 120 }}
+                            onChange={(value) => {
+                              dispatch(
+                                updateStatus({
+                                  id: order?.id,
+                                  data: { status: value },
+                                })
+                              ).then(() => dispatch(getInfor()));
+                            }}
+                            options={[
+                              {
+                                value: 1,
+                                label: "Chờ xác nhận",
+                                disabled: true,
+                              },
+                              {
+                                value: 2,
+                                label: "Đang vận chuyển",
+                                disabled: true,
+                              },
+                              {
+                                value: 3,
+                                disabled: true,
+                                label: "Hoàn tất",
+                                disabled: true,
+                              },
+                              {
+                                value: 0,
+                                label: "Hủy",
+                                disabled: order?.status > 1,
+                              },
+                            ]}
+                          />
+                          {/* ) : (
+                            <Popover
+                              content={
+                                <Button>
+                                  <GrFormEdit />
+                                </Button>
                               }
-                              console.log(text);
-                              return text;
-                            }
-                          )}
+                            >
+                              <Button>{getStatus(order.status)}</Button>
+                            </Popover>
+                          )} */}
                         </Table.Cell>
                         {/* <Table.Cell>
                         <a

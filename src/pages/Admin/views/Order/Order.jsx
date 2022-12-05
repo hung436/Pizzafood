@@ -254,7 +254,7 @@ function Order() {
                                 value: 3,
                                 disabled: true,
                                 label: "Hoàn tất",
-                                disabled: order?.status !== 2,
+                                disabled: order?.status != 2,
                               },
                               {
                                 value: 0,
