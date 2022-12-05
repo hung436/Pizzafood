@@ -1,14 +1,15 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 import { dispatch } from "../../app/Store/store";
-import { logout } from "../../app/Reducer/authSlice";
+import { Logout } from "../../app/Reducer/authSlice";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const UserDropdown = () => {
-  const { isAdmin } = useSelector((state) => state.auth);
+  const { isAdmin, userInfo } = useSelector((state) => state.auth);
   // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
@@ -21,10 +22,9 @@ const UserDropdown = () => {
     setDropdownPopoverShow(false);
   };
   return (
-    <div className='relative'>
-      <a
+    <div className='relative ' on>
+      <div
         className='text-blueGray-500 block '
-        href='#pablo'
         onClick={(e) => {
           e.preventDefault();
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
@@ -36,12 +36,14 @@ const UserDropdown = () => {
               alt='...'
               className='w-full rounded-full align-middle border-none shadow-lg'
               src={
-                "https://lh3.googleusercontent.com/a-/ACNPEu9Ktsu5fgKx5Ea3YpzidjRpLBDbW5kyfLD2gQ9udA=s96-c-rg-br100"
+                userInfo.Avatar
+                  ? userInfo.Avatar
+                  : "https://lh3.googleusercontent.com/a-/ACNPEu9Ktsu5fgKx5Ea3YpzidjRpLBDbW5kyfLD2gQ9udA=s96-c-rg-br100"
               }
             />
           </span>
         </div>
-      </a>
+      </div>
       <div
         className={
           (dropdownPopoverShow ? "block " : "hidden ") +
@@ -88,7 +90,7 @@ const UserDropdown = () => {
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={() => dispatch(logout())}
+          onClick={() => dispatch(Logout())}
         >
           Đăng xuất
         </div>

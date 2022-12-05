@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { getInfor, refresh } from "../app/Reducer/authSlice";
 
 import { StorageKeys } from "../constant/storage-key";
+import { getInforUser } from "./Auth";
 let store;
 export const injectStore = (_store) => {
   store = _store;
@@ -20,7 +21,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Làm gì đó trước khi request dược gửi đi
-    const URLS = ["/users/infor", "/users", "/users/update"];
+    const URLS = ["/users/infor", "/users", "/users/update", "/auth/logout"];
     const dynamicURL = ["/users/findbyid/", "/product/", "/order"];
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item);
@@ -45,16 +46,18 @@ instance.interceptors.response.use(
   },
   async function (error) {
     const { config, status } = error.response;
-    // console.log(error);
-    if (status === 401 && !config._retry) {
+
+    console.log(error.response);
+    if (status === 401 && (!config._retry || config._retry !== true)) {
       config._retry = true;
-      try {
-        await store.dispatch(refresh());
-        store.dispatch(getInfor());
-      } catch (err) {
-        Navigate({ to: "/logon" });
-        return Promise.reject(err);
-      }
+
+      store
+        .dispatch(refresh())
+        .then(
+          ({ payload }) =>
+            payload.statusCode === 200 && store.dispatch(getInfor())
+        )
+        .catch((error) => console.log("kjdfs"));
     }
 
     return Promise.reject(error);

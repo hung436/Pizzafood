@@ -20,6 +20,8 @@ function Menu() {
   //==================================
   useEffect(() => {
     setActiveCategory(category[0]?.id);
+  }, [category]);
+  useEffect(() => {
     dispatch(getCategoryList());
   }, []);
   useEffect(() => {

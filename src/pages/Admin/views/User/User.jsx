@@ -173,7 +173,7 @@ function User() {
                   {users &&
                     users.length > 0 &&
                     users.map((user) => (
-                      <tr>
+                      <tr key={user.id}>
                         <th>
                           <label>
                             <input

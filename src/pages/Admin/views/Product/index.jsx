@@ -225,7 +225,10 @@ function Product() {
                 <Table.Body className='divide-y'>
                   {products &&
                     products.map((product) => (
-                      <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Row
+                        key={product.id}
+                        className='bg-white dark:border-gray-700 dark:bg-gray-800'
+                      >
                         <Table.Cell className='!p-4'>
                           <input
                             type='checkbox'
@@ -244,6 +247,7 @@ function Product() {
                           <div className='flex flex-wrap items-center gap-2'>
                             {product.productToSizes?.map((item) => (
                               <Tooltip
+                                key={item.id}
                                 content={item?.price}
                                 // eslint-disable-next-line react/style-prop-object
                                 style={"auto"}

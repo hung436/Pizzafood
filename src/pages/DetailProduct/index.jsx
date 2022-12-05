@@ -79,6 +79,7 @@ function Product() {
               product.productToSizes &&
               product.productToSizes.map((size) => (
                 <div
+                  key={size.id}
                   onClick={() => {
                     setActive(size.postToCategoryId);
                     setPrice(size.price);
