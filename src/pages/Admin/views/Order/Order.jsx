@@ -1,7 +1,9 @@
 import { Badge, Label, Select, Table, Tooltip } from "flowbite-react";
+import { Select as SelectV2 } from "antd";
 import React, { useEffect, useState } from "react";
 import { AiFillPrinter } from "react-icons/ai";
 import { BiSearchAlt } from "react-icons/bi";
+import { GrFormEdit } from "react-icons/gr";
 import { BsPlusCircle } from "react-icons/bs";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { HiOutlineEye } from "react-icons/hi";
@@ -15,12 +17,13 @@ import { dispatch } from "../../../../app/Store/store";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
-import { formatTime, getObjKey } from "../../../../utils";
+import { formatTime, getObjKey, getStatus } from "../../../../utils";
 import ModalConfirm from "../../../../components/ModalConfirm";
-import { Button, Pagination } from "antd";
+import { Button, Pagination, Popover } from "antd";
 import {
-  getOrderDetails,
   getOrderList,
+  getOrderSelected,
+  updateStatus,
 } from "../../../../app/Reducer/orderSlice";
 import ModalViewOrder from "./components/ModalViewOrder";
 function Order() {
@@ -195,8 +198,8 @@ function Order() {
                       >
                         <Table.Cell>
                           <Button
-                            onClick={async () => {
-                              dispatch(getOrderDetails(order.orderDetails));
+                            onClick={() => {
+                              dispatch(getOrderSelected(order));
                               handleShow();
                             }}
                           >
@@ -217,25 +220,60 @@ function Order() {
                         <Table.Cell>{order?.totalPrice}</Table.Cell>
                         <Table.Cell>{formatTime(order?.created_at)}</Table.Cell>
                         <Table.Cell>
-                          {order?.status !== "1" ? (
-                            <Button>Chờ xác nhậnád</Button>
-                          ) : (
-                            () => {
-                              let text = "ádsa";
-                              switch (order?.status) {
-                                case "1":
-                                  text = "text";
-
-                                  break;
-
-                                default:
-                                  text = "hung";
-                                  break;
+                          <SelectV2
+                            defaultValue={order?.status}
+                            style={{ width: 120 }}
+                            onChange={(value) => {
+                              dispatch(
+                                updateStatus({
+                                  id: order?.id,
+                                  data: { status: value },
+                                })
+                              ).then(() =>
+                                dispatch(
+                                  getOrderList({
+                                    pageSizes,
+                                    pageIndex,
+                                    searchText,
+                                  })
+                                )
+                              );
+                            }}
+                            options={[
+                              {
+                                value: 1,
+                                label: "Chờ xác nhận",
+                                disabled: true,
+                              },
+                              {
+                                value: 2,
+                                label: "Đang vận chuyển",
+                                disabled: order?.status === 2,
+                              },
+                              {
+                                value: 3,
+                                disabled: true,
+                                label: "Hoàn tất",
+                                disabled: order?.status !== 2,
+                              },
+                              {
+                                value: 0,
+                                label: "Hủy",
+                                disabled: order?.status > 1,
+                              },
+                            ]}
+                          />
+                          {/* ) : (
+                            <Popover
+                              content={
+                                <Button>
+                                  <GrFormEdit />
+                                </Button>
                               }
-                              console.log(text);
-                              return text;
-                            }
-                          )}
+                            >
+                              <Button>{getStatus(order.status)}</Button>
+                            </Popover>
+                          )} */}
                         </Table.Cell>
                         {/* <Table.Cell>
                         <a

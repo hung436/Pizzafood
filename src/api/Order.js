@@ -14,6 +14,9 @@ const createOrder = (data) => {
 const updateOrder = (id, data) => {
   return instance.patch("/order/" + id, data);
 };
+const updateStatus = (id, data) => {
+  return instance.patch("/order/updatestatus/" + id, data);
+};
 const deleteOrder = (id) => {
   return instance.delete("/order/" + id);
 };
@@ -24,5 +27,6 @@ const orderApi = {
   updateOrder,
   getOrderById,
   deleteOrder,
+  updateStatus,
 };
 export default orderApi;
