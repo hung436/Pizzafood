@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { register } from "../../api/Auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [Eye, setEye] = useState(false);
   useEffect(() => {
     document.title = "Đăng ký - Blogme";
@@ -13,7 +15,7 @@ const Register = () => {
   const showPassword = () => setEye(!Eye);
   const SignupSchema = Yup.object().shape({
     name: Yup.string().required("Tên là bắt buộc"),
-    username: Yup.string().required("Tên tài khoản là bắt buộc"),
+
     email: Yup.string()
       .email("Phải là một email hợp lệ")
       .required("Email là bắt buộc"),
@@ -29,8 +31,11 @@ const Register = () => {
       .oneOf([true], "Vui lòng đồng ý với Điều khoản dịch vụ của chúng tôi "),
   });
   const registerSubmit = async (values) => {
-    const res = await register(values);
-    alert(JSON.stringify(res));
+    try {
+      const res = await register(values);
+      toast.success("Đăng ký thành công");
+      navigate("/login");
+    } catch (error) {}
   };
   return (
     <div className='flex  md:h-screen justify-center items-center'>
@@ -41,7 +46,7 @@ const Register = () => {
           initialValues={{
             name: "",
             email: "",
-            username: "",
+
             password: "",
             password_confirmation: "",
             rules: false,
@@ -75,17 +80,7 @@ const Register = () => {
               {errors.email && touched.email ? (
                 <div className='text-red-500'>{errors.email}</div>
               ) : null}
-              <div className='flex w-full h-9 items-center'>
-                <Field
-                  type='text'
-                  className=' flex-1 rounded-lg h-9'
-                  name='username'
-                  placeholder='Tên đăng nhập'
-                />
-              </div>
-              {errors.username && touched.username ? (
-                <div className='text-red-500'>{errors.username}</div>
-              ) : null}
+
               <div className='flex w-full h-9 items-center relative'>
                 <Field
                   type={Eye ? "text" : "password"}

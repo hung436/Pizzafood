@@ -79,8 +79,8 @@ export default function Cart() {
 
       <>
         <div className={css.details}>
-          <Steps current={current} items={items} />
-          <div className='steps-content'>{steps[current].content}</div>
+          {/* <Steps current={current} items={items} />
+          <div className='steps-content'>{steps[current].content}</div> */}
           <table className={css.table}>
             <thead>
               <th>Pizza</th>
