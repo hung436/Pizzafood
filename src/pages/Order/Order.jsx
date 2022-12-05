@@ -179,12 +179,15 @@ function Order() {
                 <Table.Body className='divide-y'>
                   {userOrder &&
                     userOrder.map((order) => (
-                      <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Row
+                        key={order.id}
+                        className='bg-white dark:border-gray-700 dark:bg-gray-800'
+                      >
                         <Table.Cell>
                           <Button
                             onClick={async () => {
                               await dispatch(
-                                getOrderDetails(order.orderDetail)
+                                getOrderDetails(order.orderDetails)
                               );
                               handleShow();
                             }}

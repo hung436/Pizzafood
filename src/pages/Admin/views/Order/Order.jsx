@@ -15,7 +15,7 @@ import { dispatch } from "../../../../app/Store/store";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loading from "../../../../components/Loading";
-import { getObjKey } from "../../../../utils";
+import { formatTime, getObjKey } from "../../../../utils";
 import ModalConfirm from "../../../../components/ModalConfirm";
 import { Button, Pagination } from "antd";
 import {
@@ -189,13 +189,14 @@ function Order() {
                 <Table.Body className='divide-y'>
                   {orders &&
                     orders.map((order) => (
-                      <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Row
+                        key={order.id}
+                        className='bg-white dark:border-gray-700 dark:bg-gray-800'
+                      >
                         <Table.Cell>
                           <Button
                             onClick={async () => {
-                              await dispatch(
-                                getOrderDetails(order.orderDetail)
-                              );
+                              dispatch(getOrderDetails(order.orderDetails));
                               handleShow();
                             }}
                           >
@@ -214,7 +215,7 @@ function Order() {
                           {/* {order.orderToSizes[0]?.size.name} */}
                         </Table.Cell>
                         <Table.Cell>{order?.totalPrice}</Table.Cell>
-                        <Table.Cell>{order?.created_at}</Table.Cell>
+                        <Table.Cell>{formatTime(order?.created_at)}</Table.Cell>
                         <Table.Cell>
                           {order?.status !== "1" ? (
                             <Button>Chờ xác nhậnád</Button>

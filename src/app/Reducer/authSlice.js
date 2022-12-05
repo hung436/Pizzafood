@@ -6,6 +6,7 @@ import {
   loginFB,
   getInforUser,
   refreshTK,
+  logout,
 } from "../../api/Auth";
 import { StorageKeys } from "../../constant/storage-key";
 
@@ -52,13 +53,29 @@ export const LoginFacebook = createAsyncThunk(
     const data = await loginFB(payload);
 
     if (data.success) {
-      await localStorage.setItem(
-        StorageKeys.ACCESSTOKEN,
-        data.data.accessToken
-      );
+      localStorage.setItem(StorageKeys.ACCESSTOKEN, data.data.accessToken);
     }
 
     return data;
+  }
+);
+export const Logout = createAsyncThunk(
+  "/logout",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await logout();
+
+      return data;
+      // const dispatch = useDispatch();
+      // const { name, email, role, avartar } = data;
+
+      // userSlice.actions.getUserSuccess("HUNG");
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 export const getInfor = createAsyncThunk(
@@ -113,15 +130,15 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout: (state) => {
-      state.userInfo = null;
-      state.isAdmin = false;
-      state.isLogin = false;
-      localStorage.removeItem(StorageKeys.ACCESSTOKEN);
-      state.loading = false;
-      state.userToken = null;
-      // localStorage.removeItem(StorageKeys.USER);
-    },
+    // logout: (state) => {
+    //   state.userInfo = null;
+    //   state.isAdmin = false;
+    //   state.isLogin = false;
+    //   localStorage.removeItem(StorageKeys.ACCESSTOKEN);
+    //   state.loading = false;
+    //   state.userToken = null;
+    //   // localStorage.removeItem(StorageKeys.USER);
+    // },
     change: (state, action) => {
       state.current = action.payload;
       localStorage.setItem(StorageKeys.USER, JSON.stringify(action.payload));
@@ -169,17 +186,32 @@ export const userSlice = createSlice({
       //   state.current = user;
       // }
     },
+    [Logout.pending]: (state) => {
+      state.loading = true;
+      // state.error = null;
+    },
+    [Logout.fulfilled]: (state, { payload }) => {
+      state.userInfo = null;
+      state.isAdmin = false;
+      state.isLogin = false;
+      localStorage.removeItem(StorageKeys.ACCESSTOKEN);
+      state.loading = false;
+      state.userToken = null;
+    },
+    [Logout.rejected]: (state, { payload }) => {},
     [LoginFacebook.pending]: (state) => {
       state.loading = true;
     },
     [LoginFacebook.fulfilled]: (state, { payload }) => {
-      const { name, email, role, avartar } = payload.data;
+      const { name, email, role, avartar, order } = payload.data;
       const user = {
         Name: name,
         RoleId: role,
         Avatar: avartar,
         Email: email,
       };
+      state.userOrder = order;
+      state.isLogin = true;
       state.loading = false;
       state.userInfo = user;
 
@@ -228,6 +260,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { logout, change, refreshToken, addAddressId, getUserSuccess } =
+export const { change, refreshToken, addAddressId, getUserSuccess } =
   userSlice.actions;
 export default userSlice.reducer;

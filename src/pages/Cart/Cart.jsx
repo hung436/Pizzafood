@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import { dispatch } from "../../app/Store/store";
 import { changeToCart, deleteItemCart } from "../../app/Reducer/cartSlice";
 
-import { Button, Empty, InputNumber } from "antd";
+import { Button, Empty, InputNumber, message, Steps } from "antd";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
@@ -15,6 +16,20 @@ import {
   cartTotalSelector,
 } from "../../app/Reducer/selector";
 import { toast } from "react-toastify";
+const steps = [
+  {
+    title: "Giỏ hàng của tôi",
+    content: <Button>asdds</Button>,
+  },
+  {
+    title: "Thanh toán",
+    content: "Second-content",
+  },
+  {
+    title: "Hoàn tất",
+    content: "Last-content",
+  },
+];
 export default function Cart() {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
@@ -28,6 +43,15 @@ export default function Cart() {
   const handleOnDelivery = () => {
     setShowModal(true);
   };
+  ///=========Steps
+  const [current, setCurrent] = useState(0);
+  const next = () => {
+    setCurrent(current + 1);
+  };
+  const prev = () => {
+    setCurrent(current - 1);
+  };
+
   const price = useSelector(cartTotalSelector);
   const total = useSelector(cartItemsCountSelector);
   if (carts && carts.length < 1)
@@ -45,12 +69,18 @@ export default function Cart() {
         </Empty>
       </div>
     );
+  const items = steps.map((item) => ({
+    key: item.title,
+    title: item.title,
+  }));
   return (
     <div className={css.container}>
       {/* details */}
 
       <>
         <div className={css.details}>
+          <Steps current={current} items={items} />
+          <div className='steps-content'>{steps[current].content}</div>
           <table className={css.table}>
             <thead>
               <th>Pizza</th>
@@ -115,6 +145,31 @@ export default function Cart() {
                 ))}
             </tbody>
           </table>
+          <div className='steps-action'>
+            {current < steps.length - 1 && (
+              <Button type='primary' onClick={() => next()}>
+                Next
+              </Button>
+            )}
+            {current === steps.length - 1 && (
+              <Button
+                type='primary'
+                onClick={() => message.success("Processing complete!")}
+              >
+                Done
+              </Button>
+            )}
+            {current > 0 && (
+              <Button
+                style={{
+                  margin: "0 8px",
+                }}
+                onClick={() => prev()}
+              >
+                Previous
+              </Button>
+            )}
+          </div>
         </div>
         {/* summart */}
         <div className={css.cart}>

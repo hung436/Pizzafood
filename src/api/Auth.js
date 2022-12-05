@@ -4,7 +4,7 @@ const login = (data) => {
   return instance.post(
     "/auth/signin",
     {
-      email: data.username,
+      email: data.email,
       password: data.password,
     },
     { withCredentials: true }
@@ -12,6 +12,9 @@ const login = (data) => {
 };
 const register = (data) => {
   return instance.post("/auth/signup", data);
+};
+const logout = () => {
+  return instance.get("/auth/logout");
 };
 const loginFB = (data) => {
   return instance.post("/auth/facebook", {
@@ -27,4 +30,4 @@ const getInforUser = () => {
 const refreshTK = () => {
   return instance.post("/auth/refresh", { withCredentials: true });
 };
-export { login, register, loginFB, getInforUser, refreshTK };
+export { login, register, loginFB, getInforUser, refreshTK, logout };
