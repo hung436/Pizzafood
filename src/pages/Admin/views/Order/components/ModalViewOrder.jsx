@@ -11,6 +11,7 @@ import { useReactToPrint } from "react-to-print";
 import { getStatus } from "../../../../../utils";
 export default function ModalViewOrder({ isModalOpen, onHide }) {
   const { orderSelected } = useSelector((state) => state.order);
+  const { userInfo } = useSelector((state) => state.auth);
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -57,7 +58,9 @@ export default function ModalViewOrder({ isModalOpen, onHide }) {
                   Họ và tên khách hàng
                 </dt>
                 <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
-                  {orderSelected?.user.name}
+                  {orderSelected?.user?.name
+                    ? orderSelected?.user?.name
+                    : userInfo?.Name}
                 </dd>
               </div>
               <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
@@ -73,7 +76,9 @@ export default function ModalViewOrder({ isModalOpen, onHide }) {
                   Địa chỉ email
                 </dt>
                 <dd className='mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0'>
-                  {orderSelected?.user.email}
+                  {orderSelected?.user?.email
+                    ? orderSelected?.user?.email
+                    : userInfo?.Email}
                 </dd>
               </div>
               <div className='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>

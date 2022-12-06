@@ -16,7 +16,7 @@ function CartSucces() {
       <div className={css.details}>
         <div>
           <span>Mã đơn hàng</span>
-          <span>{userOrder && userOrder[0]?.id}</span>
+          <span>{userOrder && userOrder[userOrder.length - 1]?.id}</span>
         </div>
         <div>
           <span>Tên Khách hàng</span>
@@ -24,16 +24,18 @@ function CartSucces() {
         </div>
         <div>
           <span>Địa chỉ khách hàng </span>
-          <span>{userOrder && userOrder[0]?.address}</span>
+          <span>{userOrder && userOrder[userOrder.length - 1]?.address}</span>
         </div>
 
         <div>
           <span>Số điện thoại</span>
-          <span>{userOrder && userOrder[0]?.phone}</span>
+          <span>{userOrder && userOrder[userOrder.length - 1]?.phone}</span>
         </div>
         <div>
           <span>Tổng tiền</span>
-          <span>{userOrder && userOrder[0]?.totalPrice}</span>
+          <span>
+            {userOrder && userOrder[userOrder.length - 1]?.totalPrice}
+          </span>
         </div>
       </div>
       <div className={css.btnOrder}>

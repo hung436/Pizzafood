@@ -19,6 +19,7 @@ function OrderModal({ opened, setOpened, showModal }) {
   const { carts } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [provinceSelected, setProvinceSelected] = useState();
   const SigninSchema = Yup.object().shape({
     // name: Yup.string().email().required(),
     // password: Yup.string().min(6, "Tối thiểu 6 kí tự").required(),
@@ -31,7 +32,7 @@ function OrderModal({ opened, setOpened, showModal }) {
   const price = useSelector(cartTotalSelector);
 
   const [province, setProvince] = useState();
-  const [provinceSelected, setProvinceSelected] = useState();
+
   const [district, setDistrict] = useState();
 
   useEffect(() => {
@@ -114,6 +115,7 @@ function OrderModal({ opened, setOpened, showModal }) {
                 province.map((item) => (
                   <option
                     onClick={() => {
+                      console.log(item.ProvinceID);
                       setProvinceSelected(item.ProvinceID);
                     }}
                     key={item.ProvinceID}
