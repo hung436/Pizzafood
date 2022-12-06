@@ -248,7 +248,8 @@ function Order() {
                               {
                                 value: 2,
                                 label: "Đang vận chuyển",
-                                disabled: order?.status === 2,
+                                disabled:
+                                  order?.status > 1 || order?.status < 1,
                               },
                               {
                                 value: 3,
@@ -260,7 +261,8 @@ function Order() {
                               {
                                 value: 0,
                                 label: "Hủy",
-                                disabled: order?.status > 1,
+                                disabled:
+                                  order?.status > 1 || order?.status === 0,
                               },
                             ]}
                           />
