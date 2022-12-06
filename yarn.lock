@@ -10504,6 +10504,13 @@ react-tailwindcss-select@^1.3.3:
   resolved "https://registry.npmjs.org/react-tailwindcss-select/-/react-tailwindcss-select-1.3.3.tgz"
   integrity sha512-HCcEtBoxpzmrtfd4yw2ODEL7nYD+KulTl/QAKV3ijicP1Sljy6ie/MFjVUlLa8d6ZoqFcK7G+qQUyJ6+sVSXIQ==
 
+react-to-print@^2.14.10:
+  version "2.14.10"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-2.14.10.tgz#f063bb368c2d8926012d52780a2b983e91c3a797"
+  integrity sha512-XJyhDWH/xxgHy5nIBYPXjVidoroq0qRHqTrVF5QbfohPkMx3q8x3H3+Lv7gSq9uA0csAbjkSU0J4mWgj64f6yQ==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-toastify@^9.08:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-9.1.1.tgz#9280caea4a13dc1739c350d90660a630807bf10b"
