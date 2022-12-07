@@ -56,6 +56,7 @@ instance.interceptors.response.use(
     // axios.interceptors.response.eject(interceptor);
     if (status === 401 && (!config._retry || config._retry !== true)) {
       // config._retry = true;
+
       return store
         .dispatch(refresh())
         .then((response) => {
