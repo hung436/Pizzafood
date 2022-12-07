@@ -11,13 +11,13 @@ function ListProduct({ data }) {
           <div key={item.id} className={css.pizza}>
             <Link to={`/product/${item.id}`}>
               <div className={css.ImageWrapper}>
-                <img src={item?.images[0]?.imageLink} alt="P1" />
+                <img src={item?.images[0]?.imageLink} alt='P1' />
               </div>
             </Link>
             <span className={css.textProduct}>{item.name}</span>
             <div className={css.price}>
               <span>
-                {item?.productToSizes[0]?.price.toLocaleString("it-IT")}
+                {item?.productToSizes[0]?.price?.toLocaleString("it-IT")}
                 <span style={{ color: "var(--themeRed)" }}> ₫</span>{" "}
               </span>
               <MdFavoriteBorder className={css.favorite} />
