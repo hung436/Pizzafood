@@ -11,7 +11,7 @@ export const injectStore = (_store) => {
 };
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_URL_BE,
+  baseURL: import.meta.env.VITE_APP_URL_BE,
   //   headers: { 'X-Custom-Header': 'foobar' },
   headers: {
     "Content-Type": "application/json",
@@ -49,7 +49,7 @@ instance.interceptors.response.use(
     const originalRequest = error.config;
     const { config, status } = error?.response;
     axios.interceptors.response.eject();
-    console.log("hung", originalRequest.url);
+
     if (status === 401 && originalRequest.url === "/auth/refresh") {
       return Promise.reject(error);
     }
@@ -60,12 +60,10 @@ instance.interceptors.response.use(
       return store
         .dispatch(refresh())
         .then((response) => {
-          console.log("payload", response);
           if (response.payload.success) store.dispatch(getInfor());
           return Promise.reject(error);
         })
         .catch((error2) => {
-          console.log("error2", error2);
           return Promise.reject(error2);
         });
     }

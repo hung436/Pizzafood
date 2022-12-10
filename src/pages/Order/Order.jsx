@@ -9,11 +9,7 @@ import { HiOutlineEye } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { dispatch } from "../../app/Store/store";
-import {
-  getOrderDetails,
-  getOrderSelected,
-  updateStatus,
-} from "../../app/Reducer/orderSlice";
+import { getOrderSelected, updateStatus } from "../../app/Reducer/orderSlice";
 import { deleteProduct, getProductList } from "../../app/Reducer/productSlice";
 import ModalConfirm from "../../components/ModalConfirm";
 import { getObjKey } from "../../utils";

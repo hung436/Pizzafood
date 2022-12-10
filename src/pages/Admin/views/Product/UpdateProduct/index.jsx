@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Modal as Modals, Button } from "flowbite-react";
+
 import { Field, Form, Formik, FieldArray } from "formik";
 import * as Yup from "yup";
 
@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../../../../app/Store/store";
 import { getCategoryList } from "../../../../../app/Reducer/categorySlice";
-import MultiSelect from "../../../../../components/form-control/MultiSelect/MultiSelect";
+
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import productApi from "../../../../../api/Product";
 import { updateProduct } from "../../../../../app/Reducer/productSlice";
@@ -17,7 +17,6 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
   const { id } = useParams();
   const [imgProduct, setImgProduct] = useState();
 
-  const [sizeInput, setSizeInput] = useState();
   const [editor, setEditor] = useState("");
   const [product, setProduct] = useState({});
 
@@ -31,7 +30,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
   const getProductById = async () => {
     try {
       const { data } = await productApi.getProductById(id);
-      console.log("data by id", data);
+
       setProduct(data);
       setImgProduct(data?.images);
       setEditor(data.description);
@@ -54,16 +53,13 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
     // console.log(file.preview);
     setImgProduct(selectedFIles);
   };
-  useEffect(() => {
-    console.log(sizeInput);
-  }, [sizeInput]);
+
   useEffect(() => {
     return () => {
       imgProduct && URL.revokeObjectURL(imgProduct.preview);
     };
   }, [imgProduct]);
   const Submit = async (values) => {
-    console.log(values);
     const { name, category, title, promotionPrice, price } = values;
     const prices = [];
     price.forEach((value, index) => {
@@ -77,7 +73,7 @@ export default function UpdateProduct({ showModal, hideShow, option = true }) {
     data.append("prices", JSON.stringify(prices));
     data.append("description", editor);
     data.append("file", imgRef.current.files[0]);
-    console.log(...data);
+
     try {
       await dispatch(updateProduct({ id: product.id, data }));
       navigate(-1);

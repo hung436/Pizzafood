@@ -155,6 +155,15 @@ export const productSlice = createSlice({
     [createProduct.rejected]: (state, { payload }) => {
       state.isLoading = false;
     },
+    [updateProduct.pending]: (state, { payload }) => {
+      state.isLoading = true;
+    },
+    [updateProduct.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+    },
+    [updateProduct.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+    },
   },
 });
 

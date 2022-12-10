@@ -1,7 +1,7 @@
 import ListProduct from "../Home/component/ListProduct";
 import css from "./menu.module.scss";
 import { Link } from "react-router-dom";
-import { BsChevronDown } from "react-icons/bs";
+
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../app/Store/store";
@@ -11,10 +11,10 @@ import { Pagination } from "antd";
 function Menu() {
   const category = useSelector((state) => state.category.categories);
   const { products, totalProducts } = useSelector((state) => state.product);
-  console.log("products", products);
 
   const [activeCategory, setActiveCategory] = useState(() => category[0]?.id);
   const [pageIndex, setPageIndex] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [pageSizes, setPageSize] = useState(6);
   const [fillterPrice, setFillterPrice] = useState("+");
   //==================================

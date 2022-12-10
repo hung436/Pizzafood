@@ -102,7 +102,7 @@ export const refresh = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await refreshTK();
-      console.log("data refeh", data);
+
       localStorage.setItem(StorageKeys.ACCESSTOKEN, data.data.accessToken);
       return data;
     } catch (error) {

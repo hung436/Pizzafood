@@ -7,7 +7,7 @@ export const getOrderList = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const data = await orderApi.getOrderList(payload);
-      console.log("order", data);
+
       return data;
     } catch (error) {
       if (!error.response) {

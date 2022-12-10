@@ -1,5 +1,4 @@
 import css from "./Product.module.scss";
-import p2 from "../../assets/img/p2.png";
 
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -41,7 +40,7 @@ function Product() {
     async function fetchData() {
       // You can await here
       const data = await productApi.getProductById(id);
-      console.log(data);
+
       setActive(data.data.productToSizes[0].postToCategoryId);
       setPrice(data.data.productToSizes[0].price);
       setSize(data.data.productToSizes[0].size.name);

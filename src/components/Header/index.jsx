@@ -244,7 +244,6 @@ import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../../app/Reducer/authSlice";
 import Logo from "../../assets/img/Logo.png";
 import css from "./Header.module.scss";
 import Search from "../Search";

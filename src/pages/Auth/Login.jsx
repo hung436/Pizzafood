@@ -26,17 +26,17 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [Eye, setEye] = useState(false);
-  const { loading, userInfo, isLogin } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
   //========================================================================================================
   useEffect(() => {
     if (userInfo && userInfo.RoleId) {
       if (userInfo.RoleId === "admin") navigate("/admin");
       else navigate("/");
     }
-  }, [userInfo]);
+  }, [navigate, userInfo]);
   useEffect(() => {
     dispatch(getInfor());
-  }, []);
+  }, [dispatch]);
   const showPassword = () => setEye(!Eye);
   const SigninSchema = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -44,7 +44,6 @@ const Login = () => {
   });
   //======================================================================================================
   const loginSubmit = async (values) => {
-    console.log(values);
     const action = loginUser(values);
     dispatch(action);
   };
@@ -52,7 +51,7 @@ const Login = () => {
   const responseFacebook = async (response) => {
     try {
       const action = LoginFacebook(response);
-      console.log(response);
+
       await dispatch(action);
       toast.success("Đăng nhập thành công");
     } catch (error) {}

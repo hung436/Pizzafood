@@ -22,6 +22,6 @@ export const store = configureStore({
       serializableCheck: false,
       immutableCheck: false,
     }),
-  devTools: true,
+  devTools: process.env.NODE_ENV === "development",
 });
 export const dispatch = store.dispatch;

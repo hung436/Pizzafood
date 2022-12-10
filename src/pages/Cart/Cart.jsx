@@ -1,11 +1,11 @@
 import css from "./Cart.module.scss";
-import p2 from "../../assets/img/p2.png";
+
 import noCart from "../../assets/img/no-cart.png";
 import { useSelector } from "react-redux";
 import { dispatch } from "../../app/Store/store";
 import { changeToCart, deleteItemCart } from "../../app/Reducer/cartSlice";
 
-import { Button, Empty, InputNumber, message, Steps } from "antd";
+import { Button, Empty, InputNumber, message } from "antd";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,6 @@ export default function Cart() {
   const { carts } = useSelector((state) => state.cart);
   // const [quantity, setQuantity] = useState(null);
   const handleChangeQuantity = (id, size, value) => {
-    console.log(id, value);
     dispatch(changeToCart({ id, size: size, quantity: value }));
   };
   const handleOnDelivery = () => {
@@ -69,10 +68,10 @@ export default function Cart() {
         </Empty>
       </div>
     );
-  const items = steps.map((item) => ({
-    key: item.title,
-    title: item.title,
-  }));
+  // const items = steps.map((item) => ({
+  //   key: item.title,
+  //   title: item.title,
+  // }));
   return (
     <div className={css.container}>
       {/* details */}

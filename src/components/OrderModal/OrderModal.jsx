@@ -115,7 +115,7 @@ function OrderModal({ opened, setOpened, showModal }) {
                 province.map((item) => (
                   <option
                     onClick={() => {
-                      console.log(item.ProvinceID);
+                      // console.log(item.ProvinceID);
                       setProvinceSelected(item.ProvinceID);
                     }}
                     key={item.ProvinceID}
