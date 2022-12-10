@@ -50,14 +50,14 @@ function Search() {
                 }}
               >
                 <img
-                  className={css.image}
-                  src={product.images[0].imageLink}
+                  className={css?.image}
+                  src={product?.images[0]?.imageLink}
                   alt='Pizza'
                 />
-                <div className={css.info}>
-                  <p className={css.name}>{product.name}</p>
+                <div className={css?.info}>
+                  <p className={css?.name}>{product?.name}</p>
                   <span className={css.price}>
-                    {product.productToSizes[0].price.toLocaleString("it-IT", {
+                    {product?.productToSizes[0]?.price.toLocaleString("it-IT", {
                       style: "currency",
                       currency: "VND",
                     })}

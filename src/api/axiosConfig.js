@@ -48,14 +48,14 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const { config, status } = error?.response;
+    axios.interceptors.response.eject();
     console.log("hung", originalRequest.url);
     if (status === 401 && originalRequest.url === "/auth/refresh") {
-      window.location.href = "/login/";
       return Promise.reject(error);
     }
-    // axios.interceptors.response.eject(interceptor);
+
     if (status === 401 && (!config._retry || config._retry !== true)) {
-      // config._retry = true;
+      config._retry = true;
 
       return store
         .dispatch(refresh())
