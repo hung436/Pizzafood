@@ -39,28 +39,38 @@ instance.interceptors.request.use(
 );
 
 // Thêm một bộ đón chặn response
+
 instance.interceptors.response.use(
   function (response) {
     const { data } = response;
     return data;
   },
-  async function (error) {
-    const { config, status } = error.response;
+  async (error) => {
+    const originalRequest = error.config;
+    const { config, status } = error?.response;
+    axios.interceptors.response.eject();
+    console.log("hung", originalRequest.url);
+    if (status === 401 && originalRequest.url === "/auth/refresh") {
+      return Promise.reject(error);
+    }
 
-    console.log(error.response);
     if (status === 401 && (!config._retry || config._retry !== true)) {
       config._retry = true;
 
-      store
+      return store
         .dispatch(refresh())
-        .then(
-          ({ payload }) =>
-            payload.statusCode === 200 && store.dispatch(getInfor())
-        )
-        .catch((error) => console.log("kjdfs"));
+        .then((response) => {
+          console.log("payload", response);
+          if (response.payload.success) store.dispatch(getInfor());
+          return Promise.reject(error);
+        })
+        .catch((error2) => {
+          console.log("error2", error2);
+          return Promise.reject(error2);
+        });
     }
-
     return Promise.reject(error);
   }
 );
+
 export default instance;

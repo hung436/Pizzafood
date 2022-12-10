@@ -36,7 +36,7 @@ const Login = () => {
   }, [userInfo]);
   useEffect(() => {
     dispatch(getInfor());
-  }, [isLogin]);
+  }, []);
   const showPassword = () => setEye(!Eye);
   const SigninSchema = Yup.object().shape({
     email: Yup.string().email().required(),
