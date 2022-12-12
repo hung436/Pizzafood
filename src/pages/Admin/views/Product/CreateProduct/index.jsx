@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Modal as Modals, Button } from "flowbite-react";
-import { Field, Form, Formik, FieldArray } from "formik";
+import { Field, Form, Formik, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import MyEditor from "../../../../../components/form-control/RickText";
@@ -88,8 +88,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
     title: "",
   };
   const Schema = Yup.object().shape({
-    // name: Yup.string().email().required("Email Không để trống"),
-    // password: Yup.string().min(6, "Tối thiểu 6 kí tự").required("Không để trống"),
+    name: Yup.string().required("Tên sản phẩm Không để trống"),
+    category: Yup.string().required("Không để trống"),
+    title: Yup.string().required("Không để trống"),
+    promotionPrice: Yup.string().required("Không để trống"),
+    price: Yup.array().min(1, "Nhập tối thiểu 1 giá"),
   });
 
   return (
@@ -127,6 +130,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     >
                       Tên sản phẩm
                     </label>
+                    <ErrorMessage
+                      component={"div"}
+                      className='text-red-600 text-xs italic'
+                      name='name'
+                    />
                   </div>
                   <div className='relative z-0 mb-6 w-full group'>
                     <Field
@@ -145,6 +153,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
 
                       {/* <option value='DE'>XL</option> */}
                     </Field>
+                    <ErrorMessage
+                      component={"div"}
+                      className='text-red-600 text-xs italic'
+                      name='category'
+                    />
                   </div>
                   <div className='relative z-0 mb-6 w-full group'>
                     <Field
@@ -159,6 +172,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     >
                       Tiêu đề
                     </label>
+                    <ErrorMessage
+                      component={"div"}
+                      className='text-red-600 text-xs italic'
+                      name='title'
+                    />
                   </div>
 
                   <div className='relative z-0 mb-6 w-full group'>
@@ -171,6 +189,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                     <label className='peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'>
                       Giảm giá (%)
                     </label>
+                    <ErrorMessage
+                      component={"div"}
+                      className='text-red-600 text-xs italic'
+                      name='promotionPrice'
+                    />
                   </div>
 
                   {/* <div className='relative z-0 mb-6 w-full group'>
@@ -216,6 +239,11 @@ export default function CreateProduct({ showModal, hideShow, option = true }) {
                             ))}
                         </div>
                       )}
+                    />
+                    <ErrorMessage
+                      component={"div"}
+                      className='text-red-600 text-xs italic'
+                      name='price'
                     />
                   </div>
 

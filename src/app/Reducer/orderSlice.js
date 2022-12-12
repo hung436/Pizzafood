@@ -53,6 +53,7 @@ export const orderSlice = createSlice({
     },
     [getOrderList.fulfilled]: (state, { payload }) => {
       state.orders = payload.data;
+      state.totalOrders = payload.totalCountItem;
       state.isLoading = false;
     },
     [getOrderList.rejected]: (state, { payload }) => {

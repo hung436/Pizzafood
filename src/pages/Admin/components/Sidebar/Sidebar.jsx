@@ -6,11 +6,12 @@ import { MdOutlineDashboard, MdOutlineCategory } from "react-icons/md";
 import { FaShopify, FaUser } from "react-icons/fa";
 import NotificationDropdown from "../../../../components/Dropdowns/NotificationDropdown.jsx";
 import UserDropdown from "../../../../components/Dropdowns/UserDropdown.jsx";
+import { useSelector } from "react-redux";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = useState("hidden");
   const [activePage, setActivePage] = useState(window.location.pathname);
-
+  const { userInfo } = useSelector((state) => state.auth);
   return (
     <>
       <nav className='md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6'>
@@ -88,50 +89,51 @@ export default function Sidebar() {
             {/* Navigation */}
 
             <ul className='md:flex-col md:min-w-full flex flex-col list-none'>
-              <li className='items-center rounded-md'>
-                <Link
-                  className={
-                    "text-xs uppercase py-3 px-3 space-x-4 font-bold flex flex-row items-center " +
-                    (activePage === "/admin/dashboard" ||
-                    activePage === "/admin"
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  onClick={() => setActivePage("/admin/dashboard")}
-                  to='/admin/dashboard'
-                >
-                  <MdOutlineDashboard
-                    className={
-                      activePage === "/admin/dashboard" ||
-                      activePage === "/admin"
-                        ? "opacity-75"
-                        : "text-blueGray-300"
-                    }
-                  />
-                  <p>Dashboard</p>
-                </Link>
-              </li>
-
-              <li className='items-center'>
-                <Link
-                  className={
-                    "text-xs uppercase px-3 py-3 space-x-4 font-bold flex flex-row  items-center " +
-                    (activePage === "/admin/category"
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  onClick={() => setActivePage("/admin/category")}
-                  to='/admin/category'
-                >
-                  <MdOutlineCategory
-                    className={
-                      "text-sm " +
-                      (activePage === "/admin/category"
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  />
-                  {/* <i
+              {userInfo && userInfo.RoleId === "admin" && (
+                <>
+                  <li className='items-center rounded-md'>
+                    <Link
+                      className={
+                        "text-xs uppercase py-3 px-3 space-x-4 font-bold flex flex-row items-center " +
+                        (activePage === "/admin/dashboard" ||
+                        activePage === "/admin"
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                      onClick={() => setActivePage("/admin/dashboard")}
+                      to='/admin/dashboard'
+                    >
+                      <MdOutlineDashboard
+                        className={
+                          activePage === "/admin/dashboard" ||
+                          activePage === "/admin"
+                            ? "opacity-75"
+                            : "text-blueGray-300"
+                        }
+                      />
+                      <p>Dashboard</p>
+                    </Link>
+                  </li>
+                  <li className='items-center'>
+                    <Link
+                      className={
+                        "text-xs uppercase px-3 py-3 space-x-4 font-bold flex flex-row  items-center " +
+                        (activePage === "/admin/category"
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                      onClick={() => setActivePage("/admin/category")}
+                      to='/admin/category'
+                    >
+                      <MdOutlineCategory
+                        className={
+                          "text-sm " +
+                          (activePage === "/admin/category"
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      />
+                      {/* <i
                     className={
                       'fas fa-table mr-2 text-sm ' +
                       (window.location.href.indexOf('/admin/tables') !== -1
@@ -140,53 +142,51 @@ export default function Sidebar() {
                     }
                   >
                     {' '} */}
-                  {/* </i>{' '} */}
-                  <p>Danh mục</p>
-                </Link>
-              </li>
-
-              <li className='items-center'>
-                <Link
-                  className={
-                    "text-xs uppercase py-3 px-3 font-bold flex flex-row space-x-4 items-center " +
-                    (activePage === "/admin/product"
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  onClick={() => setActivePage("/admin/product")}
-                  to='/admin/product'
-                >
-                  <GrProductHunt
-                    className={
-                      activePage === "/admin/product"
-                        ? "opacity-75"
-                        : "text-blueGray-300"
-                    }
-                  />
-                  <p>Sản phẩm</p>
-                </Link>
-              </li>
-
-              <li className='items-center '>
-                <Link
-                  className={
-                    "text-xs uppercase py-3 px-3 font-bold  flex flex-row space-x-4 items-center " +
-                    (activePage === "/admin/order"
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  onClick={() => setActivePage("/admin/order")}
-                  to='/admin/order'
-                >
-                  <FaShopify
-                    className={
-                      "text-sm" +
-                      (activePage === "/admin/order"
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  />
-                  {/* <i
+                      {/* </i>{' '} */}
+                      <p>Danh mục</p>
+                    </Link>
+                  </li>
+                  <li className='items-center'>
+                    <Link
+                      className={
+                        "text-xs uppercase py-3 px-3 font-bold flex flex-row space-x-4 items-center " +
+                        (activePage === "/admin/product"
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                      onClick={() => setActivePage("/admin/product")}
+                      to='/admin/product'
+                    >
+                      <GrProductHunt
+                        className={
+                          activePage === "/admin/product"
+                            ? "opacity-75"
+                            : "text-blueGray-300"
+                        }
+                      />
+                      <p>Sản phẩm</p>
+                    </Link>
+                  </li>
+                  <li className='items-center '>
+                    <Link
+                      className={
+                        "text-xs uppercase py-3 px-3 font-bold  flex flex-row space-x-4 items-center " +
+                        (activePage === "/admin/order"
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                      onClick={() => setActivePage("/admin/order")}
+                      to='/admin/order'
+                    >
+                      <FaShopify
+                        className={
+                          "text-sm" +
+                          (activePage === "/admin/order"
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      />
+                      {/* <i
                     className={
                       'fas fa-tools mr-2 text-sm ' +
                       (window.location.href.indexOf('/admin/settings') !== -1
@@ -194,24 +194,56 @@ export default function Sidebar() {
                         : 'text-blueGray-300')
                     }
                   ></i> */}
-                  <p> Đơn hàng</p>
-                </Link>
-              </li>
+                      <p> Đơn hàng</p>
+                    </Link>
+                  </li>
+                  <li className='items-center'>
+                    <Link
+                      className={
+                        "text-xs uppercase p-3 font-bold  flex flex-row space-x-4 items-center " +
+                        (activePage === "/admin/user"
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                      onClick={() => setActivePage("/admin/user")}
+                      to='/admin/user'
+                    >
+                      <FaUser
+                        className={
+                          "text-sm " +
+                          (activePage === "/admin/user"
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      />
+                      {/* <i
+                    className={
+                      "fas fa-tools mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/settings") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i> */}
+                      <p>Người dùng</p>
+                    </Link>
+                  </li>
+                </>
+              )}
               <li className='items-center'>
                 <Link
                   className={
                     "text-xs uppercase p-3 font-bold  flex flex-row space-x-4 items-center " +
-                    (activePage === "/admin/user"
+                    (activePage === "/shipper"
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
-                  onClick={() => setActivePage("/admin/user")}
-                  to='/admin/user'
+                  onClick={() => setActivePage("/shipper")}
+                  to='/shipper'
                 >
                   <FaUser
                     className={
                       "text-sm " +
-                      (activePage === "/admin/user"
+                      (activePage === "/shipper"
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
@@ -224,7 +256,7 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i> */}
-                  <p>Người dùng</p>
+                  <p>Shipper</p>
                 </Link>
               </li>
             </ul>

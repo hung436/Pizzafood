@@ -247,16 +247,30 @@ function Order() {
                               },
                               {
                                 value: 2,
-                                label: "Đang vận chuyển",
+                                label: "Đã xác nhận",
                                 disabled:
                                   order?.status > 1 || order?.status < 1,
                               },
                               {
                                 value: 3,
-                                disabled: true,
-                                label: "Hoàn tất",
+
+                                label: "Đang giao",
                                 disabled:
                                   order?.status != 2 || order?.status === 3,
+                              },
+                              {
+                                value: 4,
+
+                                label: "Đã giao",
+                                disabled:
+                                  order?.status != 3 || order?.status === 4,
+                              },
+                              {
+                                value: 5,
+
+                                label: "Hoàn tất",
+                                disabled:
+                                  order?.status != 4 || order?.status === 5,
                               },
                               {
                                 value: 0,

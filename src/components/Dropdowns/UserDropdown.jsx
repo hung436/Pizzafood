@@ -36,7 +36,7 @@ const UserDropdown = () => {
               alt='...'
               className='w-full rounded-full align-middle border-none shadow-lg'
               src={
-                userInfo.Avatar
+                userInfo && userInfo.Avatar
                   ? userInfo.Avatar
                   : "https://lh3.googleusercontent.com/a-/ACNPEu9Ktsu5fgKx5Ea3YpzidjRpLBDbW5kyfLD2gQ9udA=s96-c-rg-br100"
               }
