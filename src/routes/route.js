@@ -9,6 +9,8 @@ import Profile from "../pages/Profile";
 import OrderAdmin from "../pages/Admin/views/Order";
 import CartSucces from "../pages/Cart/CartSuccess/CartSuccess";
 import ResetPassword from "../pages/Auth/ResetPassword";
+import Shipper from "../pages/Shipper";
+
 const CreateProduct = React.lazy(() =>
   import("../pages/Admin/views/Product/CreateProduct")
 );
@@ -28,7 +30,7 @@ const Cart = React.lazy(() => import("../pages/Cart/Cart.jsx"));
 const Contacts = React.lazy(() => import("../pages/Contacts/contacts.jsx"));
 const About = React.lazy(() => import("../pages/About/about.jsx"));
 const Order = React.lazy(() => import("../pages/Order/Order.jsx"));
-const routes = (isAdmin) => [
+const routes = (userInfo) => [
   {
     path: "",
     element: (
@@ -53,7 +55,12 @@ const routes = (isAdmin) => [
   },
   {
     path: "admin",
-    element: isAdmin ? <AdminPage /> : <Navigate to='/login' />,
+    element:
+      userInfo && userInfo.RoleId === "admin" ? (
+        <AdminPage />
+      ) : (
+        <Navigate to='/login' />
+      ),
     children: [
       { path: "", element: <Dashboard /> },
       { path: "dashboard", element: <Dashboard /> },
@@ -71,6 +78,18 @@ const routes = (isAdmin) => [
     ],
   },
 
+  {
+    path: "shipper",
+    element:
+      userInfo &&
+      (userInfo.RoleId === "shipper" || userInfo.RoleId === "admin") ? (
+        <AdminPage />
+      ) : (
+        <NotFound />
+      ),
+    // <Navigate to='/login' />
+    children: [{ path: "", element: <Shipper /> }],
+  },
   { path: "login", element: <Login /> },
   { path: "reset-password", element: <ResetPassword /> },
   { path: "register", element: <Register /> },

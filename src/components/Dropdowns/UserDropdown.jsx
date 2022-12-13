@@ -36,7 +36,7 @@ const UserDropdown = () => {
               alt='...'
               className='w-full rounded-full align-middle border-none shadow-lg'
               src={
-                userInfo.Avatar
+                userInfo && userInfo.Avatar
                   ? userInfo.Avatar
                   : "https://lh3.googleusercontent.com/a-/ACNPEu9Ktsu5fgKx5Ea3YpzidjRpLBDbW5kyfLD2gQ9udA=s96-c-rg-br100"
               }
@@ -83,6 +83,16 @@ const UserDropdown = () => {
             }
           >
             Trang quản trị
+          </Link>
+        )}
+        {userInfo && userInfo.RoleId === "shipper" && (
+          <Link
+            to='/shipper'
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            }
+          >
+            Trang Shipper
           </Link>
         )}
         <div className='h-0 my-2 border border-solid border-blueGray-100' />

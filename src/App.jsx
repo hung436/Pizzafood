@@ -30,7 +30,7 @@ function App() {
       console.log(err);
     }
   }, []);
-  const routing = useRoutes(routes(userInfo && userInfo.RoleId === "admin"));
+  const routing = useRoutes(routes(userInfo));
   return (
     <div className='App'>
       <Suspense fallback={<Loading />}>{routing}</Suspense>

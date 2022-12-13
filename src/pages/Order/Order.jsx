@@ -16,7 +16,7 @@ import {
 } from "../../app/Reducer/orderSlice";
 import { deleteProduct, getProductList } from "../../app/Reducer/productSlice";
 import ModalConfirm from "../../components/ModalConfirm";
-import { getObjKey } from "../../utils";
+import { formatTime, getObjKey } from "../../utils";
 import ModalViewOrder from "../Admin/views/Order/components/ModalViewOrder";
 import { Loading } from "react-admin";
 import { Button, Pagination } from "antd";
@@ -175,6 +175,7 @@ function Order() {
                   <Table.HeadCell>Số điện thoại</Table.HeadCell>
                   <Table.HeadCell>Tổng tiền</Table.HeadCell>
                   <Table.HeadCell>Ngày đặt</Table.HeadCell>
+                  <Table.HeadCell>Ngày giao dự kiên</Table.HeadCell>
                   <Table.HeadCell>Trạng thái</Table.HeadCell>
 
                   {/* <Table.HeadCell>
@@ -210,7 +211,10 @@ function Order() {
                           {/* {order.orderToSizes[0]?.size.name} */}
                         </Table.Cell>
                         <Table.Cell>{order?.totalPrice}</Table.Cell>
-                        <Table.Cell>{order?.created_at}</Table.Cell>
+                        <Table.Cell>{formatTime(order?.created_at)}</Table.Cell>
+                        <Table.Cell>
+                          {formatTime(order?.estimatedDeliveryDate)}
+                        </Table.Cell>
                         <Table.Cell>
                           <SelectV2
                             defaultValue={order?.status}
@@ -238,7 +242,6 @@ function Order() {
                                 value: 3,
                                 disabled: true,
                                 label: "Hoàn tất",
-                                disabled: true,
                               },
                               {
                                 value: 0,
