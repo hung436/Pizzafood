@@ -6,7 +6,7 @@ export default function CardStats({
   statSubtitle,
   statTitle,
   statArrow,
-  statPercent,
+  statPercent = null,
   statPercentColor,
   statDescripiron,
   statIconName,
@@ -21,14 +21,15 @@ export default function CardStats({
               <h5 className='text-blueGray-400 uppercase font-bold text-xs'>
                 {statSubtitle}
               </h5>
-              <span className='font-semibold text-xl text-blueGray-700'>
+              <span className='font-semibold text-3xl text-blueGray-700'>
                 {statTitle}
               </span>
             </div>
             <div className='relative w-auto pl-4 flex-initial'>
               <div
                 className={
-                  "text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full " +
+                  "text-white p-3 text-center inline-flex items-center justify-center w-12 
+                  12 shadow-lg rounded-full " +
                   statIconColor
                 }
               >
@@ -45,7 +46,7 @@ export default function CardStats({
               ) : (
                 ""
               )}
-              {statPercent}%
+              {statPercent ? statPercent + "%" : null}
             </span>
             <span className='whitespace-nowrap'>{statDescripiron}</span>
           </p>
