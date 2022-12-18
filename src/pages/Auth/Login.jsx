@@ -30,8 +30,11 @@ const Login = () => {
   //========================================================================================================
   useEffect(() => {
     if (userInfo && userInfo.RoleId) {
-      if (userInfo.RoleId === "admin") navigate("/admin");
-      else navigate("/");
+      if (userInfo.RoleId === "admin") {
+        navigate("/admin");
+      } else if (userInfo.RoleId === "shipper") {
+        navigate("/shipper");
+      } else navigate("/");
     }
   }, [userInfo]);
   useEffect(() => {

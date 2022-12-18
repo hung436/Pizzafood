@@ -5,7 +5,15 @@ export default function CardLineChart() {
   var config = {
     type: "line",
     data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: [
+        "Tháng 6",
+        "Tháng 7",
+        "Tháng 8",
+        "Tháng 9",
+        "Tháng 10",
+        "Tháng 11",
+        "Tháng 12",
+      ],
       datasets: [
         {
           label: new Date().getFullYear(),
@@ -102,7 +110,7 @@ export default function CardLineChart() {
           <div className='flex flex-wrap items-center'>
             <div className='relative w-full max-w-full flex-grow flex-1'>
               <h6 className='uppercase text-blueGray-100 mb-1 text-xs font-semibold'>
-                Overview
+                TỔNG QUAN
               </h6>
               <h2 className='text-white text-xl font-semibold'>Sales value</h2>
             </div>

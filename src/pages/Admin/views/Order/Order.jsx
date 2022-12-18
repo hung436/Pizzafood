@@ -183,6 +183,7 @@ function Order() {
                   <Table.HeadCell>Số điện thoại</Table.HeadCell>
                   <Table.HeadCell>Tổng tiền</Table.HeadCell>
                   <Table.HeadCell>Ngày đặt</Table.HeadCell>
+                  <Table.HeadCell>Ngày giao dự kiến</Table.HeadCell>
                   <Table.HeadCell>Trạng thái</Table.HeadCell>
 
                   {/* <Table.HeadCell>
@@ -220,6 +221,9 @@ function Order() {
                         <Table.Cell>{order?.totalPrice}</Table.Cell>
                         <Table.Cell>{formatTime(order?.created_at)}</Table.Cell>
                         <Table.Cell>
+                          {formatTime(order?.estimatedDeliveryDate)}
+                        </Table.Cell>
+                        <Table.Cell>
                           <SelectV2
                             defaultValue={order?.status}
                             style={{ width: 120 }}
@@ -255,22 +259,20 @@ function Order() {
                                 value: 3,
 
                                 label: "Đang giao",
-                                disabled:
-                                  order?.status != 2 || order?.status === 3,
+                                disabled: true,
                               },
                               {
                                 value: 4,
 
                                 label: "Đã giao",
-                                disabled:
-                                  order?.status != 3 || order?.status === 4,
+                                disabled: true,
                               },
                               {
                                 value: 5,
 
                                 label: "Hoàn tất",
                                 disabled:
-                                  order?.status != 4 || order?.status === 5,
+                                  order?.status !== 4 || order?.status === 5,
                               },
                               {
                                 value: 0,

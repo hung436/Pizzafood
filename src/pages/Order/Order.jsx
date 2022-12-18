@@ -235,18 +235,32 @@ function Order() {
                               },
                               {
                                 value: 2,
-                                label: "Đang vận chuyển",
+                                label: "Đã xác nhận",
                                 disabled: true,
                               },
                               {
                                 value: 3,
+
+                                label: "Đang giao",
                                 disabled: true,
+                              },
+                              {
+                                value: 4,
+
+                                label: "Đã giao",
+                                disabled: true,
+                              },
+                              {
+                                value: 5,
+
                                 label: "Hoàn tất",
+                                disabled: true,
                               },
                               {
                                 value: 0,
                                 label: "Hủy",
-                                disabled: order?.status > 1,
+                                disabled:
+                                  order?.status > 1 || order?.status === 0,
                               },
                             ]}
                           />

@@ -69,7 +69,7 @@ const routes = (userInfo) => [
       { path: "user/update/:id", element: <UpdateUser /> },
       {
         path: "product",
-        element: <ProductADmin />,
+        element: <Dashboard />,
       },
       { path: "product/create", element: <CreateProduct /> },
       { path: "product/update/:id", element: <UpdateProduct /> },

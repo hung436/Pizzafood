@@ -21,7 +21,13 @@ const instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // Làm gì đó trước khi request dược gửi đi
-    const URLS = ["/users/infor", "/users", "/users/update", "/auth/logout"];
+    const URLS = [
+      "/users/infor",
+      "/users",
+      "/users/update",
+      "/auth/logout",
+      "/general",
+    ];
     const dynamicURL = ["/users/findbyid/", "/product/", "/order"];
     const dynamicURLNeedToken = dynamicURL.some((item) => {
       return config.url.includes(item);
